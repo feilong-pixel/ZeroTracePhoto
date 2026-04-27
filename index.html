@@ -36,6 +36,7 @@
   <p id="desc1"></p>
   <p id="desc2"></p>
   <p id="desc3"></p>
+  <p id="desc4"></p>
 
 <script>
 const i18n = {
@@ -63,6 +64,7 @@ function setLang(lang) {
   document.getElementById("desc1").innerText = i18n[lang].desc1;
   document.getElementById("desc2").innerText = i18n[lang].desc2;
   document.getElementById("desc3").innerText = i18n[lang].desc3;
+  document.getElementById("desc4").innerText = i18n[lang].desc4;
 
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
