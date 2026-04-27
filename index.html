@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZeroTracePhoto</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 100px;
+      font-family: sans-serif;
+    }
+    .lang-btn {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      display: inline-block;
+    }
+    .active {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🌐 语言切换 -->
+  <div>
+    <span class="lang-btn active" onclick="setLang('en')">EN</span>
+    <span class="lang-btn" onclick="setLang('ja')">日本語</span>
+    <span class="lang-btn" onclick="setLang('zh')">中文</span>
+  </div>
+
+  <h1 id="title">ZeroTracePhoto</h1>
+  <p id="desc1"></p>
+  <p id="desc2"></p>
+  <p id="desc3"></p>
+
+<script>
+const i18n = {
+  en: {
+    desc1: "Local-first photo organizer",
+    desc2: "No upload / No cloud / No tracking",
+    desc3: "All processing happens locally on your device",
+    desc4: "Coming Soon..."
+  },
+  ja: {
+    desc1: "ローカル優先の画像整理ツール",
+    desc2: "アップロードなし / クラウドなし / トラッキングなし",
+    desc3: "すべての画像処理はローカルで行われます",
+    desc4: "近日公開..."
+  },
+  zh: {
+    desc1: "本地优先的图片整理工具",
+    desc2: "不上传 / 不使用云端 / 不收集数据",
+    desc3: "所有图片处理均在本地完成",
+    desc4: "即将发布..."
+  }
+};
+
+function setLang(lang) {
+  document.getElementById("desc1").innerText = i18n[lang].desc1;
+  document.getElementById("desc2").innerText = i18n[lang].desc2;
+  document.getElementById("desc3").innerText = i18n[lang].desc3;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// 默认语言
+setLang('en');
+</script>
+
+</body>
+</html>
