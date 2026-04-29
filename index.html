@@ -1,78 +1,807 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ZeroTracePhoto</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZeroTraceBrowser - Local-first Photo Browser & Organizer</title>
+  <meta name="description" content="ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for safely managing large image collections on your own computer." />
+
   <style>
+    :root {
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --text: #18202f;
+      --muted: #667085;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --soft: #eef4ff;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      text-align: center;
-      margin-top: 100px;
-      font-family: sans-serif;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
-    .lang-btn {
-      margin: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      display: inline-block;
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .active {
-      background-color: #333;
-      color: white;
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 248, 251, 0.78);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 20px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2563eb, #22c55e);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    select {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .btn-secondary:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 86px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--soft);
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.03;
+      letter-spacing: -0.06em;
+      margin: 0 0 22px;
+    }
+
+    .lead {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 0 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mock {
+      background: #0f172a;
+      border-radius: 30px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      color: #e5e7eb;
+    }
+
+    .mock-top {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: #475569;
+    }
+
+    .mock-body {
+      background: #111827;
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .mock-toolbar {
+      height: 42px;
+      background: #1f2937;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .mock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .photo {
+      height: 92px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #334155, #64748b);
+    }
+
+    .photo:nth-child(2) {
+      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+    }
+
+    .photo:nth-child(3) {
+      background: linear-gradient(135deg, #166534, #86efac);
+    }
+
+    .photo:nth-child(4) {
+      background: linear-gradient(135deg, #7c2d12, #fdba74);
+    }
+
+    .photo:nth-child(5) {
+      background: linear-gradient(135deg, #581c87, #c084fc);
+    }
+
+    .photo:nth-child(6) {
+      background: linear-gradient(135deg, #991b1b, #fca5a5);
+    }
+
+    section {
+      padding: 58px 0;
+    }
+
+    .section-title {
+      max-width: 740px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -0.04em;
+      line-height: 1.12;
+      margin: 0 0 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .list {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+    }
+
+    .list-item {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .list-item:last-child {
+      border-bottom: 0;
+    }
+
+    .list-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .list-item span {
+      color: var(--muted);
+    }
+
+    .code {
+      background: #0f172a;
+      color: #e5e7eb;
+      border-radius: var(--radius);
+      padding: 24px;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+
+    pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .privacy {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border: 1px solid #dbeafe;
+      border-radius: 30px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .privacy p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .split,
+      .privacy {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+      }
+
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .nav {
+        flex-direction: column;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="logo" aria-hidden="true"></span>
+        <span>ZeroTraceBrowser</span>
+      </a>
 
-  <!-- 🌐 语言切换 -->
-  <div>
-    <span class="lang-btn active" onclick="setLang('en')">EN</span>
-    <span class="lang-btn" onclick="setLang('ja')">日本語</span>
-    <span class="lang-btn" onclick="setLang('zh')">中文</span>
-  </div>
+      <div class="nav-actions">
+        <select id="langSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+        </select>
+        <a class="btn btn-secondary" href="https://github.com/feilong-pixel/ZeroTraceBrowser" target="_blank" rel="noopener" data-i18n="nav.github">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
 
-  <h1 id="title">ZeroTracePhoto</h1>
-  <p id="desc1"></p>
-  <p id="desc2"></p>
-  <p id="desc3"></p>
-  <p id="desc4"></p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge" data-i18n="hero.badge">Local-first photo tool</div>
+          <h1 data-i18n="hero.title">Browse and organize photos safely on your own computer.</h1>
+          <p class="lead" data-i18n="hero.lead">
+            ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for managing large image collections without uploading your photos to the cloud.
+          </p>
 
-<script>
-const i18n = {
-  en: {
-    desc1: "Local-first photo organizer",
-    desc2: "No upload / No cloud / No tracking",
-    desc3: "All processing happens locally on your device",
-    desc4: "Coming Soon..."
-  },
-  ja: {
-    desc1: "ローカル優先の画像整理ツール",
-    desc2: "アップロードなし / クラウドなし / トラッキングなし",
-    desc3: "すべての画像処理はローカルで行われます",
-    desc4: "近日公開..."
-  },
-  zh: {
-    desc1: "本地优先的图片整理工具",
-    desc2: "不上传 / 不使用云端 / 不收集数据",
-    desc3: "所有图片处理均在本地完成",
-    desc4: "即将发布..."
-  }
-};
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://github.com/feilong-pixel/ZeroTraceBrowser" target="_blank" rel="noopener" data-i18n="hero.ctaPrimary">
+              View on GitHub
+            </a>
+            <a class="btn btn-secondary" href="#start" data-i18n="hero.ctaSecondary">
+              Get started
+            </a>
+          </div>
 
-function setLang(lang) {
-  document.getElementById("desc1").innerText = i18n[lang].desc1;
-  document.getElementById("desc2").innerText = i18n[lang].desc2;
-  document.getElementById("desc3").innerText = i18n[lang].desc3;
-  document.getElementById("desc4").innerText = i18n[lang].desc4;
+          <p class="note" data-i18n="hero.note">
+            Built for controlled local browsing, duplicate detection, safe delete, and batch organization.
+          </p>
+        </div>
 
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-}
+        <div class="mock" aria-label="Product preview">
+          <div class="mock-top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-toolbar"></div>
+            <div class="mock-grid">
+              <div class="photo"></div>
+              <div class="photo"></div>
+              <div class="photo"></div>
+              <div class="photo"></div>
+              <div class="photo"></div>
+              <div class="photo"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-// 默认语言
-setLang('en');
-</script>
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="features.title">A simple tool for serious photo organization.</h2>
+          <p data-i18n="features.lead">
+            ZeroTraceBrowser focuses on the essential workflow: browse, inspect, copy, detect duplicates, and safely remove files.
+          </p>
+        </div>
 
+        <div class="cards">
+          <div class="card">
+            <div class="icon">💻</div>
+            <h3 data-i18n="features.local.title">Local-first</h3>
+            <p data-i18n="features.local.text">Photos stay on your computer. No cloud upload is required.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3 data-i18n="features.light.title">Lightweight</h3>
+            <p data-i18n="features.light.text">Designed as a focused browser and organizer, not a heavy media suite.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🔍</div>
+            <h3 data-i18n="features.duplicate.title">Duplicate detection</h3>
+            <p data-i18n="features.duplicate.text">Find visually similar images with perceptual hash based comparison.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">♻️</div>
+            <h3 data-i18n="features.recycle.title">Safe delete</h3>
+            <p data-i18n="features.recycle.text">Move files to a controlled recycle area instead of deleting them directly.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🖼️</div>
+            <h3 data-i18n="features.viewer.title">Image viewer</h3>
+            <p data-i18n="features.viewer.text">Preview images and inspect useful metadata such as EXIF information.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🌐</div>
+            <h3 data-i18n="features.lang.title">Multi-language UI</h3>
+            <p data-i18n="features.lang.text">Built with English, Chinese, and Japanese interface support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <div class="section-title">
+            <h2 data-i18n="who.title">Who is it for?</h2>
+            <p data-i18n="who.lead">
+              For users who want practical local photo management without giving up control of their files.
+            </p>
+          </div>
+        </div>
+
+        <div class="list">
+          <div class="list-item">
+            <strong data-i18n="who.item1.title">Photographers and hobbyists</strong>
+            <span data-i18n="who.item1.text">Quickly browse and clean up large local photo folders.</span>
+          </div>
+          <div class="list-item">
+            <strong data-i18n="who.item2.title">Engineers and power users</strong>
+            <span data-i18n="who.item2.text">Use a transparent local tool with controlled file operations.</span>
+          </div>
+          <div class="list-item">
+            <strong data-i18n="who.item3.title">Privacy-conscious users</strong>
+            <span data-i18n="who.item3.text">Organize personal images without uploading them to a third-party cloud.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="container split">
+        <div>
+          <div class="section-title">
+            <h2 data-i18n="start.title">Get started locally.</h2>
+            <p data-i18n="start.lead">
+              Clone the repository, install dependencies, start the server, and open it in your browser.
+            </p>
+          </div>
+        </div>
+
+        <div class="code">
+          <pre><code>git clone https://github.com/feilong-pixel/ZeroTraceBrowser.git
+cd ZeroTraceBrowser
+
+pip install -r requirements.txt
+
+python app.py
+
+# Open:
+# http://127.0.0.1:8000</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="privacy">
+          <div>
+            <h2 data-i18n="privacy.title">Your photos stay with you.</h2>
+            <p data-i18n="privacy.text">
+              ZeroTraceBrowser is designed around local-first usage. It helps you browse and organize files on your own machine with explicit, controlled operations.
+            </p>
+          </div>
+          <div class="cards" style="grid-template-columns: 1fr;">
+            <div class="card">
+              <h3 data-i18n="privacy.point1.title">No cloud upload</h3>
+              <p data-i18n="privacy.point1.text">The tool is intended to run locally on your computer.</p>
+            </div>
+            <div class="card">
+              <h3 data-i18n="privacy.point2.title">Controlled actions</h3>
+              <p data-i18n="privacy.point2.text">Copy, delete, and batch operations are designed to remain visible and intentional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <span>© 2026 ZeroTraceBrowser</span>
+      <a href="https://github.com/feilong-pixel/ZeroTraceBrowser" target="_blank" rel="noopener">
+        github.com/feilong-pixel/ZeroTraceBrowser
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        "nav.github": "GitHub",
+        "hero.badge": "Local-first photo tool",
+        "hero.title": "Browse and organize photos safely on your own computer.",
+        "hero.lead": "ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for managing large image collections without uploading your photos to the cloud.",
+        "hero.ctaPrimary": "View on GitHub",
+        "hero.ctaSecondary": "Get started",
+        "hero.note": "Built for controlled local browsing, duplicate detection, safe delete, and batch organization.",
+
+        "features.title": "A simple tool for serious photo organization.",
+        "features.lead": "ZeroTraceBrowser focuses on the essential workflow: browse, inspect, copy, detect duplicates, and safely remove files.",
+        "features.local.title": "Local-first",
+        "features.local.text": "Photos stay on your computer. No cloud upload is required.",
+        "features.light.title": "Lightweight",
+        "features.light.text": "Designed as a focused browser and organizer, not a heavy media suite.",
+        "features.duplicate.title": "Duplicate detection",
+        "features.duplicate.text": "Find visually similar images with perceptual hash based comparison.",
+        "features.recycle.title": "Safe delete",
+        "features.recycle.text": "Move files to a controlled recycle area instead of deleting them directly.",
+        "features.viewer.title": "Image viewer",
+        "features.viewer.text": "Preview images and inspect useful metadata such as EXIF information.",
+        "features.lang.title": "Multi-language UI",
+        "features.lang.text": "Built with English, Chinese, and Japanese interface support.",
+
+        "who.title": "Who is it for?",
+        "who.lead": "For users who want practical local photo management without giving up control of their files.",
+        "who.item1.title": "Photographers and hobbyists",
+        "who.item1.text": "Quickly browse and clean up large local photo folders.",
+        "who.item2.title": "Engineers and power users",
+        "who.item2.text": "Use a transparent local tool with controlled file operations.",
+        "who.item3.title": "Privacy-conscious users",
+        "who.item3.text": "Organize personal images without uploading them to a third-party cloud.",
+
+        "start.title": "Get started locally.",
+        "start.lead": "Clone the repository, install dependencies, start the server, and open it in your browser.",
+
+        "privacy.title": "Your photos stay with you.",
+        "privacy.text": "ZeroTraceBrowser is designed around local-first usage. It helps you browse and organize files on your own machine with explicit, controlled operations.",
+        "privacy.point1.title": "No cloud upload",
+        "privacy.point1.text": "The tool is intended to run locally on your computer.",
+        "privacy.point2.title": "Controlled actions",
+        "privacy.point2.text": "Copy, delete, and batch operations are designed to remain visible and intentional."
+      },
+
+      zh: {
+        "nav.github": "GitHub",
+        "hero.badge": "本地优先图片工具",
+        "hero.title": "在自己的电脑上安全浏览和整理照片。",
+        "hero.lead": "ZeroTraceBrowser 是一个轻量、本地优先的图片浏览与整理工具，用于管理大量本地照片，无需把照片上传到云端。",
+        "hero.ctaPrimary": "查看 GitHub",
+        "hero.ctaSecondary": "开始使用",
+        "hero.note": "专注于本地浏览、重复检测、安全删除和批量整理。",
+
+        "features.title": "为认真整理照片而做的简单工具。",
+        "features.lead": "ZeroTraceBrowser 聚焦核心流程：浏览、查看、复制、检测重复图片，以及安全移除文件。",
+        "features.local.title": "本地优先",
+        "features.local.text": "照片保留在你的电脑上，不需要上传云端。",
+        "features.light.title": "轻量快速",
+        "features.light.text": "它是专注的浏览和整理工具，而不是沉重的媒体管理套件。",
+        "features.duplicate.title": "重复图片检测",
+        "features.duplicate.text": "基于感知哈希比较，帮助发现视觉上相似的图片。",
+        "features.recycle.title": "安全删除",
+        "features.recycle.text": "文件会移动到受控的退避区域，而不是直接永久删除。",
+        "features.viewer.title": "图片查看器",
+        "features.viewer.text": "预览图片，并查看 EXIF 等有用的元数据。",
+        "features.lang.title": "多语言界面",
+        "features.lang.text": "支持英文、中文和日文界面。",
+
+        "who.title": "适合谁使用？",
+        "who.lead": "适合想要实用本地图片管理，同时又不想失去文件控制权的用户。",
+        "who.item1.title": "摄影爱好者",
+        "who.item1.text": "快速浏览并清理大量本地照片目录。",
+        "who.item2.title": "工程师和高级用户",
+        "who.item2.text": "使用透明、可控的本地文件操作工具。",
+        "who.item3.title": "重视隐私的用户",
+        "who.item3.text": "无需上传到第三方云端，也能整理个人图片。",
+
+        "start.title": "在本地开始使用。",
+        "start.lead": "克隆仓库，安装依赖，启动服务，然后用浏览器打开。",
+
+        "privacy.title": "你的照片，留在你这里。",
+        "privacy.text": "ZeroTraceBrowser 围绕本地优先设计，帮助你在自己的电脑上以明确、可控的方式浏览和整理文件。",
+        "privacy.point1.title": "不上传云端",
+        "privacy.point1.text": "这个工具设计为在你的电脑本地运行。",
+        "privacy.point2.title": "操作可控",
+        "privacy.point2.text": "复制、删除和批处理操作都尽量保持可见、明确、可追踪。"
+      },
+
+      ja: {
+        "nav.github": "GitHub",
+        "hero.badge": "ローカル優先の写真ツール",
+        "hero.title": "自分のPC上で写真を安全に閲覧・整理できます。",
+        "hero.lead": "ZeroTraceBrowser は、大量のローカル写真を管理するための軽量な画像ブラウザ兼整理ツールです。写真をクラウドへアップロードする必要はありません。",
+        "hero.ctaPrimary": "GitHubを見る",
+        "hero.ctaSecondary": "使い方を見る",
+        "hero.note": "ローカル閲覧、重複検出、安全な削除、バッチ整理に対応しています。",
+
+        "features.title": "写真整理に必要な機能へ絞ったシンプルなツール。",
+        "features.lead": "ZeroTraceBrowser は、閲覧、確認、コピー、重複検出、安全なファイル退避という基本フローに集中しています。",
+        "features.local.title": "ローカル優先",
+        "features.local.text": "写真は自分のPC内に残ります。クラウドへのアップロードは不要です。",
+        "features.light.title": "軽量",
+        "features.light.text": "重いメディア管理ソフトではなく、閲覧と整理に特化したツールです。",
+        "features.duplicate.title": "重複画像検出",
+        "features.duplicate.text": "感知ハッシュによる比較で、見た目が近い画像を検出します。",
+        "features.recycle.title": "安全な削除",
+        "features.recycle.text": "ファイルを直接削除せず、管理された退避領域へ移動します。",
+        "features.viewer.title": "画像ビューア",
+        "features.viewer.text": "画像をプレビューし、EXIF などのメタデータを確認できます。",
+        "features.lang.title": "多言語UI",
+        "features.lang.text": "英語、中国語、日本語のUIに対応しています。",
+
+        "who.title": "こんな人に向いています",
+        "who.lead": "ファイルの管理権限を手元に残しながら、実用的に写真を整理したい人向けです。",
+        "who.item1.title": "写真愛好家",
+        "who.item1.text": "大量のローカル写真フォルダを素早く閲覧・整理できます。",
+        "who.item2.title": "エンジニアや上級ユーザー",
+        "who.item2.text": "透明性があり、操作を制御しやすいローカルツールとして使えます。",
+        "who.item3.title": "プライバシーを重視するユーザー",
+        "who.item3.text": "個人写真を第三者のクラウドへアップロードせずに整理できます。",
+
+        "start.title": "ローカル環境で始める。",
+        "start.lead": "リポジトリをクローンし、依存関係をインストールしてサーバーを起動し、ブラウザで開きます。",
+
+        "privacy.title": "写真は自分の手元に。",
+        "privacy.text": "ZeroTraceBrowser はローカル優先の利用を前提に設計されています。自分のPC上で、明確かつ制御された操作によりファイルを閲覧・整理できます。",
+        "privacy.point1.title": "クラウドアップロードなし",
+        "privacy.point1.text": "このツールは、自分のPC上でローカル実行することを前提としています。",
+        "privacy.point2.title": "操作を制御しやすい",
+        "privacy.point2.text": "コピー、削除、バッチ処理は、見える形で意図的に実行できるよう設計されています。"
+      }
+    };
+
+    const langSelect = document.getElementById("langSelect");
+
+    function applyLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      localStorage.setItem("ztb-site-lang", lang);
+    }
+
+    const savedLang = localStorage.getItem("ztb-site-lang");
+    const browserLang = navigator.language.startsWith("ja")
+      ? "ja"
+      : navigator.language.startsWith("zh")
+        ? "zh"
+        : "en";
+
+    const initialLang = savedLang || browserLang;
+    langSelect.value = initialLang;
+    applyLanguage(initialLang);
+
+    langSelect.addEventListener("change", (event) => {
+      applyLanguage(event.target.value);
+    });
+  </script>
 </body>
 </html>
