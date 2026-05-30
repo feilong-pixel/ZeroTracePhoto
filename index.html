@@ -3,502 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZeroTraceBrowser - Local-first Photo Browser & Organizer</title>
-  <meta name="description" content="ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for safely managing large image collections on your own computer. 中文名：零迹照片管家。日本語名：ZeroTrace 写真整理。" />
-
-  <style>
-    :root {
-      --bg: #f7f8fb;
-      --panel: #ffffff;
-      --text: #18202f;
-      --muted: #667085;
-      --line: #e5e7eb;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --soft: #eef4ff;
-      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-      --radius: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: rgba(247, 248, 251, 0.78);
-      border-bottom: 1px solid rgba(229, 231, 235, 0.7);
-    }
-
-    .nav {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      font-size: 20px;
-    }
-
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #2563eb, #22c55e);
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      line-height: 1.1;
-    }
-
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    select {
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      padding: 12px 20px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: #fff;
-      color: var(--text);
-      border-color: var(--line);
-    }
-
-    .btn-secondary:hover {
-      border-color: #cbd5e1;
-      transform: translateY(-1px);
-    }
-
-    .hero {
-      padding: 86px 0 54px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 46px;
-      align-items: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--soft);
-      color: #1d4ed8;
-      border: 1px solid #dbeafe;
-      padding: 8px 13px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: 1.03;
-      letter-spacing: -0.06em;
-      margin: 0 0 22px;
-    }
-
-    .lead {
-      font-size: 20px;
-      color: var(--muted);
-      max-width: 660px;
-      margin: 0 0 30px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 26px;
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .mock {
-      background: #0f172a;
-      border-radius: 30px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-      color: #e5e7eb;
-    }
-
-    .mock-top {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: #475569;
-    }
-
-    .mock-body {
-      background: #111827;
-      border-radius: 20px;
-      padding: 18px;
-    }
-
-    .mock-toolbar {
-      height: 42px;
-      background: #1f2937;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      display: grid;
-      grid-template-columns: 1fr 92px 92px;
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .mock-toolbar span {
-      border-radius: 999px;
-      background: #334155;
-    }
-
-    .mock-toolbar span:first-child {
-      background: #475569;
-    }
-
-    .mock-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .photo {
-      height: 92px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #334155, #64748b);
-    }
-
-    .photo:nth-child(2) {
-      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-    }
-
-    .photo:nth-child(3) {
-      background: linear-gradient(135deg, #166534, #86efac);
-    }
-
-    .photo:nth-child(4) {
-      background: linear-gradient(135deg, #7c2d12, #fdba74);
-    }
-
-    .photo:nth-child(5) {
-      background: linear-gradient(135deg, #581c87, #c084fc);
-    }
-
-    .photo:nth-child(6) {
-      background: linear-gradient(135deg, #991b1b, #fca5a5);
-    }
-
-    .mock-status {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(148, 163, 184, 0.18);
-      color: #cbd5e1;
-      font-size: 13px;
-    }
-
-    .mock-pill {
-      border: 1px solid rgba(34, 197, 94, 0.45);
-      color: #bbf7d0;
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    section {
-      padding: 58px 0;
-    }
-
-    .section-title {
-      max-width: 740px;
-      margin-bottom: 28px;
-    }
-
-    h2 {
-      font-size: clamp(30px, 4vw, 44px);
-      letter-spacing: -0.04em;
-      line-height: 1.12;
-      margin: 0 0 12px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
-    }
-
-    .icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: var(--soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      font-size: 22px;
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 19px;
-      letter-spacing: -0.02em;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 30px;
-      align-items: start;
-    }
-
-    .list {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-    }
-
-    .list-item {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .list-item:last-child {
-      border-bottom: 0;
-    }
-
-    .list-item strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .list-item span {
-      color: var(--muted);
-    }
-
-    .code {
-      background: #0f172a;
-      color: #e5e7eb;
-      border-radius: var(--radius);
-      padding: 24px;
-      overflow-x: auto;
-      box-shadow: var(--shadow);
-    }
-
-    pre {
-      margin: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .privacy {
-      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
-      border: 1px solid #dbeafe;
-      border-radius: 30px;
-      padding: 36px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .privacy p {
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    footer {
-      padding: 34px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 860px) {
-      .hero-grid,
-      .split,
-      .privacy {
-        grid-template-columns: 1fr;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        height: auto;
-        padding: 16px 0;
-        align-items: flex-start;
-      }
-
-      .nav-actions {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .hero {
-        padding-top: 54px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .container {
-        width: min(100% - 28px, 1120px);
-      }
-
-      .brand {
-        font-size: 18px;
-      }
-
-      .brand-subtitle {
-        font-size: 11px;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .hero-actions {
-        width: 100%;
-      }
-
-      .nav {
-        flex-direction: column;
-      }
-
-      .nav-actions {
-        width: 100%;
-        justify-content: flex-start;
-      }
-    }
-  </style>
+  <title>ZeroTraceBrowser - Family Photo Gateway</title>
+  <meta name="description" content="ZeroTraceBrowser is a local-first Family Photo Gateway for importing, deduplicating, archiving and browsing large personal photo collections. 中文名：家庭图库入口程序。日本語：家族写真管理の入口。" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="#">
+      <a class="brand" href="#top" aria-label="ZeroTraceBrowser home">
         <span class="logo" aria-hidden="true"></span>
         <span class="brand-text">
           <span>ZeroTraceBrowser</span>
-          <span class="brand-subtitle" data-i18n="brand.subtitle">Local photo control</span>
+          <span class="brand-subtitle" data-i18n="brand.subtitle">Family Photo Gateway</span>
         </span>
       </a>
 
       <div class="nav-actions">
+        <a href="#lifecycle" data-i18n="nav.lifecycle">Lifecycle</a>
+        <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a>
         <select id="langSelect" aria-label="Language">
           <option value="en">English</option>
           <option value="zh">中文</option>
@@ -511,145 +34,204 @@
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="badge" data-i18n="hero.badge">Local-first photo tool</div>
-          <h1 data-i18n="hero.title">Browse and organize photos safely on your own computer.</h1>
+          <div class="badge" data-i18n="hero.badge">Family Photo Gateway</div>
+          <h1 data-i18n="hero.title">Build Your Family Photo Library.</h1>
           <p class="lead" data-i18n="hero.lead">
-            ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for managing large image collections without uploading your photos to the cloud.
+            Import, deduplicate, archive and browse all your family memories in one place.
+          </p>
+          <p class="sublead" data-i18n="hero.sublead">
+            ZeroTraceBrowser is a local-first gateway for managing your family photo archive. Your photos stay under your control — no cloud lock-in, no subscription dependency.
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://github.com/feilong-pixel/ZeroTraceBrowser" target="_blank" rel="noopener" data-i18n="hero.ctaPrimary">
               View on GitHub
             </a>
-            <a class="btn btn-secondary" href="#start" data-i18n="hero.ctaSecondary">
-              Get started
+            <a class="btn btn-secondary" href="#lifecycle" data-i18n="hero.ctaSecondary">
+              Explore Features
             </a>
           </div>
 
-          <p class="note" data-i18n="hero.note">
-            Built for controlled local browsing, duplicate detection, safe delete, and batch organization.
-          </p>
+          <div class="mini-flow" aria-label="photo lifecycle">
+            <span data-i18n="flow.import">Import</span>
+            <strong>→</strong>
+            <span data-i18n="flow.deduplicate">Deduplicate</span>
+            <strong>→</strong>
+            <span data-i18n="flow.archive">Archive</span>
+            <strong>→</strong>
+            <span data-i18n="flow.browse">Browse</span>
+          </div>
         </div>
 
-        <div class="mock" aria-label="Product preview">
-          <div class="mock-top">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+        <div class="product-shell" aria-label="ZeroTraceBrowser interface preview">
+          <div class="product-window-bar">
+            <div class="window-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <strong>ZeroTraceBrowser</strong>
+            <span>127.0.0.1:8000</span>
           </div>
-          <div class="mock-body">
-            <div class="mock-toolbar" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="mock-grid">
-              <div class="photo"></div>
-              <div class="photo"></div>
-              <div class="photo"></div>
-              <div class="photo"></div>
-              <div class="photo"></div>
-              <div class="photo"></div>
-            </div>
-            <div class="mock-status">
-              <span data-i18n="preview.caption">Gallery, timeline, duplicate review, and app recycle stay local.</span>
-              <span class="mock-pill" data-i18n="preview.pill">No cloud upload</span>
-            </div>
+          <div class="product-workspace">
+            <aside class="product-sidebar">
+              <strong data-i18n="preview.sidebarTitle">Tools</strong>
+              <span class="active" data-i18n="preview.toolImport">Import Photos</span>
+              <span data-i18n="preview.toolDuplicates">Duplicate Results</span>
+              <span data-i18n="preview.toolRecycle">Recycle Bin</span>
+              <span data-i18n="preview.toolGallery">Gallery</span>
+            </aside>
+            <section class="product-main">
+              <div class="product-panel import-panel">
+                <div class="import-copy">
+                  <span class="panel-label" data-i18n="preview.importLabel">Phone Photo Sync</span>
+                  <strong data-i18n="preview.importStatus">Local Wi-Fi import ready</strong>
+                </div>
+                <div class="sync-metrics" aria-label="import metrics">
+                  <span><b>128</b><small data-i18n="preview.processed">processed</small></span>
+                  <span><b>96</b><small data-i18n="preview.imported">imported</small></span>
+                  <span><b>32</b><small data-i18n="preview.skipped">skipped</small></span>
+                </div>
+              </div>
+              <div class="product-grid">
+                <div class="product-panel duplicate-panel">
+                  <span class="panel-label" data-i18n="preview.duplicateLabel">Duplicate Results</span>
+                  <strong>42</strong>
+                  <p data-i18n="preview.duplicateText">strict + pHash groups waiting for review</p>
+                  <button type="button" data-i18n="preview.moveButton">Move to recycle</button>
+                </div>
+                <div class="product-panel archive-panel">
+                  <span class="panel-label" data-i18n="preview.archiveLabel">Archive</span>
+                  <strong data-i18n="preview.archiveStatus">Recycle log archived</strong>
+                  <p data-i18n="preview.archiveText">original files stay under explicit control</p>
+                </div>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-head">
+                  <span data-i18n="preview.browseLabel">Browse after cleanup</span>
+                  <strong data-i18n="preview.timeline">Timeline</strong>
+                </div>
+                <div class="timeline-strip" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2 data-i18n="features.title">A simple tool for serious photo organization.</h2>
-          <p data-i18n="features.lead">
-            ZeroTraceBrowser focuses on the essential workflow: browse, inspect, copy, detect duplicates, and safely remove files.
-          </p>
-        </div>
-
-        <div class="cards">
-          <div class="card">
-            <div class="icon">💻</div>
-            <h3 data-i18n="features.local.title">Local-first</h3>
-            <p data-i18n="features.local.text">Photos stay on your computer. No cloud upload is required.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">⚡</div>
-            <h3 data-i18n="features.light.title">Lightweight</h3>
-            <p data-i18n="features.light.text">Designed as a focused browser and organizer, not a heavy media suite.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🔍</div>
-            <h3 data-i18n="features.duplicate.title">Duplicate detection</h3>
-            <p data-i18n="features.duplicate.text">Find visually similar images with perceptual hash based comparison.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">♻️</div>
-            <h3 data-i18n="features.recycle.title">Safe delete</h3>
-            <p data-i18n="features.recycle.text">Move files to a controlled recycle area instead of deleting them directly.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🖼️</div>
-            <h3 data-i18n="features.viewer.title">Image viewer</h3>
-            <p data-i18n="features.viewer.text">Preview images and inspect useful metadata such as EXIF information.</p>
-          </div>
-
-          <div class="card">
-            <div class="icon">🌐</div>
-            <h3 data-i18n="features.lang.title">Multi-language UI</h3>
-            <p data-i18n="features.lang.text">Built with English, Chinese, and Japanese interface support.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
+    <section class="why-section">
       <div class="container split">
-        <div>
-          <div class="section-title">
-            <h2 data-i18n="who.title">Who is it for?</h2>
-            <p data-i18n="who.lead">
-              For users who want practical local photo management without giving up control of their files.
-            </p>
-          </div>
+        <div class="section-title">
+          <p class="eyebrow" data-i18n="why.eyebrow">Why ZeroTraceBrowser?</p>
+          <h2 data-i18n="why.title">Most families do not lack photos. They lack a clean entrance to manage them.</h2>
         </div>
 
-        <div class="list">
-          <div class="list-item">
-            <strong data-i18n="who.item1.title">Photographers and hobbyists</strong>
-            <span data-i18n="who.item1.text">Quickly browse and clean up large local photo folders.</span>
+        <div class="story-card">
+          <p data-i18n="why.text1">Every family creates thousands of photos every year.</p>
+          <p data-i18n="why.text2">Phones fill up. Cloud subscriptions grow. Duplicates accumulate.</p>
+          <p data-i18n="why.text3">Most people eventually stop organizing.</p>
+          <p class="story-emphasis" data-i18n="why.text4">ZeroTraceBrowser was built to solve the entire photo lifecycle.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="lifecycle">
+      <div class="container">
+        <div class="section-title wide">
+          <p class="eyebrow" data-i18n="lifecycle.eyebrow">Photo Lifecycle</p>
+          <h2 data-i18n="lifecycle.title">A simple workflow for long-term family photo preservation.</h2>
+          <p data-i18n="lifecycle.lead">ZeroTraceBrowser focuses on the path every photo should follow before it becomes part of your family archive.</p>
+        </div>
+
+        <div class="cards lifecycle-cards">
+          <div class="card">
+            <div class="icon">01</div>
+            <h3 data-i18n="features.import.title">Import</h3>
+            <p data-i18n="features.import.text">Pair a phone once and receive new photos over local Wi-Fi into the current local root.</p>
           </div>
-          <div class="list-item">
-            <strong data-i18n="who.item2.title">Engineers and power users</strong>
-            <span data-i18n="who.item2.text">Use a transparent local tool with controlled file operations.</span>
+
+          <div class="card">
+            <div class="icon">02</div>
+            <h3 data-i18n="features.deduplicate.title">Deduplicate</h3>
+            <p data-i18n="features.deduplicate.text">Use SHA-256 and perceptual hash comparison to find exact and visually similar duplicates.</p>
           </div>
-          <div class="list-item">
-            <strong data-i18n="who.item3.title">Privacy-conscious users</strong>
-            <span data-i18n="who.item3.text">Organize personal images without uploading them to a third-party cloud.</span>
+
+          <div class="card">
+            <div class="icon">03</div>
+            <h3 data-i18n="features.archive.title">Archive</h3>
+            <p data-i18n="features.archive.text">Move unwanted copies into the app recycle area, keep audit logs, then preserve a cleaner local archive.</p>
           </div>
+
+          <div class="card">
+            <div class="icon">04</div>
+            <h3 data-i18n="features.browse.title">Browse</h3>
+            <p data-i18n="features.browse.text">Browse the cleaned collection with gallery, metadata, search, date filtering and Timeline navigation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="families-section">
+      <div class="container families-panel">
+        <div>
+          <p class="eyebrow" data-i18n="families.eyebrow">Designed For Real Families</p>
+          <h2 data-i18n="families.title">Not everyone has only 100 photos.</h2>
+          <p data-i18n="families.text">Many families already have tens of thousands of photos and videos. ZeroTraceBrowser is designed for large personal collections that need order, not another closed cloud.</p>
+        </div>
+        <div class="number-grid" aria-label="collection size examples">
+          <div><strong>10,000</strong><span data-i18n="families.photos1">photos</span></div>
+          <div><strong>50,000</strong><span data-i18n="families.photos2">photos</span></div>
+          <div><strong>100,000</strong><span data-i18n="families.photos3">photos</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="container split roadmap-grid">
+        <div class="section-title">
+          <p class="eyebrow" data-i18n="roadmap.eyebrow">Roadmap</p>
+          <h2 data-i18n="roadmap.title">From browser to family photo infrastructure.</h2>
+          <p data-i18n="roadmap.lead">ZeroTraceBrowser is evolving from a local photo browser into a gateway for importing, cleaning, archiving and rediscovering family memories.</p>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-item done"><span>✓</span><strong data-i18n="roadmap.item1">Local Gallery and Timeline</strong></div>
+          <div class="roadmap-item done"><span>✓</span><strong data-i18n="roadmap.item2">Duplicate Detection</strong></div>
+          <div class="roadmap-item done"><span>✓</span><strong data-i18n="roadmap.item3">Local Wi-Fi Phone Sync</strong></div>
+          <div class="roadmap-item done"><span>✓</span><strong data-i18n="roadmap.item4">Recycle and Audit Logs</strong></div>
+          <div class="roadmap-item"><span>□</span><strong data-i18n="roadmap.item5">Device Fallback Import</strong></div>
+          <div class="roadmap-item"><span>□</span><strong data-i18n="roadmap.item6">Smart Import Rules</strong></div>
+          <div class="roadmap-item"><span>□</span><strong data-i18n="roadmap.item7">Family Timeline</strong></div>
+          <div class="roadmap-item"><span>□</span><strong data-i18n="roadmap.item8">AI Assisted Organization</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="philosophy-section">
+      <div class="container philosophy">
+        <div>
+          <p class="eyebrow" data-i18n="philosophy.eyebrow">Philosophy</p>
+          <h2 data-i18n="philosophy.title">Your photos are memories. Keep them organized. Keep them local. Keep them forever.</h2>
+          <p data-i18n="philosophy.text">Family photos should not depend entirely on subscriptions, cloud lock-in or vendor ecosystems. ZeroTraceBrowser is built around local ownership and long-term preservation.</p>
+        </div>
+        <div class="principles">
+          <div class="principle"><span>01</span><strong data-i18n="philosophy.point1">Local ownership</strong></div>
+          <div class="principle"><span>02</span><strong data-i18n="philosophy.point2">Long-term preservation</strong></div>
+          <div class="principle"><span>03</span><strong data-i18n="philosophy.point3">Visible, controlled actions</strong></div>
         </div>
       </div>
     </section>
 
     <section id="start">
-      <div class="container split">
-        <div>
-          <div class="section-title">
-            <h2 data-i18n="start.title">Get started locally.</h2>
-            <p data-i18n="start.lead">
-              Clone the repository, install dependencies, start the server, and open it in your browser.
-            </p>
-          </div>
+      <div class="container split start-grid">
+        <div class="section-title">
+          <p class="eyebrow" data-i18n="start.eyebrow">Get Started</p>
+          <h2 data-i18n="start.title">Run it locally on your own computer.</h2>
+          <p data-i18n="start.lead">Clone the repository, install dependencies, start the local server, and open it in your browser.</p>
         </div>
 
         <div class="code">
@@ -665,34 +247,12 @@ python -m uvicorn app:app --host 127.0.0.1 --port 8000
         </div>
       </div>
     </section>
-
-    <section>
-      <div class="container">
-        <div class="privacy">
-          <div>
-            <h2 data-i18n="privacy.title">Your photos stay with you.</h2>
-            <p data-i18n="privacy.text">
-              ZeroTraceBrowser is designed around local-first usage. It helps you browse and organize files on your own machine with explicit, controlled operations.
-            </p>
-          </div>
-          <div class="cards" style="grid-template-columns: 1fr;">
-            <div class="card">
-              <h3 data-i18n="privacy.point1.title">No cloud upload</h3>
-              <p data-i18n="privacy.point1.text">The tool is intended to run locally on your computer.</p>
-            </div>
-            <div class="card">
-              <h3 data-i18n="privacy.point2.title">Controlled actions</h3>
-              <p data-i18n="privacy.point2.text">Copy, delete, and batch operations are designed to remain visible and intentional.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <div class="container footer-row">
       <span>© 2026 ZeroTraceBrowser</span>
+      <span data-i18n="footer.tagline">Family Photo Gateway</span>
       <a href="https://github.com/feilong-pixel/ZeroTraceBrowser" target="_blank" rel="noopener">
         github.com/feilong-pixel/ZeroTraceBrowser
       </a>
@@ -702,147 +262,241 @@ python -m uvicorn app:app --host 127.0.0.1 --port 8000
   <script>
     const translations = {
       en: {
-        "page.title": "ZeroTraceBrowser - Local-first Photo Browser & Organizer",
-        "brand.subtitle": "Local photo control",
+        "page.title": "ZeroTraceBrowser - Family Photo Gateway",
+        "brand.subtitle": "Family Photo Gateway",
+        "nav.lifecycle": "Lifecycle",
+        "nav.roadmap": "Roadmap",
         "nav.github": "GitHub",
-        "hero.badge": "Local-first photo tool",
-        "hero.title": "Browse and organize photos safely on your own computer.",
-        "hero.lead": "ZeroTraceBrowser is a lightweight, local-first photo browser and organizer for managing large image collections without uploading your photos to the cloud.",
+        "hero.badge": "Family Photo Gateway",
+        "hero.title": "Build Your Family Photo Library.",
+        "hero.lead": "Import, deduplicate, archive and browse all your family memories in one place.",
+        "hero.sublead": "ZeroTraceBrowser is a local-first gateway for managing your family photo archive. Your photos stay under your control — no cloud lock-in, no subscription dependency.",
         "hero.ctaPrimary": "View on GitHub",
-        "hero.ctaSecondary": "Get started",
-        "hero.note": "Built for controlled local browsing, duplicate detection, safe delete, and batch organization.",
-        "preview.caption": "Gallery, timeline, duplicate review, and app recycle stay local.",
-        "preview.pill": "No cloud upload",
-
-        "features.title": "A simple tool for serious photo organization.",
-        "features.lead": "ZeroTraceBrowser focuses on the essential workflow: browse, inspect, copy, detect duplicates, and safely remove files.",
-        "features.local.title": "Local-first",
-        "features.local.text": "Photos stay on your computer. No cloud upload is required.",
-        "features.light.title": "Lightweight",
-        "features.light.text": "Designed as a focused browser and organizer, not a heavy media suite.",
-        "features.duplicate.title": "Duplicate detection",
-        "features.duplicate.text": "Find visually similar images with perceptual hash based comparison.",
-        "features.recycle.title": "Safe delete",
-        "features.recycle.text": "Move files to a controlled recycle area instead of deleting them directly.",
-        "features.viewer.title": "Image viewer",
-        "features.viewer.text": "Preview images and inspect useful metadata such as EXIF information.",
-        "features.lang.title": "Multi-language UI",
-        "features.lang.text": "Built with English, Chinese, and Japanese interface support.",
-
-        "who.title": "Who is it for?",
-        "who.lead": "For users who want practical local photo management without giving up control of their files.",
-        "who.item1.title": "Photographers and hobbyists",
-        "who.item1.text": "Quickly browse and clean up large local photo folders.",
-        "who.item2.title": "Engineers and power users",
-        "who.item2.text": "Use a transparent local tool with controlled file operations.",
-        "who.item3.title": "Privacy-conscious users",
-        "who.item3.text": "Organize personal images without uploading them to a third-party cloud.",
-
-        "start.title": "Get started locally.",
-        "start.lead": "Clone the repository, install dependencies, start the server, and open it in your browser.",
-
-        "privacy.title": "Your photos stay with you.",
-        "privacy.text": "ZeroTraceBrowser is designed around local-first usage. It helps you browse and organize files on your own machine with explicit, controlled operations.",
-        "privacy.point1.title": "No cloud upload",
-        "privacy.point1.text": "The tool is intended to run locally on your computer.",
-        "privacy.point2.title": "Controlled actions",
-        "privacy.point2.text": "Copy, delete, and batch operations are designed to remain visible and intentional."
+        "hero.ctaSecondary": "Explore Features",
+        "flow.import": "Import",
+        "flow.deduplicate": "Deduplicate",
+        "flow.archive": "Archive",
+        "flow.browse": "Browse",
+        "preview.sidebarTitle": "Tools",
+        "preview.toolImport": "Import Photos",
+        "preview.toolDuplicates": "Duplicate Results",
+        "preview.toolRecycle": "Recycle Bin",
+        "preview.toolGallery": "Gallery",
+        "preview.importLabel": "Phone Photo Sync",
+        "preview.importStatus": "Local Wi-Fi import ready",
+        "preview.processed": "processed",
+        "preview.imported": "imported",
+        "preview.skipped": "skipped",
+        "preview.duplicateLabel": "Duplicate Results",
+        "preview.duplicateText": "strict + pHash groups waiting for review",
+        "preview.moveButton": "Move to recycle",
+        "preview.archiveLabel": "Archive",
+        "preview.archiveStatus": "Recycle log archived",
+        "preview.archiveText": "original files stay under explicit control",
+        "preview.browseLabel": "Browse after cleanup",
+        "preview.timeline": "Timeline",
+        "why.eyebrow": "Why ZeroTraceBrowser?",
+        "why.title": "Most families do not lack photos. They lack a clean entrance to manage them.",
+        "why.text1": "Every family creates thousands of photos every year.",
+        "why.text2": "Phones fill up. Cloud subscriptions grow. Duplicates accumulate.",
+        "why.text3": "Most people eventually stop organizing.",
+        "why.text4": "ZeroTraceBrowser was built to solve the entire photo lifecycle.",
+        "lifecycle.eyebrow": "Photo Lifecycle",
+        "lifecycle.title": "A simple workflow for long-term family photo preservation.",
+        "lifecycle.lead": "ZeroTraceBrowser focuses on the path every photo should follow before it becomes part of your family archive.",
+        "features.import.title": "Import",
+        "features.import.text": "Pair a phone once and receive new photos over local Wi-Fi into the current local root.",
+        "features.deduplicate.title": "Deduplicate",
+        "features.deduplicate.text": "Use SHA-256 and perceptual hash comparison to find exact and visually similar duplicates.",
+        "features.archive.title": "Archive",
+        "features.archive.text": "Move unwanted copies into the app recycle area, keep audit logs, then preserve a cleaner local archive.",
+        "features.browse.title": "Browse",
+        "features.browse.text": "Browse the cleaned collection with gallery, metadata, search, date filtering and Timeline navigation.",
+        "families.eyebrow": "Designed For Real Families",
+        "families.title": "Not everyone has only 100 photos.",
+        "families.text": "Many families already have tens of thousands of photos and videos. ZeroTraceBrowser is designed for large personal collections that need order, not another closed cloud.",
+        "families.photos1": "photos",
+        "families.photos2": "photos",
+        "families.photos3": "photos",
+        "roadmap.eyebrow": "Roadmap",
+        "roadmap.title": "From browser to family photo infrastructure.",
+        "roadmap.lead": "ZeroTraceBrowser is evolving from a local photo browser into a gateway for importing, cleaning, archiving and rediscovering family memories.",
+        "roadmap.item1": "Local Gallery and Timeline",
+        "roadmap.item2": "Duplicate Detection",
+        "roadmap.item3": "Local Wi-Fi Phone Sync",
+        "roadmap.item4": "Recycle and Audit Logs",
+        "roadmap.item5": "Device Fallback Import",
+        "roadmap.item6": "Smart Import Rules",
+        "roadmap.item7": "Family Timeline",
+        "roadmap.item8": "AI Assisted Organization",
+        "philosophy.eyebrow": "Philosophy",
+        "philosophy.title": "Your photos are memories. Keep them organized. Keep them local. Keep them forever.",
+        "philosophy.text": "Family photos should not depend entirely on subscriptions, cloud lock-in or vendor ecosystems. ZeroTraceBrowser is built around local ownership and long-term preservation.",
+        "philosophy.point1": "Local ownership",
+        "philosophy.point2": "Long-term preservation",
+        "philosophy.point3": "Visible, controlled actions",
+        "start.eyebrow": "Get Started",
+        "start.title": "Run it locally on your own computer.",
+        "start.lead": "Clone the repository, install dependencies, start the local server, and open it in your browser.",
+        "footer.tagline": "Family Photo Gateway"
       },
-
       zh: {
-        "page.title": "ZeroTraceBrowser｜零迹照片管家",
-        "brand.subtitle": "零迹照片管家",
+        "page.title": "ZeroTraceBrowser｜家庭图库入口程序",
+        "brand.subtitle": "家庭图库入口程序",
+        "nav.lifecycle": "照片流程",
+        "nav.roadmap": "路线图",
         "nav.github": "GitHub",
-        "hero.badge": "本地优先图片工具",
-        "hero.title": "在自己的电脑上安全浏览和整理照片。",
-        "hero.lead": "ZeroTraceBrowser（零迹照片管家）是一个轻量、本地优先的图片浏览与整理工具，用于管理大量本地照片，无需把照片上传到云端。",
+        "hero.badge": "家庭图库入口程序",
+        "hero.title": "建立属于自己的家庭图库。",
+        "hero.lead": "导入、去重、归库、浏览，让所有家庭记忆集中到一个地方。",
+        "hero.sublead": "ZeroTraceBrowser 是一个本地优先的家庭图库入口程序。照片始终掌握在自己手中，不依赖云端绑定，也不依赖订阅服务。",
         "hero.ctaPrimary": "查看 GitHub",
-        "hero.ctaSecondary": "开始使用",
-        "hero.note": "专注于本地浏览、重复检测、安全删除和批量整理。",
-        "preview.caption": "图库、时间线、重复审查和应用内回收区都保留在本地。",
-        "preview.pill": "不上传云端",
-
-        "features.title": "为认真整理照片而做的简单工具。",
-        "features.lead": "ZeroTraceBrowser 聚焦核心流程：浏览、查看、复制、检测重复图片，以及安全移除文件。",
-        "features.local.title": "本地优先",
-        "features.local.text": "照片保留在你的电脑上，不需要上传云端。",
-        "features.light.title": "轻量快速",
-        "features.light.text": "它是专注的浏览和整理工具，而不是沉重的媒体管理套件。",
-        "features.duplicate.title": "重复图片检测",
-        "features.duplicate.text": "基于感知哈希比较，帮助发现视觉上相似的图片。",
-        "features.recycle.title": "安全删除",
-        "features.recycle.text": "文件会移动到应用内回收区，而不是直接永久删除。",
-        "features.viewer.title": "图片查看器",
-        "features.viewer.text": "预览图片，并查看 EXIF 等有用的元数据。",
-        "features.lang.title": "多语言界面",
-        "features.lang.text": "支持英文、中文和日文界面。",
-
-        "who.title": "适合谁使用？",
-        "who.lead": "适合想要实用本地图片管理，同时又不想失去文件控制权的用户。",
-        "who.item1.title": "摄影爱好者",
-        "who.item1.text": "快速浏览并清理大量本地照片目录。",
-        "who.item2.title": "工程师和高级用户",
-        "who.item2.text": "使用透明、可控的本地文件操作工具。",
-        "who.item3.title": "重视隐私的用户",
-        "who.item3.text": "无需上传到第三方云端，也能整理个人图片。",
-
-        "start.title": "在本地开始使用。",
-        "start.lead": "克隆仓库，安装依赖，启动服务，然后用浏览器打开。",
-
-        "privacy.title": "你的照片，留在你这里。",
-        "privacy.text": "ZeroTraceBrowser 围绕本地优先设计，帮助你在自己的电脑上以明确、可控的方式浏览和整理文件。",
-        "privacy.point1.title": "不上传云端",
-        "privacy.point1.text": "这个工具设计为在你的电脑本地运行。",
-        "privacy.point2.title": "操作可控",
-        "privacy.point2.text": "复制、删除和批处理操作都尽量保持可见、明确、可追踪。"
+        "hero.ctaSecondary": "查看功能",
+        "flow.import": "导入",
+        "flow.deduplicate": "去重",
+        "flow.archive": "归库",
+        "flow.browse": "浏览",
+        "preview.sidebarTitle": "工具",
+        "preview.toolImport": "导入照片",
+        "preview.toolDuplicates": "重复结果",
+        "preview.toolRecycle": "回收区",
+        "preview.toolGallery": "图库",
+        "preview.importLabel": "手机照片同步",
+        "preview.importStatus": "本地 Wi-Fi 导入就绪",
+        "preview.processed": "已处理",
+        "preview.imported": "已导入",
+        "preview.skipped": "已跳过",
+        "preview.duplicateLabel": "重复结果",
+        "preview.duplicateText": "strict + pHash 分组等待审查",
+        "preview.moveButton": "移入回收区",
+        "preview.archiveLabel": "归库",
+        "preview.archiveStatus": "回收日志已归档",
+        "preview.archiveText": "原始文件始终由用户明确控制",
+        "preview.browseLabel": "清理后再浏览",
+        "preview.timeline": "时间线",
+        "why.eyebrow": "为什么做 ZeroTraceBrowser？",
+        "why.title": "大多数家庭不是缺照片，而是缺少一个干净的管理入口。",
+        "why.text1": "每个家庭每年都会产生数千张照片。",
+        "why.text2": "手机会满，云空间会越来越贵，重复照片会越来越多。",
+        "why.text3": "最终，大多数人会放弃整理。",
+        "why.text4": "ZeroTraceBrowser 希望解决完整的照片生命周期。",
+        "lifecycle.eyebrow": "照片生命周期",
+        "lifecycle.title": "为家庭照片长期保存而设计的简单流程。",
+        "lifecycle.lead": "ZeroTraceBrowser 关注每张照片进入家庭图库之前应该经过的路径。",
+        "features.import.title": "导入",
+        "features.import.text": "手机配对一次后，通过本地 Wi-Fi 把新照片导入当前本地目录。",
+        "features.deduplicate.title": "去重",
+        "features.deduplicate.text": "使用 SHA-256 和感知哈希比较，发现完全重复和视觉相似的照片。",
+        "features.archive.title": "归库",
+        "features.archive.text": "把不需要的副本移入应用回收区，保留审计日志，再沉淀更干净的本地图库。",
+        "features.browse.title": "浏览",
+        "features.browse.text": "清理完成后，用图库、元数据、搜索、日期过滤和时间线浏览本地照片集合。",
+        "families.eyebrow": "为真实家庭设计",
+        "families.title": "并不是每个人只有 100 张照片。",
+        "families.text": "很多家庭已经拥有数万张照片和视频。ZeroTraceBrowser 为大型个人图库设计，目标是建立秩序，而不是再加入一个封闭云端。",
+        "families.photos1": "张照片",
+        "families.photos2": "张照片",
+        "families.photos3": "张照片",
+        "roadmap.eyebrow": "路线图",
+        "roadmap.title": "从图片浏览器，走向家庭照片基础设施。",
+        "roadmap.lead": "ZeroTraceBrowser 正在从本地图片浏览器，发展成导入、清理、归库和重新发现家庭记忆的入口。",
+        "roadmap.item1": "本地图库和时间线",
+        "roadmap.item2": "重复图片检测",
+        "roadmap.item3": "本地 Wi-Fi 手机同步",
+        "roadmap.item4": "回收区和审计日志",
+        "roadmap.item5": "设备备用导入",
+        "roadmap.item6": "智能导入规则",
+        "roadmap.item7": "家庭时间线",
+        "roadmap.item8": "AI 辅助整理",
+        "philosophy.eyebrow": "理念",
+        "philosophy.title": "照片是记忆。整理它们，留在本地，长期保存。",
+        "philosophy.text": "家庭照片不应该完全依赖订阅服务、云端绑定或厂商生态。ZeroTraceBrowser 围绕本地掌控和长期保存而构建。",
+        "philosophy.point1": "本地掌控",
+        "philosophy.point2": "长期保存",
+        "philosophy.point3": "可见、可控的操作",
+        "start.eyebrow": "开始使用",
+        "start.title": "在自己的电脑上本地运行。",
+        "start.lead": "克隆仓库，安装依赖，启动本地服务，然后用浏览器打开。",
+        "footer.tagline": "家庭图库入口程序"
       },
-
       ja: {
-        "page.title": "ZeroTraceBrowser｜ZeroTrace 写真整理",
-        "brand.subtitle": "ZeroTrace 写真整理",
+        "page.title": "ZeroTraceBrowser｜家族写真管理の入口",
+        "brand.subtitle": "家族写真管理の入口",
+        "nav.lifecycle": "流れ",
+        "nav.roadmap": "ロードマップ",
         "nav.github": "GitHub",
-        "hero.badge": "ローカル優先の写真ツール",
-        "hero.title": "自分のPC上で写真を安全に閲覧・整理できます。",
-        "hero.lead": "ZeroTraceBrowser（ZeroTrace 写真整理）は、大量のローカル写真を管理するための軽量な画像ブラウザ兼整理ツールです。写真をクラウドへアップロードする必要はありません。",
+        "hero.badge": "家族写真管理の入口",
+        "hero.title": "家族写真ライブラリを作ろう。",
+        "hero.lead": "取り込み、重複排除、整理、閲覧。家族の思い出を一か所にまとめます。",
+        "hero.sublead": "ZeroTraceBrowser は、家族写真アーカイブを管理するためのローカル優先ゲートウェイです。写真は自分の管理下に残り、クラウドへのロックインやサブスクリプション依存を避けられます。",
         "hero.ctaPrimary": "GitHubを見る",
-        "hero.ctaSecondary": "使い方を見る",
-        "hero.note": "ローカル閲覧、重複検出、安全な削除、バッチ整理に対応しています。",
-        "preview.caption": "ギャラリー、タイムライン、重複確認、アプリ内リサイクルはローカルで完結します。",
-        "preview.pill": "クラウドなし",
-
-        "features.title": "写真整理に必要な機能へ絞ったシンプルなツール。",
-        "features.lead": "ZeroTraceBrowser は、閲覧、確認、コピー、重複検出、安全な削除という基本フローに集中しています。",
-        "features.local.title": "ローカル優先",
-        "features.local.text": "写真は自分のPC内に残ります。クラウドへのアップロードは不要です。",
-        "features.light.title": "軽量",
-        "features.light.text": "重いメディア管理ソフトではなく、閲覧と整理に特化したツールです。",
-        "features.duplicate.title": "重複画像検出",
-        "features.duplicate.text": "感知ハッシュによる比較で、見た目が近い画像を検出します。",
-        "features.recycle.title": "安全な削除",
-        "features.recycle.text": "ファイルを直接削除せず、アプリ内リサイクル領域へ移動します。",
-        "features.viewer.title": "画像ビューア",
-        "features.viewer.text": "画像をプレビューし、EXIF などのメタデータを確認できます。",
-        "features.lang.title": "多言語UI",
-        "features.lang.text": "英語、中国語、日本語のUIに対応しています。",
-
-        "who.title": "こんな人に向いています",
-        "who.lead": "ファイルの管理権限を手元に残しながら、実用的に写真を整理したい人向けです。",
-        "who.item1.title": "写真愛好家",
-        "who.item1.text": "大量のローカル写真フォルダを素早く閲覧・整理できます。",
-        "who.item2.title": "エンジニアや上級ユーザー",
-        "who.item2.text": "透明性があり、操作を制御しやすいローカルツールとして使えます。",
-        "who.item3.title": "プライバシーを重視するユーザー",
-        "who.item3.text": "個人写真を第三者のクラウドへアップロードせずに整理できます。",
-
-        "start.title": "ローカル環境で始める。",
-        "start.lead": "リポジトリをクローンし、依存関係をインストールしてサーバーを起動し、ブラウザで開きます。",
-
-        "privacy.title": "写真は自分の手元に。",
-        "privacy.text": "ZeroTraceBrowser はローカル優先の利用を前提に設計されています。自分のPC上で、明確かつ制御された操作によりファイルを閲覧・整理できます。",
-        "privacy.point1.title": "クラウドアップロードなし",
-        "privacy.point1.text": "このツールは、自分のPC上でローカル実行することを前提としています。",
-        "privacy.point2.title": "操作を制御しやすい",
-        "privacy.point2.text": "コピー、削除、バッチ処理は、見える形で意図的に実行できるよう設計されています。"
+        "hero.ctaSecondary": "機能を見る",
+        "flow.import": "取り込み",
+        "flow.deduplicate": "重複排除",
+        "flow.archive": "整理保存",
+        "flow.browse": "閲覧",
+        "preview.sidebarTitle": "ツール",
+        "preview.toolImport": "写真取り込み",
+        "preview.toolDuplicates": "重複結果",
+        "preview.toolRecycle": "ごみ箱",
+        "preview.toolGallery": "ギャラリー",
+        "preview.importLabel": "スマホ写真同期",
+        "preview.importStatus": "ローカル Wi-Fi 取り込み準備完了",
+        "preview.processed": "処理済み",
+        "preview.imported": "取り込み済み",
+        "preview.skipped": "スキップ",
+        "preview.duplicateLabel": "重複結果",
+        "preview.duplicateText": "strict + pHash グループを確認待ち",
+        "preview.moveButton": "ごみ箱へ移動",
+        "preview.archiveLabel": "アーカイブ",
+        "preview.archiveStatus": "削除ログを保存済み",
+        "preview.archiveText": "元ファイルは明示的な操作で管理",
+        "preview.browseLabel": "整理後に閲覧",
+        "preview.timeline": "タイムライン",
+        "why.eyebrow": "なぜ ZeroTraceBrowser？",
+        "why.title": "多くの家庭に足りないのは写真ではなく、きれいに管理する入口です。",
+        "why.text1": "家庭では毎年、何千枚もの写真が生まれます。",
+        "why.text2": "スマホの容量はいっぱいになり、クラウド料金は増え、重複写真も増えていきます。",
+        "why.text3": "そして多くの人は、整理をあきらめてしまいます。",
+        "why.text4": "ZeroTraceBrowser は、写真のライフサイクル全体を解決するために作られました。",
+        "lifecycle.eyebrow": "写真のライフサイクル",
+        "lifecycle.title": "家族写真を長く残すためのシンプルな流れ。",
+        "lifecycle.lead": "ZeroTraceBrowser は、写真が家族アーカイブに入る前に通るべき道筋に集中しています。",
+        "features.import.title": "取り込み",
+        "features.import.text": "一度スマホをペアリングし、同じローカル Wi-Fi から新しい写真を現在のローカルルートへ受け取ります。",
+        "features.deduplicate.title": "重複排除",
+        "features.deduplicate.text": "SHA-256 と感知ハッシュ比較により、完全一致や見た目が近い写真を見つけます。",
+        "features.archive.title": "整理保存",
+        "features.archive.text": "不要なコピーをアプリのごみ箱へ移し、監査ログを残して、よりきれいなローカルアーカイブを保ちます。",
+        "features.browse.title": "閲覧",
+        "features.browse.text": "整理後の写真を、ギャラリー、メタデータ、検索、日付フィルター、タイムラインで閲覧できます。",
+        "families.eyebrow": "実際の家庭向け",
+        "families.title": "写真が100枚だけとは限りません。",
+        "families.text": "多くの家庭には、すでに何万枚もの写真や動画があります。ZeroTraceBrowser は、閉じたクラウドではなく、秩序を必要とする大きな個人コレクションのために設計されています。",
+        "families.photos1": "枚の写真",
+        "families.photos2": "枚の写真",
+        "families.photos3": "枚の写真",
+        "roadmap.eyebrow": "ロードマップ",
+        "roadmap.title": "画像ブラウザから、家族写真インフラへ。",
+        "roadmap.lead": "ZeroTraceBrowser は、ローカル画像ブラウザから、取り込み・整理・保存・思い出の再発見を支える入口へ進化しています。",
+        "roadmap.item1": "ローカルギャラリーとタイムライン",
+        "roadmap.item2": "重複画像検出",
+        "roadmap.item3": "ローカル Wi-Fi スマホ同期",
+        "roadmap.item4": "ごみ箱と監査ログ",
+        "roadmap.item5": "デバイス予備取り込み",
+        "roadmap.item6": "スマート取り込みルール",
+        "roadmap.item7": "家族タイムライン",
+        "roadmap.item8": "AI整理サポート",
+        "philosophy.eyebrow": "理念",
+        "philosophy.title": "写真は思い出です。整理し、手元に残し、長く守る。",
+        "philosophy.text": "家族写真は、サブスクリプション、クラウドロックイン、特定企業のエコシステムだけに依存すべきではありません。ZeroTraceBrowser はローカル所有と長期保存を中心に作られています。",
+        "philosophy.point1": "ローカル所有",
+        "philosophy.point2": "長期保存",
+        "philosophy.point3": "見える・制御できる操作",
+        "start.eyebrow": "使い始める",
+        "start.title": "自分のPCでローカル実行。",
+        "start.lead": "リポジトリをクローンし、依存関係をインストールしてローカルサーバーを起動し、ブラウザで開きます。",
+        "footer.tagline": "家族写真管理の入口"
       }
     };
 
