@@ -24,6 +24,93 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function normalizeYearFileName(name) {
+  const match = name.match(/^(\d{4})\.(html|md)$/);
+  if (!match) return null;
+  return { year: Number(match[1]), ext: match[2] };
+}
+
+function renderInlineMarkdown(value, prefix) {
+  return escapeHtml(value)
+    .replace(/&lt;br&gt;/g, "<br>")
+    .replace(/&lt;hr&gt;/g, "<hr>")
+    .replace(/\{\{post:(\d+)\|([^}]+)\}\}/g, (_match, id, label) => {
+      return `<a href="${prefix}posts/${id}.html" target="_blank">${label}</a>`;
+    })
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label, href) => {
+      const postMatch = href.match(/^post:(\d+)$/);
+      if (postMatch) {
+        return `<a href="${prefix}posts/${postMatch[1]}.html" target="_blank">${label}</a>`;
+      }
+      return `<a href="${href}">${label}</a>`;
+    });
+}
+
+function splitMarkdownRow(line) {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
+function isDividerRow(cells) {
+  return cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+}
+
+function renderMarkdownTable(lines, prefix) {
+  const rows = lines.map(splitMarkdownRow).filter((cells) => cells.length > 1);
+  if (rows.length < 2 || !isDividerRow(rows[1])) {
+    throw new Error("Schedule Markdown must contain a pipe table with a divider row.");
+  }
+
+  const header = rows[0];
+  const bodyRows = rows.slice(2);
+  return `<table border="1" style="font-size: 10pt; line-height: 130%; width: 100%;">
+    <thead>
+      <tr style="background-color: skyblue;">
+        ${header.map((cell) => `<th>${renderInlineMarkdown(cell, prefix)}</th>`).join("\n        ")}
+      </tr>
+    </thead>
+    <tbody>
+      ${bodyRows.map((cells) => `<tr>
+        ${cells.map((cell) => `<td>${renderInlineMarkdown(cell, prefix)}</td>`).join("\n        ")}
+      </tr>`).join("\n      ")}
+    </tbody>
+  </table>`;
+}
+
+function renderScheduleMarkdown(markdown, prefix) {
+  const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+  const titleIndex = lines.findIndex((line) => line.startsWith("# "));
+  const tableStart = lines.findIndex((line) => line.trim().startsWith("|"));
+  if (titleIndex === -1 || tableStart === -1) {
+    throw new Error("Schedule Markdown must include a '# title' and a pipe table.");
+  }
+
+  const title = lines[titleIndex].replace(/^#\s+/, "").trim();
+  const tableLines = [];
+  for (let i = tableStart; i < lines.length; i += 1) {
+    const line = lines[i].trim();
+    if (!line.startsWith("|")) break;
+    tableLines.push(line);
+  }
+
+  return `<section class="content-block schedule-section schedule-feature">
+  <h2>${renderInlineMarkdown(title, prefix)}</h2>
+  ${renderMarkdownTable(tableLines, prefix)}
+</section>`;
+}
+
+function renderScheduleContent(entry, prefix = "") {
+  const content = read(entry.file).trim();
+  if (entry.ext === "md") {
+    return renderScheduleMarkdown(content, prefix);
+  }
+  return content;
+}
+
 function nav(active, prefix = "") {
   const items = [
     ["index.html", "ホーム", "home"],
@@ -66,12 +153,20 @@ ${body}
 
 function yearFiles() {
   if (!fs.existsSync(contentDir)) return [];
-  return fs.readdirSync(contentDir)
-    .map((name) => {
-      const match = name.match(/^(\d{4})\.html$/);
-      return match ? { year: Number(match[1]), file: path.join(contentDir, name) } : null;
-    })
-    .filter(Boolean)
+  const byYear = new Map();
+  for (const name of fs.readdirSync(contentDir)) {
+    const parsed = normalizeYearFileName(name);
+    if (!parsed) continue;
+    const existing = byYear.get(parsed.year);
+    if (!existing || parsed.ext === "md") {
+      byYear.set(parsed.year, {
+        year: parsed.year,
+        ext: parsed.ext,
+        file: path.join(contentDir, name),
+      });
+    }
+  }
+  return Array.from(byYear.values())
     .sort((a, b) => b.year - a.year);
 }
 
@@ -97,11 +192,11 @@ function main() {
   }
 
   const latest = years[0];
-  const latestHtml = read(latest.file).trim();
+  const latestHtml = renderScheduleContent(latest);
   write(schedulePath, shell({
     title: "活動予定",
     description: "高洲ホープスバドミントンクラブの活動予定",
-    body: `    <h1>活動予定</h1>
+    body: `    <h1>🌻活動予定</h1>
     <p class="lead">${latest.year}年の活動予定を掲載しています。</p>
     ${latestHtml}
     ${archiveLinks(years, latest.year)}`,
@@ -125,7 +220,7 @@ function main() {
   }));
 
   for (const { year, file } of years) {
-    const content = read(file).trim();
+    const content = renderScheduleContent({ year, file, ext: path.extname(file).slice(1) }, "../");
     write(path.join(archiveDir, `${year}.html`), shell({
       title: `${year}年 活動予定`,
       description: `高洲ホープスバドミントンクラブの${year}年活動予定`,
