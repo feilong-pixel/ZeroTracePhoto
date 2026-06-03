@@ -587,7 +587,7 @@ nav a.active { color: var(--accent); }
   overflow-x: auto;
 }
 
-.schedule-page .schedule-section table {
+.schedule-page .schedule-feature table {
   background: #fff;
   border: 1px solid #d6ddd8;
   border-collapse: separate;
@@ -601,41 +601,67 @@ nav a.active { color: var(--accent); }
   width: 100%;
 }
 
-.schedule-page .schedule-section table:hover {
+.schedule-page .schedule-feature table:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, .08), 0 12px 30px rgba(0, 0, 0, .12), 0 30px 60px rgba(0, 0, 0, .1);
 }
 
-.schedule-page .schedule-section thead tr,
-.schedule-page .schedule-section thead tr[style] {
+.schedule-page .schedule-feature thead tr,
+.schedule-page .schedule-feature thead tr[style] {
   background: linear-gradient(90deg, #a8e063, #56ab2f) !important;
   color: #fff;
 }
 
-.schedule-page .schedule-section th,
-.schedule-page .schedule-section td {
+.schedule-page .schedule-feature th,
+.schedule-page .schedule-feature td {
   border: 1px solid #dcdedc;
   padding: 8px 10px;
   text-align: left;
   vertical-align: top;
 }
 
-.schedule-page .schedule-section thead th,
-.schedule-page .schedule-section thead td,
-.schedule-page .schedule-section [bgcolor] {
+.schedule-page .schedule-feature th:nth-child(1),
+.schedule-page .schedule-feature td:nth-child(1) {
+  min-width: 132px;
+  width: 18%;
+}
+
+.schedule-page .schedule-feature th:nth-child(2),
+.schedule-page .schedule-feature td:nth-child(2) {
+  min-width: 58px;
+  white-space: nowrap;
+  width: 7%;
+}
+
+.schedule-page .schedule-feature th:nth-child(4),
+.schedule-page .schedule-feature td:nth-child(4) {
+  min-width: 150px;
+  width: 20%;
+}
+
+.schedule-page .schedule-feature th:nth-child(5),
+.schedule-page .schedule-feature td:nth-child(5) {
+  min-width: 68px;
+  white-space: nowrap;
+  width: 8%;
+}
+
+.schedule-page .schedule-feature thead th,
+.schedule-page .schedule-feature thead td,
+.schedule-page .schedule-feature [bgcolor] {
   background: transparent !important;
   color: #fff;
   font-weight: 700;
 }
 
-.schedule-page .schedule-section tbody tr:nth-child(even) {
+.schedule-page .schedule-feature tbody tr:nth-child(even) {
   background: #fafafa;
 }
 
-.schedule-page .schedule-section tbody tr:hover {
+.schedule-page .schedule-feature tbody tr:hover {
   background: #f5fff2;
 }
 
-.schedule-page .schedule-section hr {
+.schedule-page .schedule-feature hr {
   border: 0;
   border-top: 1px dashed #cfd8d3;
   margin: 5px 0;
