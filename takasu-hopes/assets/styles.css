@@ -575,6 +575,33 @@ nav a.active { color: var(--accent); }
   margin-top: 28px;
 }
 
+.schedule-page .lead {
+  margin-bottom: 24px;
+}
+
+.schedule-section h2 {
+  font-size: 22px;
+}
+
+.schedule-archive {
+  margin-top: 28px;
+}
+
+.archive-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.archive-links a {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--accent-strong);
+  display: inline-flex;
+  font-weight: 700;
+  padding: 8px 12px;
+}
+
 .map-frame {
   background: #eef4f3;
   border: 1px solid var(--line);

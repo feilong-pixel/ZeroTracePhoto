@@ -13,3 +13,4 @@ if ($IncludeDrafts) {
 }
 
 node $args
+node tools/build-schedule.js
