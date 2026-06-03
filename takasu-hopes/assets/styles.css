@@ -519,12 +519,12 @@ nav a.active { color: var(--accent); }
 .qr-panel {
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 18px;
 }
 
 .form-qr {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   justify-items: center;
   text-align: center;
 }
@@ -536,9 +536,9 @@ nav a.active { color: var(--accent); }
   border-radius: 0;
   display: block;
   height: auto;
-  max-width: min(320px, 100%);
+  max-width: min(380px, 100%);
   object-fit: contain;
-  padding: 10px;
+  padding: 0;
   width: 100%;
 }
 
@@ -822,7 +822,7 @@ nav a.active { color: var(--accent); }
   }
 
   .qr-panel {
-    padding: 18px;
+    padding: 14px;
   }
 
   .hero-facts {
