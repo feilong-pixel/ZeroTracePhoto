@@ -583,6 +583,64 @@ nav a.active { color: var(--accent); }
   font-size: 22px;
 }
 
+.schedule-section {
+  overflow-x: auto;
+}
+
+.schedule-page .schedule-section table {
+  background: #fff;
+  border: 1px solid #d6ddd8;
+  border-collapse: separate;
+  border-radius: 12px;
+  border-spacing: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .05), 0 8px 20px rgba(0, 0, 0, .08), 0 20px 40px rgba(0, 0, 0, .06);
+  color: #40504e;
+  line-height: 1.45;
+  min-width: 820px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.schedule-page .schedule-section table:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .08), 0 12px 30px rgba(0, 0, 0, .12), 0 30px 60px rgba(0, 0, 0, .1);
+}
+
+.schedule-page .schedule-section thead tr,
+.schedule-page .schedule-section thead tr[style] {
+  background: linear-gradient(90deg, #a8e063, #56ab2f) !important;
+  color: #fff;
+}
+
+.schedule-page .schedule-section th,
+.schedule-page .schedule-section td {
+  border: 1px solid #dcdedc;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.schedule-page .schedule-section thead th,
+.schedule-page .schedule-section thead td,
+.schedule-page .schedule-section [bgcolor] {
+  background: transparent !important;
+  color: #fff;
+  font-weight: 700;
+}
+
+.schedule-page .schedule-section tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.schedule-page .schedule-section tbody tr:hover {
+  background: #f5fff2;
+}
+
+.schedule-page .schedule-section hr {
+  border: 0;
+  border-top: 1px dashed #cfd8d3;
+  margin: 5px 0;
+}
+
 .schedule-archive {
   margin-top: 28px;
 }
@@ -622,6 +680,40 @@ nav a.active { color: var(--accent); }
   color: var(--muted);
   padding: 28px;
   text-align: center;
+}
+
+.rainbow-glow {
+  animation: rainbow 6s linear infinite, glow 1.5s ease-in-out infinite alternate;
+  background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet, red);
+  background-size: 400% 400%;
+  font-weight: 700;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 6px rgba(255, 255, 255, .6), 0 0 12px rgba(255, 255, 255, .4);
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 4px rgba(255, 255, 255, .5), 0 0 8px rgba(255, 255, 255, .4);
+  }
+
+  to {
+    text-shadow: 0 0 12px rgba(255, 255, 255, .9), 0 0 20px rgba(255, 255, 255, .6);
+  }
 }
 
 @media (max-width: 760px) {
