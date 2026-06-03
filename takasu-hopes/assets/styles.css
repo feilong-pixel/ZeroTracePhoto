@@ -707,6 +707,53 @@ nav a.active { color: var(--accent); }
   margin: 5px 0;
 }
 
+@media (max-width: 640px) {
+  .schedule-section {
+    overflow-x: visible;
+  }
+
+  .schedule-page .schedule-feature table {
+    font-size: 8.5pt !important;
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .schedule-page .schedule-feature th,
+  .schedule-page .schedule-feature td {
+    padding: 5px 4px;
+    word-break: break-word;
+  }
+
+  .schedule-page .schedule-feature th:nth-child(1),
+  .schedule-page .schedule-feature td:nth-child(1) {
+    min-width: 0;
+    width: 23%;
+  }
+
+  .schedule-page .schedule-feature th:nth-child(2),
+  .schedule-page .schedule-feature td:nth-child(2) {
+    min-width: 0;
+    width: 8%;
+  }
+
+  .schedule-page .schedule-feature th:nth-child(3),
+  .schedule-page .schedule-feature td:nth-child(3) {
+    width: 31%;
+  }
+
+  .schedule-page .schedule-feature th:nth-child(4),
+  .schedule-page .schedule-feature td:nth-child(4) {
+    min-width: 0;
+    width: 25%;
+  }
+
+  .schedule-page .schedule-feature th:nth-child(5),
+  .schedule-page .schedule-feature td:nth-child(5) {
+    min-width: 0;
+    width: 13%;
+  }
+}
+
 .schedule-archive {
   margin-top: 28px;
 }
