@@ -587,14 +587,54 @@ nav a.active { color: var(--accent); }
   overflow-x: auto;
 }
 
+.schedule-style-green {
+  --schedule-head-bg: linear-gradient(90deg, #a8e063, #56ab2f);
+  --schedule-table-border: #d6ddd8;
+  --schedule-cell-border: #dcdedc;
+  --schedule-text: #40504e;
+  --schedule-row-alt: #fafafa;
+  --schedule-row-hover: #f5fff2;
+  --schedule-divider: #cfd8d3;
+}
+
+.schedule-style-blue {
+  --schedule-head-bg: linear-gradient(90deg, #8ed8ff, #2d8fd8);
+  --schedule-table-border: #d4e2ec;
+  --schedule-cell-border: #dbe4ea;
+  --schedule-text: #3f4f59;
+  --schedule-row-alt: #f8fbfd;
+  --schedule-row-hover: #eef8ff;
+  --schedule-divider: #c7dbe9;
+}
+
+.schedule-style-yellow {
+  --schedule-head-bg: linear-gradient(90deg, #ffe17a, #f2b705);
+  --schedule-table-border: #e8dcc2;
+  --schedule-cell-border: #e7dfcf;
+  --schedule-text: #514935;
+  --schedule-row-alt: #fffdf5;
+  --schedule-row-hover: #fff8db;
+  --schedule-divider: #dfd2aa;
+}
+
+.schedule-style-classic {
+  --schedule-head-bg: skyblue;
+  --schedule-table-border: #c8d4dc;
+  --schedule-cell-border: #d9d9d9;
+  --schedule-text: #3f4b50;
+  --schedule-row-alt: #fbfbfb;
+  --schedule-row-hover: #f1f8fb;
+  --schedule-divider: #cfd8dc;
+}
+
 .schedule-page .schedule-feature table {
   background: #fff;
-  border: 1px solid #d6ddd8;
+  border: 1px solid var(--schedule-table-border);
   border-collapse: separate;
   border-radius: 12px;
   border-spacing: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .05), 0 8px 20px rgba(0, 0, 0, .08), 0 20px 40px rgba(0, 0, 0, .06);
-  color: #40504e;
+  color: var(--schedule-text);
   line-height: 1.45;
   min-width: 820px;
   overflow: hidden;
@@ -607,13 +647,13 @@ nav a.active { color: var(--accent); }
 
 .schedule-page .schedule-feature thead tr,
 .schedule-page .schedule-feature thead tr[style] {
-  background: linear-gradient(90deg, #a8e063, #56ab2f) !important;
+  background: var(--schedule-head-bg) !important;
   color: #fff;
 }
 
 .schedule-page .schedule-feature th,
 .schedule-page .schedule-feature td {
-  border: 1px solid #dcdedc;
+  border: 1px solid var(--schedule-cell-border);
   padding: 8px 10px;
   text-align: left;
   vertical-align: top;
@@ -654,16 +694,16 @@ nav a.active { color: var(--accent); }
 }
 
 .schedule-page .schedule-feature tbody tr:nth-child(even) {
-  background: #fafafa;
+  background: var(--schedule-row-alt);
 }
 
 .schedule-page .schedule-feature tbody tr:hover {
-  background: #f5fff2;
+  background: var(--schedule-row-hover);
 }
 
 .schedule-page .schedule-feature hr {
   border: 0;
-  border-top: 1px dashed #cfd8d3;
+  border-top: 1px dashed var(--schedule-divider);
   margin: 5px 0;
 }
 

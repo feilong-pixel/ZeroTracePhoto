@@ -30,6 +30,43 @@ function normalizeYearFileName(name) {
   return { year: Number(match[1]), ext: match[2] };
 }
 
+function parseFrontMatter(markdown) {
+  if (!markdown.startsWith("---\n")) {
+    return { data: {}, body: markdown };
+  }
+
+  const end = markdown.indexOf("\n---", 4);
+  if (end === -1) {
+    throw new Error("Schedule Markdown has invalid front matter.");
+  }
+
+  const raw = markdown.slice(4, end).trim();
+  const body = markdown.slice(end + 4).trim();
+  const data = {};
+  for (const line of raw.split(/\r?\n/)) {
+    const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!match) continue;
+    let value = match[2].trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    data[match[1]] = value;
+  }
+
+  return { data, body };
+}
+
+function scheduleStyleClass(style) {
+  const value = String(style || "green").trim().toLowerCase();
+  if (!/^[a-z0-9-]+$/.test(value)) {
+    throw new Error(`Invalid schedule style: ${style}`);
+  }
+  return `schedule-style-${value}`;
+}
+
 function renderInlineMarkdown(value, prefix) {
   return escapeHtml(value)
     .replace(/&lt;br&gt;/g, "<br>")
@@ -82,7 +119,8 @@ function renderMarkdownTable(lines, prefix) {
 }
 
 function renderScheduleMarkdown(markdown, prefix) {
-  const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+  const { data, body } = parseFrontMatter(markdown);
+  const lines = body.replace(/\r\n/g, "\n").split("\n");
   const titleIndex = lines.findIndex((line) => line.startsWith("# "));
   const tableStart = lines.findIndex((line) => line.trim().startsWith("|"));
   if (titleIndex === -1 || tableStart === -1) {
@@ -97,7 +135,7 @@ function renderScheduleMarkdown(markdown, prefix) {
     tableLines.push(line);
   }
 
-  return `<section class="content-block schedule-section schedule-feature">
+  return `<section class="content-block schedule-section schedule-feature ${scheduleStyleClass(data.style)}">
   <h2>${renderInlineMarkdown(title, prefix)}</h2>
   ${renderMarkdownTable(tableLines, prefix)}
 </section>`;
