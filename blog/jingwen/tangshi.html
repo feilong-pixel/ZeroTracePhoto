@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="网途日志">
+
+<title>唐诗选读 - 网途日志</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="../common/css/site.css" rel="stylesheet">
+<style>
+.result-item {
+	color: #1e1f24;
+	font-family: 'PingFang TC', ’Noto Sans SC’, 'Microsoft Yahei UI', NSimSun, sans-serif;
+	font-size: 18px;
+		position: relative;
+		display: inline-block;
+		width: 400px;
+		text-align: center;
+		border: 1px solid rgb(237, 238, 240);
+		border-radius: 8px;
+		margin-right: 16px;
+		margin-top: 16px;
+		padding-bottom: 20px;
+		box-sizing: border-box;
+	
+}
+
+.result-item .poem-title {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	white-space: nowrap;
+	margin-top: 15px;
+}
+
+.result-item .poem-info {
+	font-size: 16px;
+	color: #848691;
+	margin-top: 9px;
+	margin-bottom: 11px;
+}
+
+.result-item .poem-line {
+	max-height: 60px;
+	font-size: 16px;
+	overflow: hidden;
+	margin: 0 50px;
+}
+
+.result-item .poem-line-item {
+		display: inline-block;
+		margin-bottom: 8px;
+}
+
+.result-item .poem-info .poem-tags {
+		display: inline-block;
+		font-size: 11px;
+		font-weight: 500;
+		border-radius: 3px;
+		border: 1px solid rgb(183, 185, 193);
+		padding: 2px;
+		margin-left: 10px;
+}
+</style>
+</head>
+<body>
+
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="bootstrap" viewBox="0 0 118 94">
+		<title>Bootstrap</title>
+		<path fill-rule="evenodd" clip-rule="evenodd"
+				d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0h34.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+		</symbol>
+		<symbol id="home" viewBox="0 0 16 16">
+		<path
+				d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h3v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4h3.5z" />
+		</symbol>
+
+		<symbol id="house-door-fill" viewBox="0 0 16 16">
+			<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+		</symbol>
+	</svg>
+
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis" href="../">
+						<svg class="bi" width="16" height="16">
+							<use xlink:href="#house-door-fill"></use>
+						</svg>
+						<span class="visually-hidden">Home</span>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					唐诗
+				</li>
+			</ol>
+		</nav>
+	</div>
+
+	<div class="container noto-sans-sc-400">
+		<h2 style="text-align: center">唐&nbsp;&nbsp;&nbsp;&nbsp;诗</h2>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">黄鹤楼送孟浩然之广陵</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> 
+				<span>
+					<span class="poem-tags">友情</span>
+					<span class="poem-tags">送别</span>
+				</span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">故人西辞黄鹤楼，</span>
+				<span class="poem-line-item">烟花三月下扬州。</span>
+				<span class="poem-line-item">孤帆远影碧空尽，</span>
+				<span class="poem-line-item">唯见长江天际流。</span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">将进酒·君不见</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> 
+				<span>
+					<span class="poem-tags">乐府</span>
+					<span class="poem-tags">唐诗三百首</span>
+				</span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">君不见，</span>
+				<span class="poem-line-item">黄河之水天上来，</span>
+				<span class="poem-line-item">奔流到海不复回。</span>
+				<span class="poem-line-item">君不见，</span>
+				<span class="poem-line-item">高堂明镜悲白发，</span>
+				<span class="poem-line-item">朝如青丝暮成雪。</span>
+				<span class="poem-line-item">人生得意须尽欢，</span>
+				<span class="poem-line-item">莫使金樽空对月。</span>
+				<span class="poem-line-item">天生我材必有用，</span>
+				<span class="poem-line-item">千金散尽还复来。</span>
+				<span class="poem-line-item">烹羊宰牛且为乐，</span>
+				<span class="poem-line-item">会须一饮三百杯。</span>
+				<span class="poem-line-item">岑夫子，</span>
+				<span class="poem-line-item">丹丘生，</span>
+				<span class="poem-line-item">将进酒，</span>
+				<span class="poem-line-item">杯莫停。</span>
+				<span class="poem-line-item">与君歌一曲，</span>
+				<span class="poem-line-item">请君为我倾耳听。</span>
+				<span class="poem-line-item">钟鼓馔玉不足贵，</span>
+				<span class="poem-line-item">但愿长醉不复醒。</span>
+				<span class="poem-line-item">古来圣贤皆寂寞，</span>
+				<span class="poem-line-item">惟有饮者留其名。</span>
+				<span class="poem-line-item">陈王昔时宴平乐，</span>
+				<span class="poem-line-item">斗酒十千恣欢谑。</span>
+				<span class="poem-line-item">主人何为言少钱，</span>
+				<span class="poem-line-item">径须沽取对君酌。</span>
+				<span class="poem-line-item">五花马，</span>
+				<span class="poem-line-item">千金裘，</span>
+				<span class="poem-line-item">呼儿将出换美酒，</span>
+				<span class="poem-line-item">与尔同销万古愁。</span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">送元二使安西</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span> 
+				<span>
+					<span class="poem-tags">友情</span>
+					<span class="poem-tags">送别</span>
+				</span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">渭城朝雨浥轻尘，</span>
+				<span class="poem-line-item">客舍青青柳色新。</span>
+				<span class="poem-line-item">劝君更尽一杯酒，</span>
+				<span class="poem-line-item">西出阳关无故人。</span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">咏柳</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·贺知章</span> <span><span class="poem-tags">咏物</span><span
+					class="poem-tags">柳树</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">碧玉妆成一树高，</span><span
+					class="poem-line-item">万条垂下绿丝绦。</span><span class="poem-line-item">不知细叶谁裁出，</span>
+				<span class="poem-line-item">二月春风似剪刀。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">春望</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜甫</span> <span><span class="poem-tags">战争</span><span
+					class="poem-tags">爱国</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">国破山河在，</span><span
+					class="poem-line-item">城春草木深。</span><span class="poem-line-item">感时花溅泪，</span>
+				<span class="poem-line-item">恨别鸟惊心。</span><span
+					class="poem-line-item">烽火连三月，</span><span class="poem-line-item">家书抵万金。</span>
+				<span class="poem-line-item">白头搔更短，</span><span
+					class="poem-line-item">浑欲不胜簪。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">望庐山瀑布</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> <span><span class="poem-tags">山水</span><span
+					class="poem-tags">出游</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">日照香炉生紫烟，</span><span
+					class="poem-line-item">遥看瀑布挂前川。</span><span class="poem-line-item">飞流直下三千尺，</span>
+				<span class="poem-line-item">疑是银河落九天。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">清明</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜牧</span> <span><span class="poem-tags">出游</span><span
+					class="poem-tags">亲情</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">清明时节雨纷纷，</span><span
+					class="poem-line-item">路上行人欲断魂。</span><span class="poem-line-item">借问酒家何处有，</span>
+				<span class="poem-line-item">牧童遥指杏花村。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">悯农（其一）</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李绅</span> <span><span class="poem-tags">同情</span><span
+					class="poem-tags">悲愤</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">春种一粒粟，</span><span
+					class="poem-line-item">秋收万颗子。</span><span class="poem-line-item">四海无闲田，</span>
+				<span class="poem-line-item">农夫犹饿死。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">静夜思</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">思乡</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">床前明月光，</span><span
+					class="poem-line-item">疑是地上霜。</span><span class="poem-line-item">举头望明月，</span>
+				<span class="poem-line-item">低头思故乡。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">古风二首 / 悯农二首</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李绅</span>
+				<!---->
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">春种一粒粟，</span><span
+					class="poem-line-item">秋收万颗子。</span><span class="poem-line-item">四海无闲田，</span>
+				<span class="poem-line-item">农夫犹饿死。</span><span
+					class="poem-line-item">锄禾日当午，</span><span class="poem-line-item">汗滴禾下土。</span>
+				<span class="poem-line-item">谁知盘中餐，</span><span
+					class="poem-line-item">粒粒皆辛苦。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">悯农</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李绅</span>
+				<!---->
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">锄禾日当午，</span><span
+					class="poem-line-item">汗滴禾下土。</span><span class="poem-line-item">谁知盘中餐，</span>
+				<span class="poem-line-item">粒粒皆辛苦。</span>
+			</div>
+			<div class="poem-func">
+				<!---->
+				<!---->
+				<span class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">春夜喜雨</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜甫</span> <span><span class="poem-tags">春天</span><span
+					class="poem-tags">喜悦</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">好雨知时节，</span><span
+					class="poem-line-item">当春乃发生。</span><span class="poem-line-item">随风潜入夜，</span>
+				<span class="poem-line-item">润物细无声。</span><span
+					class="poem-line-item">野径云俱黑，</span><span class="poem-line-item">江船火独明。</span>
+				<span class="poem-line-item">晓看红湿处，</span><span
+					class="poem-line-item">花重锦官城。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">芙蓉楼送辛渐</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王昌龄</span> <span><span class="poem-tags">送别</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">寒雨连江夜入吴，</span><span
+					class="poem-line-item">平明送客楚山孤。</span><span class="poem-line-item">洛阳亲友如相问，</span>
+				<span class="poem-line-item">一片冰心在玉壶。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">绝句</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜甫</span> <span><span class="poem-tags">喜悦</span><span
+					class="poem-tags">明快</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">两个黄鹂鸣翠柳，</span><span
+					class="poem-line-item">一行白鹭上青天。</span><span class="poem-line-item">窗含西岭千秋雪，</span>
+				<span class="poem-line-item">门泊东吴万里船。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">九月九日忆山东兄弟</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">思乡</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">独在异乡为异客，</span><span
+					class="poem-line-item">每逢佳节倍思亲。</span><span class="poem-line-item">遥知兄弟登高处，</span>
+				<span class="poem-line-item">遍插茱萸少一人。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">江雪</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·柳宗元</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">冬天</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">千山鸟飞绝，</span><span
+					class="poem-line-item">万径人踪灭。</span><span class="poem-line-item">孤舟蓑笠翁，</span>
+				<span class="poem-line-item">独钓寒江雪。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">夜雨寄北</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李商隐</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">爱情</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">君问归期未有期，</span><span
+					class="poem-line-item">巴山夜雨涨秋池。</span><span class="poem-line-item">何当共剪西窗烛，</span>
+				<span class="poem-line-item">却话巴山夜雨时。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">早发白帝城</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">行旅</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">朝辞白帝彩云间，</span><span
+					class="poem-line-item">千里江陵一日还。</span><span class="poem-line-item">两岸猿声啼不住，</span>
+				<span class="poem-line-item">轻舟已过万重山。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">枫桥夜泊</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·张继</span> <span><span class="poem-tags">秋天</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">月落乌啼霜满天，</span><span
+					class="poem-line-item">江枫渔火对愁眠。</span><span class="poem-line-item">姑苏城外寒山寺，</span>
+				<span class="poem-line-item">夜半钟声到客船。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">黄鹤楼</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·崔颢</span> <span><span class="poem-tags">怀古</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">昔人已乘黄鹤去，</span><span
+					class="poem-line-item">此地空余黄鹤楼。</span><span class="poem-line-item">黄鹤一去不复返，</span>
+				<span class="poem-line-item">白云千载空悠悠。</span><span
+					class="poem-line-item">晴川历历汉阳树，</span><span class="poem-line-item">芳草萋萋鹦鹉洲。</span>
+				<span class="poem-line-item">日暮乡关何处是？</span><span
+					class="poem-line-item">烟波江上使人愁。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">登鹳雀楼</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王之涣</span> <span><span class="poem-tags">励志</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">白日依山尽，</span><span
+					class="poem-line-item">黄河入海流。</span><span class="poem-line-item">欲穷千里目，</span>
+				<span class="poem-line-item">更上一层楼。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">无题·相见时难别亦难</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李商隐</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">爱情</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">相见时难别亦难，</span><span
+					class="poem-line-item">东风无力百花残。</span><span class="poem-line-item">春蚕到死丝方尽，</span>
+				<span class="poem-line-item">蜡炬成灰泪始干。</span><span
+					class="poem-line-item">晓镜但愁云鬓改，</span><span class="poem-line-item">夜吟应觉月光寒。</span>
+				<span class="poem-line-item">蓬山此去无多路，</span><span
+					class="poem-line-item">青鸟殷勤为探看。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">早春呈水部张十八员外（其一）</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·韩愈</span> <span><span class="poem-tags">春天</span><span
+					class="poem-tags">柳树</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">天街小雨润如酥，</span><span
+					class="poem-line-item">草色遥看近却无。</span><span class="poem-line-item">最是一年春好处，</span>
+				<span class="poem-line-item">绝胜烟柳满皇都。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">春晓</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·孟浩然</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">赞美</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">春眠不觉晓，</span><span
+					class="poem-line-item">处处闻啼鸟。</span><span class="poem-line-item">夜来风雨声，</span>
+				<span class="poem-line-item">花落知多少。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">山行</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜牧</span> <span><span class="poem-tags">秋天</span><span
+					class="poem-tags">其他</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">远上寒山石径斜，</span><span
+					class="poem-line-item">白云生处有人家。</span><span class="poem-line-item">停车坐爱枫林晚，</span>
+				<span class="poem-line-item">霜叶红于二月花。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">出塞二首·其一</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王昌龄</span> <span><span class="poem-tags">爱国</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">秦时明月汉时关，</span><span
+					class="poem-line-item">万里长征人未还。</span><span class="poem-line-item">但使龙城飞将在，</span>
+				<span class="poem-line-item">不教胡马度阴山。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">赠汪伦</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李白</span> <span><span class="poem-tags">友情</span><span
+					class="poem-tags">送别</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">李白乘舟将欲行，</span><span
+					class="poem-line-item">忽闻岸上踏歌声。</span><span class="poem-line-item">桃花潭水深千尺，</span>
+				<span class="poem-line-item">不及汪伦送我情。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">钱塘湖春行</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·白居易</span> <span><span class="poem-tags">春天</span><span
+					class="poem-tags">出游</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">孤山寺北贾亭西，</span><span
+					class="poem-line-item">水面初平云脚低。</span><span class="poem-line-item">几处早莺争暖树，</span>
+				<span class="poem-line-item">谁家新燕啄春泥。</span><span
+					class="poem-line-item">乱花渐欲迷人眼，</span><span class="poem-line-item">浅草才能没马蹄。</span>
+				<span class="poem-line-item">最爱湖东行不足，</span><span
+					class="poem-line-item">绿杨阴里白沙堤。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">泊秦淮</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜牧</span> <span><span class="poem-tags">爱国</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">烟笼寒水月笼沙，</span><span
+					class="poem-line-item">夜泊秦淮近酒家。</span><span class="poem-line-item">商女不知亡国恨，</span>
+				<span class="poem-line-item">隔江犹唱后庭花。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">锦瑟</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李商隐</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">爱情</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">锦瑟无端五十弦，</span><span
+					class="poem-line-item">一弦一柱思华年。</span><span class="poem-line-item">庄生晓梦迷蝴蝶，</span>
+				<span class="poem-line-item">望帝春心托杜鹃。</span><span
+					class="poem-line-item">沧海月明珠有泪，</span><span class="poem-line-item">蓝田日暖玉生烟。</span>
+				<span class="poem-line-item">此情可待成追忆？</span><span
+					class="poem-line-item">只是当时已惘然。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">嫦娥</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·李商隐</span> <span><span class="poem-tags">孤独</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">云母屏风烛影深，</span><span
+					class="poem-line-item">长河渐落晓星沉。</span><span class="poem-line-item">嫦娥应悔偷灵药，</span>
+				<span class="poem-line-item">碧海青天夜夜心。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">凉州词二首·其一</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王之涣</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">边塞</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">黄河远上白云间，</span><span
+					class="poem-line-item">一片孤城万仞山。</span><span class="poem-line-item">羌笛何须怨杨柳，</span>
+				<span class="poem-line-item">春风不度玉门关。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">滁州西涧</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·韦应物</span> <span><span class="poem-tags">山水</span><span
+					class="poem-tags">唐诗三百首</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">独怜幽草涧边生，</span><span
+					class="poem-line-item">上有黄鹂深树鸣。</span><span class="poem-line-item">春潮带雨晚来急，</span>
+				<span class="poem-line-item">野渡无人舟自横。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">山居秋暝</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">山水</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">空山新雨后，</span><span
+					class="poem-line-item">天气晚来秋。</span><span class="poem-line-item">明月松间照，</span>
+				<span class="poem-line-item">清泉石上流。</span><span
+					class="poem-line-item">竹喧归浣女，</span><span class="poem-line-item">莲动下渔舟。</span>
+				<span class="poem-line-item">随意春芳歇，</span><span
+					class="poem-line-item">王孙自可留。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">回乡偶书二首·其一</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·贺知章</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">思乡</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">少小离家老大回，</span><span
+					class="poem-line-item">乡音无改鬓毛衰。</span><span class="poem-line-item">儿童相见不相识，</span>
+				<span class="poem-line-item">笑问客从何处来。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">望岳</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜甫</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">励志</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">岱宗夫如何？</span><span
+					class="poem-line-item">齐鲁青未了。</span><span class="poem-line-item">造化钟神秀，</span>
+				<span class="poem-line-item">阴阳割昏晓。</span><span
+					class="poem-line-item">荡胸生曾云，</span><span class="poem-line-item">决眦入归鸟。</span>
+				<span class="poem-line-item">会当凌绝顶，</span><span
+					class="poem-line-item">一览众山小。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">凉州词二首·其一</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王翰</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">边塞</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">葡萄美酒夜光杯，</span><span
+					class="poem-line-item">欲饮琵琶马上催。</span><span class="poem-line-item">醉卧沙场君莫笑，</span>
+				<span class="poem-line-item">古来征战几人回？</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">送杜少府之任蜀州</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王勃</span> <span><span class="poem-tags">友情</span><span
+					class="poem-tags">送别</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">城阙辅三秦，</span><span
+					class="poem-line-item">风烟望五津。</span><span class="poem-line-item">与君离别意，</span>
+				<span class="poem-line-item">同是宦游人。</span><span
+					class="poem-line-item">海内存知己，</span><span class="poem-line-item">天涯若比邻。</span>
+				<span class="poem-line-item">无为在歧路，</span><span
+					class="poem-line-item">儿女共沾巾。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">江南春</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜牧</span> <span><span class="poem-tags">春天</span><span
+					class="poem-tags">出游</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">千里莺啼绿映红，</span><span
+					class="poem-line-item">水村山郭酒旗风。</span><span class="poem-line-item">南朝四百八十寺，</span>
+				<span class="poem-line-item">多少楼台烟雨中。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">白雪歌送武判官归京</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·岑参</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">冬天</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">北风卷地白草折，</span><span
+					class="poem-line-item">胡天八月即飞雪。</span><span class="poem-line-item">忽如一夜春风来，</span>
+				<span class="poem-line-item">千树万树梨花开。</span><span
+					class="poem-line-item">散入珠帘湿罗幕，</span><span class="poem-line-item">狐裘不暖锦衾薄。</span>
+				<span class="poem-line-item">将军角弓不得控，</span><span
+					class="poem-line-item">都护铁衣冷难着。</span><span class="poem-line-item">瀚海阑干百丈冰，</span>
+				<span class="poem-line-item">愁云惨淡万里凝。</span><span
+					class="poem-line-item">中军置酒饮归客，</span><span class="poem-line-item">胡琴琵琶与羌笛。</span>
+				<span class="poem-line-item">纷纷暮雪下辕门，</span><span
+					class="poem-line-item">风掣红旗冻不翻。</span><span class="poem-line-item">轮台东门送君去，</span>
+				<span class="poem-line-item">去时雪满天山路。</span><span
+					class="poem-line-item">山回路转不见君，</span><span class="poem-line-item">雪上空留马行处。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">寻隐者不遇</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·贾岛</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">怅惘</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">松下问童子，</span><span
+					class="poem-line-item">言师采药去。</span><span class="poem-line-item">只在此山中，</span>
+				<span class="poem-line-item">云深不知处。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">相思</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span>
+				<!---->
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">红豆生南国，</span><span
+					class="poem-line-item">春来发几枝。</span><span class="poem-line-item">愿君多采撷，</span>
+				<span class="poem-line-item">此物最相思。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">过故人庄</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·孟浩然</span> <span><span class="poem-tags">友情</span><span
+					class="poem-tags">田园</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">故人具鸡黍，</span><span
+					class="poem-line-item">邀我至田家。</span><span class="poem-line-item">绿树村边合，</span>
+				<span class="poem-line-item">青山郭外斜。</span><span
+					class="poem-line-item">开轩面场圃，</span><span class="poem-line-item">把酒话桑麻。</span>
+				<span class="poem-line-item">待到重阳日，</span><span
+					class="poem-line-item">还来就菊花。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">鸟鸣涧</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span> <span><span class="poem-tags">春天</span><span
+					class="poem-tags">乡村</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">人闲桂花落，</span><span
+					class="poem-line-item">夜静春山空。</span><span class="poem-line-item">月出惊山鸟，</span>
+				<span class="poem-line-item">时鸣春涧中。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">草 / 赋得古原草送别</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·白居易</span> <span><span class="poem-tags">咏物</span><span
+					class="poem-tags">送别</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">离离原上草，</span><span
+					class="poem-line-item">一岁一枯荣。</span><span class="poem-line-item">野火烧不尽，</span>
+				<span class="poem-line-item">春风吹又生。</span><span
+					class="poem-line-item">远芳侵古道，</span><span class="poem-line-item">晴翠接荒城。</span>
+				<span class="poem-line-item">又送王孙去，</span><span
+					class="poem-line-item">萋萋满别情。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">使至塞上</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·王维</span> <span><span class="poem-tags">战士</span><span
+					class="poem-tags">赞美</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">单车欲问边，</span><span
+					class="poem-line-item">属国过居延。</span><span class="poem-line-item">征蓬出汉塞，</span>
+				<span class="poem-line-item">归雁入胡天。</span><span
+					class="poem-line-item">大漠孤烟直，</span><span class="poem-line-item">长河落日圆。</span>
+				<span class="poem-line-item">萧关逢候骑，</span><span
+					class="poem-line-item">都护在燕然。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">茅屋为秋风所破歌</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·杜甫</span> <span><span class="poem-tags">感怀</span><span
+					class="poem-tags">悲愤</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">八月秋高风怒号，</span><span
+					class="poem-line-item">卷我屋上三重茅。</span><span class="poem-line-item">茅飞渡江洒江郊，</span>
+				<span class="poem-line-item">高者挂罥长林梢，</span><span
+					class="poem-line-item">下者飘转沉塘坳。</span><span class="poem-line-item">南村群童欺我老无力，</span>
+				<span class="poem-line-item">忍能对面为盗贼。</span><span
+					class="poem-line-item">公然抱茅入竹去，</span><span class="poem-line-item">唇焦口燥呼不得，</span>
+				<span class="poem-line-item">归来倚杖自叹息。</span><span
+					class="poem-line-item">俄顷风定云墨色，</span><span class="poem-line-item">秋天漠漠向昏黑。</span>
+				<span class="poem-line-item">布衾多年冷似铁，</span><span
+					class="poem-line-item">娇儿恶卧踏里裂。</span><span class="poem-line-item">床头屋漏无干处，</span>
+				<span class="poem-line-item">雨脚如麻未断绝。</span><span
+					class="poem-line-item">自经丧乱少睡眠，</span><span class="poem-line-item">长夜沾湿何由彻！</span>
+				<span class="poem-line-item">安得广厦千万间，</span><span
+					class="poem-line-item">大庇天下寒士俱欢颜！</span><span
+					class="poem-line-item">风雨不动安如山。</span> <span
+					class="poem-line-item">呜呼！</span><span class="poem-line-item">何时眼前突兀见此屋，</span><span
+					class="poem-line-item">吾庐独破受冻死亦足！</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">游子吟</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·孟郊</span> <span><span class="poem-tags">唐诗三百首</span><span
+					class="poem-tags">亲情</span></span>
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">慈母手中线，</span><span
+					class="poem-line-item">游子身上衣。</span><span class="poem-line-item">临行密密缝，</span>
+				<span class="poem-line-item">意恐迟迟归。</span><span
+					class="poem-line-item">谁言寸草心，</span><span class="poem-line-item">报得三春晖。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">离思五首·其四</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·元稹</span>
+				<!---->
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">曾经沧海难为水，</span><span
+					class="poem-line-item">除却巫山不是云。</span><span class="poem-line-item">取次花丛懒回顾，</span>
+				<span class="poem-line-item">半缘修道半缘君。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+		<div class="result-item">
+			<div class="poem-title">
+				《<span class="poem-name">逢雪宿芙蓉山主人</span>》
+			</div>
+			<div class="poem-info">
+				<span>唐·刘长卿</span>
+				<!---->
+			</div>
+			<div class="poem-line">
+				<span class="poem-line-item">日暮苍山远，</span><span
+					class="poem-line-item">天寒白屋贫。</span><span class="poem-line-item">柴门闻犬吠，</span>
+				<span class="poem-line-item">风雪夜归人。</span>
+			</div>
+			<div class="poem-func">
+				<span class="video"></span> <span class="line"></span> <span
+					class="copy"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<p>&nbsp; &nbsp; </p>
+		<h4 id="links">链接</h4>
+		<ol>
+			<li><a target="_top" href="https://hanyu.baidu.com/hanyu-page/poem/list?flag=0&from=aladdin&query=%E5%94%90%E8%AF%97&searchParam=%7B%22word%22%3A%22%E5%94%90%E8%AF%97%22,%22searchCondition%22%3A%7B%22mustRecite%22%3A0,%22version%22%3A%5B%5D,%22grade%22%3A%5B%5D,%22gradeStage%22%3A%5B%5D,%22author%22%3A%5B%5D,%22theme%22%3A%5B%5D,%22dynasty%22%3A%5B%5D%7D%7D&smpid=&srcid=51369&wd=%E5%94%90%E8%AF%97">唐诗 - 古诗文</a></li>
+		</ol>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日</div>
+	</footer>
+</body>
+</html>

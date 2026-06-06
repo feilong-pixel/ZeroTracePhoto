@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>早期网页作品：Hello, 蜗牛！ - 网途日志</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="../common/css/site.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="../common/js/color-modes.js"></script>
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="check2" viewBox="0 0 16 16">
+		<	path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+		</symbol>
+		<symbol id="circle-half" viewBox="0 0 16 16">
+			<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+		</symbol>
+		<symbol id="moon-stars-fill" viewBox="0 0 16 16">
+			<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+			<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+		</symbol>
+		<symbol id="sun-fill" viewBox="0 0 16 16">
+			<path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+		</symbol>
+	</svg>
+
+	<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+		<button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+			id="bd-theme"
+			type="button"
+			aria-expanded="false"
+			data-bs-toggle="dropdown"
+			aria-label="Toggle theme (auto)">
+		<svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+		<span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+		</button>
+		<ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+			Light
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+			Dark
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+			Auto
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		</ul>
+	</div>
+
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="home" viewBox="0 0 16 16">
+			<path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+		</symbol>
+
+		<symbol id="alphabet-N" viewBox="0 0 384 512">
+			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+			<path fill="#FFD43B" d="M21.1 33.9c12.7-4.6 26.9-.7 35.5 9.6L320 359.6 320 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 384c0 13.5-8.4 25.5-21.1 30.1s-26.9 .7-35.5-9.6L64 152.4 64 448c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 50.5 8.4 38.5 21.1 33.9z"/>
+		</symbol>
+
+		<symbol id="alphabet-W" viewBox="0 0 384 512">
+			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+			<path fill="#74C0FC" d="M20.8 34c16.5-6.2 35 2.2 41.2 18.7l110.2 294L257.3 55c4-13.7 16.5-23 30.7-23s26.7 9.4 30.7 23l85.1 291.7L514 52.8c6.2-16.5 24.6-24.9 41.2-18.7s24.9 24.7 18.7 41.2l-144 384c-4.8 12.9-17.4 21.3-31.2 20.7s-25.7-9.8-29.5-23L288 178.3 206.7 457c-3.9 13.2-15.8 22.5-29.5 23s-26.3-7.8-31.2-20.7L2 75.2C-4.2 58.7 4.2 40.2 20.8 34z"/>
+		</symbol>
+
+		<symbol id="house-door-fill" viewBox="0 0 16 16">
+			<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+		</symbol>
+	</svg>
+
+	<main>
+		<div class="container">
+			<header class="site-header noto-sans-sc-400">
+				<div class="site-header-inner">
+					<a href="../"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+						<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+						<span class="fs-4">网途日志</span>
+					</a>
+					<form id="search" method="GET" action="https://www.google.com/search">
+						<input type="hidden" name="ie" value="utf-8">
+						<input type="hidden" name="oe" value="utf-8">
+						<input type="hidden" name="hl" value="zh-CN">
+						<input type="hidden" name="lr" value="zh-CN">
+						<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+						<label for="google-search">Search:</label>
+						<input id="google-search" type="text" name="q" maxlength="255" value="">
+						<input type="submit" name="btnG" value="検索">
+						(By <a href="http://www.google.com/">Google</a>)
+					</form>
+				</div>
+			</header>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb breadcrumb-chevron">
+					<li class="breadcrumb-item">
+						<a class="link-body-emphasis" href="../">
+							<svg class="bi" width="16" height="16">
+								<use xlink:href="#house-door-fill"></use>
+							</svg>
+							<span class="visually-hidden">Home</span>
+						</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">
+						Hello, 蜗牛！
+					</li>
+				</ol>
+			</nav>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<h1 class="text-center">Hello, 蜗牛！</h1>
+			<img  class="container" src="../common/images/20240909/woniu_000.png" alt="蜗牛">
+			<img  class="container" src="../common/images/20240909/woniu_001.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240909/woniu_002.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240909/woniu_003.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240909/woniu_004.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240912/woniu_0912_01.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240912/woniu_0912_02.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240912/woniu_0912_03.jpg" alt="蜗牛">
+			<img  class="container" src="../common/images/20240912/woniu_0912_04.jpg" alt="蜗牛">
+
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<footer class="site-footer noto-sans-sc-400">
+				<div class="float-end mb-1"><a href="#">返回页首</a></div>
+				<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年09月12日 最終更新 : 2024年09月12日</div>
+			</footer>
+		</div>
+	</main>
+</body>
+</html>
+
+
+

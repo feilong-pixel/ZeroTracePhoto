@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="网途日志">
+
+<title>在 HTML 网页中使用 pinyin-pro 标注拼音 - 网途日志</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="../common/css/site.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+<script type="importmap">
+{
+	"imports": {
+		"pinyin-pro": "https://esm.sh/pinyin-pro",
+		"@pinyin-pro/data/modern": "https://esm.sh/@pinyin-pro/data/dist/modern",
+		"@pinyin-pro/data/complete": "https://esm.sh/@pinyin-pro/data/dist/complete"
+	}
+}
+</script>
+<style>
+.py-result-item {
+	margin-top: 5px;
+}
+</style>
+</head>
+
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="home" viewBox="0 0 16 16">
+			<path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h3v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4h3.5z" />
+		</symbol>
+
+		<symbol id="house-door-fill" viewBox="0 0 16 16">
+			<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+		</symbol>
+	</svg>
+
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="b-example-divider"></div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis" href="../">
+						<svg class="bi" width="16" height="16">
+							<use xlink:href="#house-door-fill"></use>
+						</svg>
+						<span class="visually-hidden">Home</span>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					在 HTML 网页中使用 pinyin-pro 标注拼音
+				</li>
+			</ol>
+		</nav>
+	</div>
+
+	<div class="container">
+		<p style="text-align: center" class="h1">在 HTML 网页中使用 pinyin-pro 标注拼音</p>
+		<p class="h6">目标是在HTML网页中给需要的中文标注拼音，在网上搜索了很多，最终选择使用pinyin-pro来进行拼音标注。</p>
+		<p class="h6">刚开始的时候，按照pinyin-pro的帮助文件，很快的成功的标注了拼音。但是在使用到pinyin-pro的添加词典功能时，很遗憾的是照着帮助文件，废了半天劲，也没能成功添加成功字典。经过各种尝试，反复实验，最终在HTML网页中成功使用pinyin-pro的添加词典功能。</p>
+		<p class="h6">对于如何使用pinyin-pro标注拼音，请参照pinyin-pro的帮助文件，这里不再赘述。</p>
+		<p class="h6">参照pinyin-pro的使用示例，按照以下的步骤即可成功在 HTML 网页中使用 pinyin-pro 进行标注拼音。</p>
+		<br />
+		<div>
+			<p class="h6">1. 在HTML的head标签中添加以下的代码，引入"pinyin-pro"和"@pinyin-pro/data/complete"拼音包。</p>
+			<div class="w3-code htmlHigh notranslate"><span class="form-control form-control-sm"><pre>
+&lt;script type=&quot;importmap&quot;&gt;
+{
+	&quot;imports&quot;: {
+		&quot;pinyin-pro&quot;: &quot;https://esm.sh/pinyin-pro&quot;,
+		&quot;@pinyin-pro/data/modern&quot;: &quot;https://esm.sh/@pinyin-pro/data/dist/modern&quot;,
+		&quot;@pinyin-pro/data/complete&quot;: &quot;https://esm.sh/@pinyin-pro/data/dist/complete&quot;
+	}
+}
+&lt;/script&gt;
+</pre></span></div>
+	</div>
+	<br />
+	<div>
+		<p class="h6">2. 下面是使用使用内置词典(默认)的代码示例。</p>
+		<div class="w3-code htmlHigh notranslate"><span class="form-control form-control-sm"><pre>
+&lt;script type=&quot;module&quot;&gt;
+	import { pinyin } from &apos;pinyin-pro&apos;;
+
+	const result1 = pinyin(&apos;小明硕士毕业于中国科学院计算所，后在日本京都大学深造&apos;);
+&lt;/script&gt;
+</pre></span></div>
+	</div>
+	<br />
+	<div>
+		<span class="h6">※使用内置词典(默认)的使用示例：</span><br />
+		<span id="shili01">小明硕士毕业于中国科学院计算所，后在日本京都大学深造。</span>
+	</div>
+	<br />
+	<div>
+		<p class="h6">3. 下面是使用现代汉语词典的代码示例。</p>
+		<div class="w3-code htmlHigh notranslate"><span class="form-control form-control-sm"><pre>
+&lt;script type=&quot;module&quot;&gt;
+	import { pinyin, addDict } from &apos;pinyin-pro&apos;;
+	import ModernChineseDict from &apos;@pinyin-pro/data/modern&apos;;
+
+	addDict(ModernChineseDict);
+
+	const result = pinyin(&apos;小明硕士毕业于中国科学院计算所，后在日本京都大学深造&apos;);
+&lt;/script&gt;
+</pre></div>
+	</div>
+	<br />
+	<div>
+		<span class="h6">※使用现代汉语词典的使用示例：</span><br />
+		<span id="shili02">小明硕士毕业于中国科学院计算所，后在日本京都大学深造。</span>
+	</div>
+	<br />
+	<div>
+		<p class="h6">4. 下面是使用完整词典的代码示例。</p>
+		<div class="w3-code htmlHigh notranslate"><span class="form-control form-control-sm"><pre>
+&lt;script type=&quot;module&quot;&gt;
+	import { pinyin, addDict } from &apos;pinyin-pro&apos;;
+	import CompleteDict from &apos;@pinyin-pro/data/complete&apos;;
+
+	addDict(CompleteDict);
+
+	const result = pinyin(&apos;小明硕士毕业于中国科学院计算所，后在日本京都大学深造&apos;);
+&lt;/script&gt;
+</pre></span></div>
+		</div>
+		<br />
+		<div>
+			<span class="h6">※使用使用完整词典的使用示例：</span><br />
+			<span id="shili03">小明硕士毕业于中国科学院计算所，后在日本京都大学深造。</span>
+		</div>
+	</div>
+
+	<script type="module">
+		import ModernChineseDict from '@pinyin-pro/data/modern';
+		import CompleteDict from '@pinyin-pro/data/complete';
+		import { annotateElement, onReady, usePinyinDict } from '../common/js/pinyin-helper.js';
+
+		const sampleText = '小明硕士毕业于中国科学院计算所，后在日本京都大学深造。';
+
+		onReady(function () {
+			annotateElement('#shili01', { text: sampleText });
+
+			usePinyinDict(ModernChineseDict);
+			annotateElement('#shili02', { text: sampleText });
+
+			usePinyinDict(CompleteDict);
+			annotateElement('#shili03', { text: sampleText });
+		});
+	</script>
+
+	<div class="container">
+		<p>&nbsp; &nbsp; </p>
+		<h4 id="links">链接</h4>
+		<ol>
+			<li><a target="_top" href="https://pinyin-pro.cn/guide/start.html">pinyin-pro快速开始</a></li>
+			<li><a target="_top" href="https://pinyin-pro.cn/use/html.html">pinyin-pro获取html</a></li>
+			<li><a target="_top" href="https://pinyin-pro.cn/use/addDict.html">pinyin-pro追加词典</a></li>
+			<li><a target="_top" href="https://play.fe-dev.cn/?entry=index.html&activeFile=main.ts&openConsole=true#eNp1Uk9v0zAc/Soml2xSE8MNlXQCdUPixA6bBFIuXmwaI8cOsdtRVZUmcUKCAkLTYFSIjT9DohtwYhrrt2nS9bSvgJ1kayvgFOf93nv+vZd0LMoxeeyGKmJW1fKuLN+tr91fXQEGWPK5Z56AId6o+RbhvqUxALyQIJyf9DkiCoEgRIkkSpPW1247130LwLl5qFTskEdN2tKUe876LacuohgpusGIJgeCK8KN/M5KjeCGweYNOIqIHrco2YxFouY0mxSrsIZJiwbEyV8qgHKqKGKODBAjtWvu1VlHRRUjS3WBySpDbZJ4sEDybPAynLchcPtCg2kLUKxvQ3Gsa/CgBkrBJc2TQUJjBVQ7NstGAjdNvNKCRmZzYLswQpS7Sto3Cn2hMm3DvHarYpUM/UlKVQfElLcprwCE8TINFOiCB4mIgF3gTpwI41fSTbuMKJIzC97NKRFipBAMSo6R+by0XZhVLuYTXbRUICGyyRSolXss2OmPF9mb3nhvO/34Lfu+PTreHZ30RseH6bvh+OBVevhl8nb/7GhvfLSTPd06P32Wvuyl/a/ZzuesPxidDCZPhumnA03Lfv2cbH2wp3cJRlwmGgv22XCQPd8f/36dve+fn+7alXKJRV1QkdOJUOw+lILrojqmTL8cSN+qghwx2DS5gX3L/I2yCiGRkStDODuuXGj+W9c/Lf5iYyrVjMS4dn3etbp/AHmWTEg=">pinyin-pro追加词典示例</a></li>
+		</ol>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日</div>
+	</footer>
+
+	<script>
+		w3CodeColor();
+	</script>
+</body>
+</html>

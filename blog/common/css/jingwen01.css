@@ -1,0 +1,146 @@
+/* Global */
+html {
+    background-color: #F0F8FF;
+}
+
+body {
+    margin: 0 auto 0 auto;
+    max-width: 958px;
+    background-color: #fff;
+    font-size: 15px;
+}
+
+/* Global */
+h2 {
+    font-size: 21px;
+    padding: 6px;
+    margin: 0 0 8px 0;
+    border-bottom: 4px solid #469;
+    line-height: 2rem;
+}
+
+h3 {
+    padding: 0 0 0 4px;
+    font-size: 16pt;
+    border-left: 6px solid #469;
+    border-bottom: 1px solid #469;
+}
+
+h4 {
+    font-size: 150%;
+    border-bottom: 1px solid #aaa;
+}
+
+h5 {
+    font-size: 125%;
+    margin: 0 0 1rem 0;
+}
+
+h5:has(+ h5) {
+    margin: 0 0 0 0;
+}
+
+h5 i,
+h5 tt,
+h5 .normal {
+    font-weight: normal;
+    font-family: inherit;
+}
+
+h6 {
+    font-size: 100%;
+    margin: 0;
+}
+
+h6 i,
+h6 tt {
+    font-weight: normal;
+    font-family: inherit;
+}
+
+.reset h1,
+.reset h2,
+.reset h3,
+.reset h4,
+.reset h5,
+.reset h6,
+h1.reset,
+h2.reset,
+h3.reset,
+h4.reset,
+h5.reset,
+h6.reset {
+    margin: .5em 0;
+    padding: 0;
+    border: none;
+}
+
+.reset h1,
+h1.reset {
+    font-size: 2em;
+}
+
+.reset h2,
+h2.reset {
+    font-size: 1.5em;
+}
+
+.reset h3,
+h3.reset {
+    font-size: 1.17em;
+}
+
+.reset h4,
+h4.reset {
+    font-size: 1em;
+}
+
+.reset h5,
+h5.reset {
+    font-size: .83em;
+}
+
+.reset h6,
+h6.reset {
+    font-size: .67em;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+ul {
+    x-margin-left: -1em;
+    padding-left: 2em;
+}
+
+em {
+    color: #d00;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.reset em,
+em.reset {
+    color: inherit;
+    font-style: italic;
+}
+
+a {
+    word-break: break-all;
+    x-overflow-wrap: break-word;
+}
+
+a:link,
+a:visited {
+    color: #113366;
+}
+
+a:hover {
+    color: #f00;
+}
+
+.reset a::hover,
+a.reset:hover {
+    color: inherit;
+}

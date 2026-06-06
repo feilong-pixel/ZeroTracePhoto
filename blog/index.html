@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="description" content="网途日志">
+
+	<title>网途日志</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="./common/css/site.css" rel="stylesheet">
+<style>
+		.site-section {
+			margin-bottom: 1rem;
+		}
+
+		.site-section-title {
+			margin: 0 0 .75rem 0;
+			padding: .35rem .6rem;
+			background-color: #e2dfdf;
+			color: #284918;
+			font-size: 1.1rem;
+			font-weight: 700;
+		}
+
+		.site-section-title::before {
+			content: "■ ";
+		}
+
+		.site-link-list {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: .35rem 2rem;
+			margin: 0;
+			padding-left: 0;
+			list-style: none;
+		}
+
+		.site-link-list li {
+			line-height: 1.6;
+		}
+
+		@media (max-width: 640px) {
+			.site-link-list {
+				grid-template-columns: 1fr;
+			}
+		}
+	
+	</style>
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="home" viewBox="0 0 16 16">
+			<path
+				d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h3v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4h3.5z" />
+		</symbol>
+
+		<symbol id="alphabet-W" viewBox="0 0 384 512">
+			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+			<path d="M20.8 34c16.5-6.2 35 2.2 41.2 18.7l110.2 294L257.3 55c4-13.7 16.5-23 30.7-23s26.7 9.4 30.7 23l85.1 291.7L514 52.8c6.2-16.5 24.6-24.9 41.2-18.7s24.9 24.7 18.7 41.2l-144 384c-4.8 12.9-17.4 21.3-31.2 20.7s-25.7-9.8-29.5-23L288 178.3 206.7 457c-3.9 13.2-15.8 22.5-29.5 23s-26.3-7.8-31.2-20.7L2 75.2C-4.2 58.7 4.2 40.2 20.8 34z"/>
+		</symbol>
+	</svg>
+
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="./"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container noto-sans-sc-400">
+		<section class="site-section">
+			<h2 class="site-section-title">早期作品</h2>
+			<ul class="site-link-list">
+				<li><a href="./woniu/helloWoniu.html">早期AI作品：Hello, 蜗牛！</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">汉字注音与经文</h2>
+			<ul class="site-link-list">
+				<li><a href="./jingwen/jingangjing.html">金刚经原文和译文</a></li>
+				<li><a href="./jingwen/xinjing.html">般若波罗蜜多心经 - 注音版</a></li>
+				<li><a href="./jingwen/xinjing_wzy.html">般若波罗蜜多心经 - 无注音版</a></li>
+				<li><a href="./jingwen/wuliangshoujing.html">无量寿经（夏莲居会集本） - 注音版</a></li>
+				<li><a href="./jingwen/wuliangshoujing_wzy.html">无量寿经（夏莲居会集本） - 无注音版</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">古诗文</h2>
+			<ul class="site-link-list">
+				<li><a href="./jingwen/tangshi.html">唐诗选读</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">网页与字体实验</h2>
+			<ul class="site-link-list">
+				<li><a href="./pinyinPro/pinyinPro.html">在 HTML 网页中使用 pinyin-pro 标注拼音</a></li>
+				<li><a href="./fonts/fontsList.html">Google Fonts 中文字体示例</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">技术笔记</h2>
+			<ul class="site-link-list">
+				<li><a href="./PowerShell/SearchExcel_001.html">PowerShell 检索 Excel 文件内容</a></li>
+				<li><a href="./jquery/jquery_ready.html">jQuery ready() 学习笔记</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">生活记录</h2>
+			<ul class="site-link-list">
+				<li><a href="./riji/riji_20240831.html">在日本出生的小孩办理中国户口登记</a></li>
+			</ul>
+		</section>
+
+		<section class="site-section">
+			<h2 class="site-section-title">工具备忘</h2>
+			<ul class="site-link-list">
+				<li><a href="./notepad/notepad_shotcut.html">Notepad++ 快捷键备忘录</a></li>
+			</ul>
+		</section>
+	</div>
+
+	<!-- FOOTER -->
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Notepad++ 快捷键备忘录 - 网途日志</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="../common/css/site.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="../common/js/color-modes.js"></script>
+<style>
+table.numberedRows {
+	counter-reset: rowNum;
+}
+
+table.numberedRows tbody tr {
+	counter-increment: rowNum;
+}
+
+table.numberedRows tbody tr th:first-child::before {
+	content: counter(rowNum);
+}
+</style>
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="check2" viewBox="0 0 16 16">
+			<path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+		</symbol>
+		<symbol id="circle-half" viewBox="0 0 16 16">
+			<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+		</symbol>
+		<symbol id="moon-stars-fill" viewBox="0 0 16 16">
+			<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+			<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+		</symbol>
+		<symbol id="sun-fill" viewBox="0 0 16 16">
+			<path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+		</symbol>
+	</svg>
+
+	<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+		<button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+			id="bd-theme"
+			type="button"
+			aria-expanded="false"
+			data-bs-toggle="dropdown"
+			aria-label="Toggle theme (auto)">
+		<svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+		<span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+		</button>
+		<ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+			Light
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+			Dark
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		<li>
+			<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+			<svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+			Auto
+			<svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+			</button>
+		</li>
+		</ul>
+	</div>
+
+	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+		<symbol id="home" viewBox="0 0 16 16">
+			<path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+		</symbol>
+
+		<symbol id="alphabet-N" viewBox="0 0 384 512">
+			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+			<path d="M21.1 33.9c12.7-4.6 26.9-.7 35.5 9.6L320 359.6 320 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 384c0 13.5-8.4 25.5-21.1 30.1s-26.9 .7-35.5-9.6L64 152.4 64 448c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 64C0 50.5 8.4 38.5 21.1 33.9z"/>
+		</symbol>
+
+		<symbol id="alphabet-W" viewBox="0 0 384 512">
+			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+			<path d="M20.8 34c16.5-6.2 35 2.2 41.2 18.7l110.2 294L257.3 55c4-13.7 16.5-23 30.7-23s26.7 9.4 30.7 23l85.1 291.7L514 52.8c6.2-16.5 24.6-24.9 41.2-18.7s24.9 24.7 18.7 41.2l-144 384c-4.8 12.9-17.4 21.3-31.2 20.7s-25.7-9.8-29.5-23L288 178.3 206.7 457c-3.9 13.2-15.8 22.5-29.5 23s-26.3-7.8-31.2-20.7L2 75.2C-4.2 58.7 4.2 40.2 20.8 34z"/>
+		</symbol>
+
+		<symbol id="house-door-fill" viewBox="0 0 16 16">
+			<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+		</symbol>
+	</svg>
+
+	<main>
+		<div class="container">
+			<header class="site-header noto-sans-sc-400">
+				<div class="site-header-inner">
+					<a href="../"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+						<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+						<span class="fs-4">网途日志</span>
+					</a>
+					<form id="search" method="GET" action="https://www.google.com/search">
+						<input type="hidden" name="ie" value="utf-8">
+						<input type="hidden" name="oe" value="utf-8">
+						<input type="hidden" name="hl" value="zh-CN">
+						<input type="hidden" name="lr" value="zh-CN">
+						<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+						<label for="google-search">Search:</label>
+						<input id="google-search" type="text" name="q" maxlength="255" value="">
+						<input type="submit" name="btnG" value="検索">
+						(By <a href="http://www.google.com/">Google</a>)
+					</form>
+				</div>
+			</header>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb breadcrumb-chevron">
+					<li class="breadcrumb-item">
+						<a class="link-body-emphasis" href="../">
+							<svg class="bi" width="16" height="16">
+								<use xlink:href="#house-door-fill"></use>
+							</svg>
+							<span class="visually-hidden">Home</span>
+						</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">
+						Notepad++ 快捷键备忘录
+					</li>
+				</ol>
+			</nav>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<div class="text-center"><h2>Notepad++ 快捷键备忘录</h2></div>
+			<div>
+				<table class="table caption-top table-bordered table-striped" id="shortKey01">
+				<caption>《主菜单》快捷键</caption>
+				<thead class="table-success">
+					<tr>
+						<th scope="col" width="7%">#</th>
+						<th scope="col" width="46%">名称</td>
+						<th scope="col" width="40%">快捷键</td>
+						<th scope="col" width="7%">类别</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>新建</td>
+						<td>Ctrl + N</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>打开</td>
+						<td>Ctrl + O</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>重新读取文件</td>
+						<td>Ctrl + R</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>保存</td>
+						<td>Ctrl + S</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>另存为</td>
+						<td>Ctrl + Alt + S</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>全部保存</td>
+						<td>Ctrl + Shift + S</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>关闭</td>
+						<td>Ctrl + W</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>全部关闭</td>
+						<td>Ctrl + Shift + W</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>打印</td>
+						<td>Ctrl + P</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>恢复最近关闭的文件</td>
+						<td>Ctrl + Shift + T</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>退出</td>
+						<td>Alt + F4</td>
+						<td>文件</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>剪切</td>
+						<td>Shift + DEL</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>剪切</td>
+						<td>Ctrl + X</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>复制</td>
+						<td>Ctrl + INS</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>复制</td>
+						<td>Ctrl + C</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>粘贴</td>
+						<td>Shift + INS</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>粘贴</td>
+						<td>Ctrl + V</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>开始/结束 选取</td>
+						<td>Ctrl + Shift + B</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>开始/结束 列选取</td>
+						<td>Alt + Shift + B</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>转成大写</td>
+						<td>Ctrl + Shift + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>转成小写</td>
+						<td>Ctrl + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>每词转成仅首字母大写</td>
+						<td>Alt + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>每词的首字母转成大写</td>
+						<td>Alt + Shift + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>每句转成仅首字母大写</td>
+						<td>Ctrl + Alt + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>每句的首字母转成大写</td>
+						<td>Ctrl + Alt + Shift + U</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>分割行</td>
+						<td>Ctrl + I</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>合并行</td>
+						<td>Ctrl + J</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>上移当前行</td>
+						<td>Ctrl + Shift + Up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>下移当前行</td>
+						<td>Ctrl + Shift + Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>在当前行上方插入空行</td>
+						<td>Ctrl + Alt + Enter</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>在当前行下方插入空行</td>
+						<td>Ctrl + Alt + Shift + Enter</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>添加/删除单行注释</td>
+						<td>Ctrl + Q</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>行删除</td>
+						<td>Ctrl + L</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>行复制</td>
+						<td>Ctrl + D</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>设置行注释</td>
+						<td>Ctrl + K</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>取消行注释</td>
+						<td>Ctrl + Shift + K</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>区块注释</td>
+						<td>Ctrl + Shift + Q</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>函数自动补全</td>
+						<td>Ctrl + Spacebar</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>路径自动补全</td>
+						<td>Ctrl + Alt + Spacebar</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>单词自动补全</td>
+						<td>Ctrl + Enter</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>函数参数提示</td>
+						<td>Ctrl + Shift + Spacebar</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>函数参数上一个提示</td>
+						<td>Alt + UP</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>函数参数下一个提示</td>
+						<td>Alt + Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>列编辑器</td>
+						<td>Alt + C</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>查找</td>
+						<td>Ctrl + F</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>在文件中查找</td>
+						<td>Ctrl + Shift + F</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>查找下一个</td>
+						<td>F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>查找上一个</td>
+						<td>Shift + F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>选定并寻找下一个</td>
+						<td>Ctrl + F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>选定并寻找上一个</td>
+						<td>Ctrl + Shift + F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>快速查找下一个</td>
+						<td>Ctrl + Alt + F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>快速查找上一个</td>
+						<td>Ctrl + Alt + Shift + F3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>替换</td>
+						<td>Ctrl + H</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>增量查找</td>
+						<td>Ctrl + Alt + I</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>寻找结果</td>
+						<td>F7</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>上一个寻找结果</td>
+						<td>Shift + F4</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>下一个寻找结果</td>
+						<td>F4</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>行定位</td>
+						<td>Ctrl + G</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>转到匹配的括号</td>
+						<td>Ctrl + B</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>选中所有匹配括号间字符</td>
+						<td>Ctrl + Alt + B</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标记</td>
+						<td>Ctrl + M</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到上一个格式1标记</td>
+						<td>Ctrl + Shift + 1</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到上一个格式2标记</td>
+						<td>Ctrl + Shift + 2</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到上一个格式3标记</td>
+						<td>Ctrl + Shift + 3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到上一个格式4标记</td>
+						<td>Ctrl + Shift + 4</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到上一个格式5标记</td>
+						<td>Ctrl + Shift + 5</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>上一个标记面板格式标记</td>
+						<td>Ctrl + Shift + 0</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到下一个格式1标记</td>
+						<td>Ctrl + 1</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到下一个格式2标记</td>
+						<td>Ctrl + 2</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到下一个格式3标记</td>
+						<td>Ctrl + 3</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到下一个格式4标记</td>
+						<td>Ctrl + 4</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>到下一个格式5标记</td>
+						<td>Ctrl + 5</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>下一个标记面板格式标记</td>
+						<td>Ctrl + 0</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>设置/取消书签</td>
+						<td>Ctrl + F2</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>下一书签</td>
+						<td>F2</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>上一书签</td>
+						<td>Shift + F2</td>
+						<td>搜索</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>切换全屏模式</td>
+						<td>F11</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>便签模式</td>
+						<td>F12</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页1</td>
+						<td>Ctrl + Numpad 1</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页2</td>
+						<td>Ctrl + Numpad 2</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页3</td>
+						<td>Ctrl + Numpad 3</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页4</td>
+						<td>Ctrl + Numpad 4</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页5</td>
+						<td>Ctrl + Numpad 5</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页6</td>
+						<td>Ctrl + Numpad 6</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页7</td>
+						<td>Ctrl + Numpad 7</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页8</td>
+						<td>Ctrl + Numpad 8</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>标签页9</td>
+						<td>Ctrl + Numpad 9</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>下个标签页</td>
+						<td>Ctrl + Page down</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>上个标签页</td>
+						<td>Ctrl + Page up</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>前移标签</td>
+						<td>Ctrl + Shift + Page down</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>后移标签</td>
+						<td>Ctrl + Shift + Page up</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>切换到上一个文档</td>
+						<td>Ctrl + Shift + Tab</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>切换到下一个文档</td>
+						<td>Ctrl + Tab</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>隐藏行</td>
+						<td>Alt + H</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>激活从视图</td>
+						<td>F8</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠所有层次</td>
+						<td>Alt + 0</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开所有层次</td>
+						<td>Alt + Shift+ 0</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠当前层次</td>
+						<td>Ctrl + Alt + F</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开当前层次</td>
+						<td>Ctrl + Alt + Shift + F</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次1</td>
+						<td>Alt + 1</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次2</td>
+						<td>Alt + 2</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次3</td>
+						<td>Alt + 3</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次4</td>
+						<td>Alt + 4</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次5</td>
+						<td>Alt + 5</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次6</td>
+						<td>Alt + 6</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次7</td>
+						<td>Alt + 7</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>折叠层次8</td>
+						<td>Alt + 8</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次1</td>
+						<td>Alt + Shift + 1</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次2</td>
+						<td>Alt + Shift + 2</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次3</td>
+						<td>Alt + Shift + 3</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次4</td>
+						<td>Alt + Shift + 4</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次5</td>
+						<td>Alt + Shift + 5</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次6</td>
+						<td>Alt + Shift + 6</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次7</td>
+						<td>Alt + Shift + 7</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>展开层次8</td>
+						<td>Alt + Shift + 8</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>文字方向从右到左</td>
+						<td>Ctrl + Alt + R</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>文字方向从左到右</td>
+						<td>Ctrl + Alt + L</td>
+						<td>视图</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>开启/关闭宏录制</td>
+						<td>Ctrl + Shift + R</td>
+						<td>宏</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>回放</td>
+						<td>Ctrl + Shift + P</td>
+						<td>宏</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>运行</td>
+						<td>F5</td>
+						<td>宏</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>关于 Notepad++</td>
+						<td>F1</td>
+						<td>关于</td>
+					</tr>
+				</tbody>
+				</table>
+
+				<table class="table caption-top table-bordered table-striped">
+				<caption>《Scintilla命令》快捷键</caption>
+				<thead class="table-success">
+					<tr>
+						<th scope="col" width="7%">#</th>
+						<th scope="col" width="46%">名称</td>
+						<th scope="col" width="40%">快捷键</td>
+						<th scope="col" width="7%">类别</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_SELECTALL（全选择）</td>
+						<td>Ctrl + A</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CLEAR（删除）</td>
+						<td>DeL</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_UNDO（撤销上一次操作）</td>
+						<td>Ctrl + Z or Alt + Backspace</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_REDO（恢复上一次操作）</td>
+						<td>Ctrl + Y or Ctrl + Shift + Z</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_NEWLINE（新行）</td>
+						<td>Enter or Shift + Enter</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_TAB（制表键）</td>
+						<td>Tab</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_BACKTAB（回退制表键）</td>
+						<td>Shift + Tab</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_ZOOMIN（放大）</td>
+						<td>Ctrl + Num +</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_ZOOMOUT（缩小）</td>
+						<td>Ctrl + Num -</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_SETZOOM（缩放重置）</td>
+						<td>Ctrl + Num /</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_SELECTIONDUPLICATE（行拷贝）</td>
+						<td>Ctrl + D</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_EDITTOGGLEOVERTYPE（插入覆盖变换）</td>
+						<td>INS</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEDOWN（下一行）</td>
+						<td>Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEDOWNEXTEND（向下选择一行）</td>
+						<td>Shift + Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEDOWNRECTEXTEND（块选择向下移动一行）</td>
+						<td>Alt + Shift + Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINESCROLLDOWN（向下滚动一行）</td>
+						<td>Ctrl + Down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEUP（向上移动）</td>
+						<td>Up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEUPEXTEND（向上选择一行）</td>
+						<td>Shift + Up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEUPRECTEXTEND（块选择向上移动一行）</td>
+						<td>Alt + Shift + Up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINESCROLLUP（向上滚动一行）</td>
+						<td>Ctrl + Up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PARADOWN（移动到段落末）</td>
+						<td>Ctrl + ]</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PARADOWNEXTEND（选择到段落末）</td>
+						<td>Ctrl + Shift + ]</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PARAUP（移动到段落首）</td>
+						<td>Ctrl + [</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PARAUPEXTEND（选择到段落首）</td>
+						<td>Ctrl + Shift + [</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARLEFT（向左移动）</td>
+						<td>Left</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARLEFTEXTEND（选择到单词末）</td>
+						<td>Shift + Left</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARLEFTRECTEXTEND（选择到单词末）</td>
+						<td>Alt + Shift + Left</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARRIGHT（向右移动）</td>
+						<td>Right</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARRIGHTEXTEND（选择到单词首）</td>
+						<td>Shift + Right</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CHARRIGHTRECTEXTEND（选择到单词首）</td>
+						<td>Alt + Shift + Right</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDLEFT（移动到单词末）</td>
+						<td>Ctrl + Left</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDLEFTEXTEND（选择到单词末）</td>
+						<td>Ctrl + Shift + Left</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDRIGHT（移动到单词首）</td>
+						<td>Ctrl + Right</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDRIGHTENDEXTEND（选择到单词首）</td>
+						<td>Ctrl + Shift + Right</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDPARTLEFT（移动到单词首）</td>
+						<td>Ctrl + /</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDPARTLEFTEXTEND（选择到单词首）</td>
+						<td>Ctrl + Shift + /</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDPARTRIGHT（移动到单词末）</td>
+						<td>Ctrl + \</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_WORDPARTRIGHTEXTEND（选择到单词末）</td>
+						<td>Ctrl + Shift + \</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_HOMEDISPLAY（移动到行首）</td>
+						<td>Alt + Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_VCHOMERECTEXTEND（选择到行首）</td>
+						<td>Alt + Shift + Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_VCHOMEWRAP（移动到行首）</td>
+						<td>Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_VCHOMEWRAPEXTEND（选择到行首）</td>
+						<td>Shift + Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEENDWRAPEXTEND（选择到行末）</td>
+						<td>Shift + End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEENDRECTEXTEND（选择到行末）</td>
+						<td>Alt + Shift + End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEENDDISPLAY（移动到行末）</td>
+						<td>Alt + End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEENDWRAP（移动到行末）</td>
+						<td>End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DOCUMENTSTART（移动到文件首）</td>
+						<td>Ctrl + Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DOCUMENTSTARTEXTEND（选择到文件首）</td>
+						<td>Ctrl + Shift + Home</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DOCUMENTEND（移动到文件尾）</td>
+						<td>Ctrl + End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DOCUMENTENDEXTEND（选择到文件尾）</td>
+						<td>Ctrl + Shift + End</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEUP（向上翻页）</td>
+						<td>Page up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEUPEXTEND（选择向上翻页）</td>
+						<td>Shift + Page up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEUPRECTEXTEND（块选择向上翻页）</td>
+						<td>Alt + Shift + Page up</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEDOWN（向下翻页）</td>
+						<td>Page down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEDOWNEXTEND（选择向下翻页）</td>
+						<td>Shift + Page down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_PAGEDOWNRECTEXTEND（块选择向下翻页）</td>
+						<td>Alt + Shift + Page down</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DELETEBACK（删除）</td>
+						<td>Backspace or Shift + Backspace</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DELWORDLEFT（右删除单词）</td>
+						<td>Ctrl + Backspace</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DELWORDRIGHT（左删除单词）</td>
+						<td>Ctrl + DEL</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DELLINELEFT（右删除到行首）</td>
+						<td>Ctrl + Shift + Backspace</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_DELLINERIGHT（左删除到行末）</td>
+						<td>Ctrl + Shift + DEL</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINEDELETE（行删除）</td>
+						<td>Ctrl + Shift + L</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINECUT（行剪切）</td>
+						<td>Ctrl + L</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINECOPY（行拷贝）</td>
+						<td>Ctrl + Shift + X</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_LINETRANSPOSE（行交换）</td>
+						<td>Ctrl + T</td>
+						<td>编辑</td>
+					</tr>
+					<tr>
+						<th scope="row" class="sno"></th>
+						<td>SCI_CANCEL（取消）</td>
+						<td>ESC</td>
+						<td>编辑</td>
+					</tr>
+				</tbody>
+				</table>
+				<div>
+					<h4 id="memo" class="text-body-emphasis">※备注：</h4>
+					<ol class="text-body-emphasis">
+						<li>在使用快捷键时要注意，对于单词的选择移动，是不支持中文的。</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<p>&nbsp; &nbsp; </p>
+			<h4 id="memo">※提示：</h4>
+			<ol>
+				<li>《主菜单》快捷键，可以在左面的菜单里面变更：（菜单）设置 → 管理快捷键 → 主菜单（页面）</li>
+				<li>《Scintilla命令》快捷键，可以在左面的菜单里面变更：（菜单）设置 → 管理快捷键 → Scintilla命令（页面）</li>
+			</ol>
+		</div>
+
+		<div class="b-example-divider"></div>
+		<div class="container">
+			<p>&nbsp; &nbsp; </p>
+			<h4 id="links">※链接：</h4>
+			<ol>
+				<li><a target="_top" href="https://notepad-plus-plus.org/">Notepad++</a></li>
+				<li><a target="_top" href="https://npp-user-manual.org/">Notepad++ User Manual</a></li>
+			</ol>
+		</div>
+
+		<div class="b-example-divider"></div>
+
+		<div class="container">
+			<footer class="site-footer noto-sans-sc-400">
+				<div class="float-end mb-1"><a href="#">返回页首</a></div>
+				<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年09月16日 最終更新 : 2024年09月16日</div>
+			</footer>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var rowstr = document.getElementsByClassName('sno');
+
+			for (var i=0, iLen=rowstr.length; i<iLen; i++) {
+				rowstr[i].innerHTML = i + 1;
+			}
+		};
+	</script>
+</body>
+</html>

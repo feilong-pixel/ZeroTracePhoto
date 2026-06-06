@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="网途日志">
+
+<title>PowerShell 检索 Excel 文件内容 - 网途日志</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link href="../common/css/site.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/lib/w3codecolor.js"></script>
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="bootstrap" viewBox="0 0 118 94">
+            <title>Bootstrap</title>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0h34.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+            </path>
+        </symbol>
+        <symbol id="home" viewBox="0 0 16 16">
+            <path
+                d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h3v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4h3.5z" />
+        </symbol>
+       
+		<symbol id="house-door-fill" viewBox="0 0 16 16">
+			<path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+		</symbol>
+    </svg>
+
+    <div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+    <div class="b-example-divider"></div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis" href="../">
+						<svg class="bi" width="16" height="16">
+							<use xlink:href="#house-door-fill"></use>
+						</svg>
+						<span class="visually-hidden">Home</span>
+					</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					PowerShell 检索 Excel 文件内容
+				</li>
+			</ol>
+		</nav>
+	</div>
+
+    <div class="container">
+        <h1>
+            <p style="text-align: center">PowerShell 检索 Excel 文件内容</p>
+        </h1>
+        <p><span class="h6">这个脚本能够搜索指定目录下的Excel文件
+                (*.xls,*.xlsm,*.xlsx)中存在指定的字符串，并且返回文件名、工作表名、单元格坐标和单元格值到CSV文件、Excel文件和控制台。</span></p>
+        <p><span class="h6">能够从大量Excel文件中搜索包含特定字符串的文件及内容，并输出到CSV文件、Excel文件和控制台。</span></p>
+        <div class="w3-code notranslate"><span class="form-control form-control-sm"><pre><code>
+&lt;#
+.SYNOPSIS
+Excel文件内的文字检索
+
+.DESCRIPTION
+检索指定目录内的所有Excel文件
+
+.EXAMPLE
+PS &gt; Search-Excel.ps1 -TargetDir:&quot;检索目录&quot; -Keayword:&quot;检索文字列&quot;
+#&gt;
+
+param (
+    [string]$TargetDir = &quot;.\&quot;,                            # 默认的检索目录：当前目录
+    [string]$Keyword = &quot;检索文字列&quot;                       # 默认的检索文字列
+)
+
+# 结果保存的Excel文件名
+$dateYMD = Get-Date -Format &quot;yyyyMMddHHmmss&quot;
+$resultExcelFile = &quot;D:\Temp\SearchResult.$dateYMD.xlsx&quot;
+
+# 结果保存的CSV文件名
+$resultCsvFile = &quot;D:\Temp\SearchResult.$dateYMD.csv&quot;
+
+# 输出CSV文件的各项目的名称
+Write-Output &apos;&quot;文件名&quot;, &quot;工作表名&quot;, &quot;单元格坐标&quot;, &quot;单元格值&quot;&apos; &gt; $resultCsvFile
+
+function Search-Excel {
+    param (
+        [string]$fullPath,
+        [string]$keyword,
+        [string]$resultExcelFile,
+        [string]$resultCsvFile
+    )
+
+    # Excel对象生成
+    $excel = New-Object -ComObject Excel.Application
+    #excel.Visible = $False          # 表示・非表示
+    $excel.Application.DisplayAlerts = $False
+    $targetWorbook = $excel.Workbooks.Add()
+    $targetWorksheet = $targetWorbook.Worksheets.Item(1)
+
+    # 输出Excel文件的各项目的名称
+    $targetWorksheet.name = &quot;检索结果&quot;
+    $targetWorksheet.Cells.Item(1, 1) = &quot;文件名&quot;
+    $targetWorksheet.Cells.Item(1, 2) = &quot;工作表名&quot;
+    $targetWorksheet.Cells.Item(1, 3) = &quot;单元格坐标&quot;
+    $targetWorksheet.Cells.Item(1, 4) = &quot;单元格值&quot;
+
+    try {
+        # 在取得的文件一览中，循环检索指定内容
+        $rowNumber = 2
+        Get-ChildItem $fullPath -Include *.xls,*.xlsm,*.xlsx -Recurse | ForEach-Object {
+
+            $filePath = $_.FullName
+            Write-Output &quot;检索文件名：　$filePath&quot;
+
+            $workbook = $excel.Workbooks.Open($filePath)     # 打开检索的Excel文件
+
+            $workbook.Worksheets | % {
+                $sheetName = $_.Name
+
+                $range = $_.UsedRange               # 取得检索范围
+
+                $r = $range.Find($keyword)  # 初回检索
+
+                if ($r -eq $Null) {
+                    # 初回检索没有找到检索内容
+
+                } else {
+
+                    # 保存初回检索的位置
+                    $firstColumn = $r.Column
+                    $firstRow = $r.Row
+
+                    do {
+                        [PSCustomObject]@{&quot;FullPath&quot;=$filePath;
+                            &quot;Sheet&quot; = $sheetName;
+                            &quot;Address&quot; = $r.Address();
+                            &quot;Value&quot; = $r.Value()}       # 在命令行出力检索到的内容
+
+                        Write-Output (&apos;&quot;&apos; + $filePath + &apos;&quot;,&quot;&apos; + $sheetName + &apos;&quot;,&quot;&apos; +    $r.Address() + &apos;&quot;,&quot;&apos; + $r.Value() + &apos;&quot;&apos;)    &gt;&gt; $resultCsvFile
+
+                        $targetWorksheet.Cells.Item($rowNumber, 1) = $filePath
+                        $targetWorksheet.Cells.Item($rowNumber, 2) = $sheetName
+                        $targetWorksheet.Cells.Item($rowNumber, 3) = $r.Address()
+                        $targetWorksheet.Cells.Item($rowNumber, 4) = $r.Value()
+                        $rowNumber++
+
+                        $r = $range.FindNext($r)    # 第二次检索
+
+                        if ($r -eq $Null) {
+                            break # 循环终了
+                        }
+
+                    } while ($r.Column -ne $firstColumn -Or $r.Row -ne $firstRow)       # 循环条件
+                }
+            }
+
+            $workbook.Close() | Out-Null # 关闭打开的Excel文件
+        }
+
+        # 保存检索到的内容到Excel文件中
+        $targetWorbook.SaveAs($resultExcelFile) | Out-Null
+
+    } finally {
+
+        # 关闭打开的结果保存的Excel文件
+        $targetWorbook.Close    | Out-Null # Excel终了
+        $Excel.Quit() | Out-Null                 # Excel终了
+        $Excel = $Null
+
+        [System.GC]::Collect() | Out-Null # 内存回收
+    }
+
+    Write-Output &quot;检索的内容已保存到文件。（$resultExcelFile）（$resultCsvFile）&quot;
+}
+
+# 执行
+Search-Excel $TargetDir $Keyword $resultExcelFile $resultCsvFile
+</code></pre></span></div>
+    </div>
+
+    <div class="container">
+        <p>&nbsp; &nbsp; </p>
+        <h4 id="links">链接</h4>
+        <ol>
+            <li><a target="_top" href="https://maywork.net/computer/powershell-xlsx-search/">参考文章：PowerShell 批量检索 Excel 文件内容
+                </a></li>
+        </ol>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="container site-footer noto-sans-sc-400">
+        <div class="float-end mb-1"><a href="#">返回页首</a></div>
+        <div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日</div>
+    </footer>
+
+	<script>
+		w3CodeColor();
+	</script>
+
+</body>
+</html>
