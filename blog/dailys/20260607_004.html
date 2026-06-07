@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="用 AI 辅助完成域名注册、DNS 配置、GitHub Pages 发布和网站维护">
+	<title>如何使用 AI 协助注册域名和维护网站 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">如何使用 AI 协助注册域名和维护网站</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>如何使用 AI 协助注册域名和维护网站</h1>
+		<div class="daily-meta">2026-06-07</div>
+<p>现在做一个个人网站，最难的地方往往不是写几行 HTML，而是中间有太多杂事：起名字、选域名、注册账号、配置 DNS、绑定 GitHub Pages、检查 HTTPS、以后还要不断改页面。</p>
+<p>这些事情每一件都不算特别难，但堆在一起，很容易让人卡住。</p>
+<p>AI 在这里最适合做的事，不是“替你拥有一个网站”，而是当一个随叫随到的网站助理：帮你拆步骤、写草稿、检查配置、解释报错、整理发布清单。</p>
+<p>所以这篇文章不是某个平台的完整操作手册。Namecheap、Cloudflare、GitHub 的界面以后都可能变化，但“如何把问题说清楚，再让 AI 帮你一步步拆开”，这个方法是可以反复使用的。</p>
+<p>下面按一个普通个人网站从 0 到上线的流程，讲一下怎样用 AI 协助完成。</p>
+<h2>1. 先让 AI 帮你把网站目标说清楚</h2>
+<p>不要一开始就问“怎么建站”。先问清楚这个网站要做什么。</p>
+<p>可以这样问 AI：</p>
+<pre><code>我想做一个个人项目网站，用来展示我的软件、文章和联系方式。
+请帮我整理网站目标、主要栏目和首页应该包含的内容。</code></pre>
+<p>AI 通常会帮你整理出：</p>
+<ul>
+<li>网站定位</li>
+<li>主要页面</li>
+<li>首页文案</li>
+<li>项目介绍方式</li>
+<li>适合放在导航栏里的栏目</li>
+</ul>
+<p>这一步很重要。目标不清楚时，后面会不停返工；目标清楚以后，技术只是执行。</p>
+<h2>2. 如何注册域名</h2>
+<p>域名注册商有很多，常见选择包括：</p>
+<ul>
+<li>Namecheap</li>
+<li>Cloudflare Registrar</li>
+<li>GoDaddy</li>
+<li>Porkbun</li>
+</ul>
+<p>对于个人开发者而言，我更推荐先从 Namecheap 这种界面比较直观的平台开始。它的优点是操作简单，支持国际信用卡，价格相对透明，后续切换 DNS 也比较方便。</p>
+<p>AI 在这一步最有用的地方，是帮助起名和筛选域名。</p>
+<p>比如你要做一个图片管理软件，可以直接问：</p>
+<pre><code>帮我推荐一个适合图片管理软件的域名。
+要求：简短、容易记、偏隐私和本地照片整理方向。</code></pre>
+<p>也可以让 AI 多给一些候选：</p>
+<pre><code>帮我生成 100 个适合本地照片管理软件的英文品牌名和域名候选。
+请按“品牌名 / 域名 / 含义 / 优点 / 可能缺点”的格式输出。</code></pre>
+<p>AI 可以快速给出产品名称、域名建议和品牌命名方向，大幅减少起名时间。但 AI 不能替你确认域名一定可注册，最后仍然要去注册商网站搜索。</p>
+<p>以 Namecheap 为例，注册域名可以按这个流程走：</p>
+<ol>
+<li>打开 Namecheap 官网</li>
+<li>在搜索框输入想注册的域名，例如 <code>feilonglab.com</code></li>
+<li>查看是否显示可注册</li>
+<li>加入购物车</li>
+<li>检查是否自动勾选了不需要的附加服务</li>
+<li>确认域名隐私保护是否开启</li>
+<li>付款</li>
+<li>收取注册邮箱里的验证邮件</li>
+</ol>
+<p>这里可以继续让 AI 当检查员：</p>
+<pre><code>我准备用 Namecheap 注册 feilonglab.com。
+请告诉我付款前需要重点检查哪些项目，哪些附加服务可以先不买。</code></pre>
+<p>注意：账号、密码、信用卡、验证码不要发给 AI。AI 只负责解释步骤和检查清单，真正的注册操作要自己完成。</p>
+<h2>3. 如何配置 Cloudflare DNS</h2>
+<p>域名购买完成后，建议将 DNS 托管到 Cloudflare。</p>
+<p>这样做的好处是：</p>
+<ul>
+<li>免费 CDN</li>
+<li>免费 HTTPS</li>
+<li>DNS 解析速度快</li>
+<li>有基础安全防护能力</li>
+<li>后续管理 DNS 记录比较方便</li>
+</ul>
+<p>这里要分清两个概念：Nameserver 和 DNS 记录。</p>
+<p>Nameserver 决定“这个域名交给谁来管理解析”。DNS 记录决定“这个域名具体指向哪里”。</p>
+<p>以 <code>feilonglab.com</code> 为例，配置 Cloudflare DNS 的核心步骤是：</p>
+<ol>
+<li>登录 Cloudflare</li>
+<li>点击添加域名</li>
+<li>输入 <code>feilonglab.com</code></li>
+<li>选择免费计划</li>
+<li>Cloudflare 会扫描现有 DNS 记录</li>
+<li>Cloudflare 会提供两条 Nameserver</li>
+</ol>
+<p>例如 Cloudflare 可能给出：</p>
+<pre><code>alice.ns.cloudflare.com
+bob.ns.cloudflare.com</code></pre>
+<p>接下来回到 Namecheap：</p>
+<ol>
+<li>进入 Domain List</li>
+<li>找到 <code>feilonglab.com</code></li>
+<li>点击 Manage</li>
+<li>找到 Nameservers</li>
+<li>从默认 DNS 改成 Custom DNS</li>
+<li>填入 Cloudflare 提供的两条 Nameserver</li>
+<li>保存</li>
+</ol>
+<p>也就是把 Namecheap 里的 Nameserver 改成类似这样：</p>
+<pre><code>alice.ns.cloudflare.com
+bob.ns.cloudflare.com</code></pre>
+<p>保存后回到 Cloudflare，等待验证完成。通常 10 分钟到 2 小时内可以生效，有时也可能更久。</p>
+<p>这一步可以这样问 AI：</p>
+<pre><code>我在 Namecheap 买了 feilonglab.com，Cloudflare 给了我两条 Nameserver。
+请告诉我在 Namecheap 的哪个位置修改，以及修改后如何判断是否生效。</code></pre>
+<p>如果 Cloudflare 一直没有验证成功，可以把现象告诉 AI：</p>
+<pre><code>Cloudflare 显示我的域名还没有激活。
+我已经在 Namecheap 设置了 Custom DNS。
+请帮我列出可能原因和排查顺序。</code></pre>
+<h2>4. 如何使用 GitHub Pages 部署网站</h2>
+<p>对于静态网站来说，GitHub Pages 已经足够。</p>
+<p>它的优点是：</p>
+<ul>
+<li>免费</li>
+<li>稳定</li>
+<li>自动部署</li>
+<li>与 Git 集成</li>
+<li>适合个人主页、项目主页、文章目录</li>
+</ul>
+<p>如果你只是发布一个普通静态网站，仓库里通常至少需要这些文件：</p>
+<pre><code>index.html
+styles.css
+README.md</code></pre>
+<p>以个人网站为例，可以创建一个仓库：</p>
+<pre><code>feilonglab.github.io</code></pre>
+<p>也可以使用普通项目仓库，例如：</p>
+<pre><code>ZeroTracePhoto</code></pre>
+<p>GitHub Pages 的基本设置流程是：</p>
+<ol>
+<li>打开 GitHub 仓库</li>
+<li>上传或提交 <code>index.html</code>、<code>styles.css</code>、<code>README.md</code></li>
+<li>进入 Settings</li>
+<li>找到 Pages</li>
+<li>Source 选择 Deploy from branch</li>
+<li>Branch 选择 <code>main</code></li>
+<li>Folder 通常选择 <code>/root</code></li>
+<li>保存</li>
+<li>等待 GitHub Pages 自动部署</li>
+</ol>
+<p>部署完成后，GitHub 会给出一个访问地址。例如：</p>
+<pre><code>https://用户名.github.io/仓库名/</code></pre>
+<p>这一步可以让 AI 帮你确认目录是否合理：</p>
+<pre><code>这是我的网站目录结构：
+
+index.html
+styles.css
+README.md
+blog/index.html
+blog/dailys/20260607_004.html
+
+请判断它是否适合直接用 GitHub Pages 发布。</code></pre>
+<p>如果你不知道仓库应该怎么命名，可以问：</p>
+<pre><code>我想发布一个个人项目网站，域名是 feilonglab.com。
+请告诉我 GitHub 仓库名应该怎么选，GitHub Pages 应该怎么设置。</code></pre>
+<h2>5. 让 AI 帮你生成首页，但自己决定内容</h2>
+<p>AI 很适合生成 HTML、CSS 和初稿文案。</p>
+<p>可以这样提需求：</p>
+<pre><code>请帮我生成一个静态个人项目主页。
+要求：
+- 使用 HTML 和 CSS
+- 响应式布局
+- 首页包含个人介绍、项目列表、文章入口、联系方式
+- 风格简洁，不要太像商业宣传页</code></pre>
+<p>如果是产品主页，可以更具体：</p>
+<pre><code>请帮我写一个本地照片管理软件的官网首页。
+重点突出：
+- 本地优先
+- 隐私
+- 查找重复照片
+- 适合普通用户</code></pre>
+<p>AI 生成后，不要直接发布。至少检查：</p>
+<ul>
+<li>有没有夸大功能</li>
+<li>有没有不符合事实的宣传语</li>
+<li>链接是否正确</li>
+<li>手机端是否能正常阅读</li>
+<li>标题和描述是否适合搜索引擎</li>
+</ul>
+<p>AI 可以写得很快，但网站最终表达什么，还是要由你决定。</p>
+<h2>6. 绑定自定义域名</h2>
+<p>GitHub Pages 默认地址通常比较长，不适合作为正式网站。绑定自己的域名后，访问体验会好很多。</p>
+<p>常见做法：</p>
+<ol>
+<li>在 GitHub Pages 设置里填写自定义域名</li>
+<li>仓库里生成或保留 <code>CNAME</code> 文件</li>
+<li>在 Cloudflare 添加 DNS 记录</li>
+<li>等待 HTTPS 证书生效</li>
+</ol>
+<p>可以问 AI：</p>
+<pre><code>我的 GitHub 用户名是 myname，仓库已经启用 GitHub Pages。
+我想绑定 example.com，请告诉我 Cloudflare 里应该添加哪些 DNS 记录。</code></pre>
+<p>如果已经有了 GitHub Pages 给出的地址，也可以问得更具体：</p>
+<pre><code>我的 GitHub Pages 地址是 https://myname.github.io/my-site/。
+我想绑定 example.com 和 www.example.com。
+请分别告诉我 GitHub Pages 和 Cloudflare 需要怎么设置。</code></pre>
+<p>常见记录包括：</p>
+<ul>
+<li>根域名 <code>example.com</code></li>
+<li><code>www.example.com</code></li>
+</ul>
+<p>具体应该用 <code>A</code> 记录还是 <code>CNAME</code>，要根据 GitHub Pages 当前要求和你的域名结构决定。让 AI 解释可以，但最后最好对照 GitHub Pages 官方页面或仓库提示确认。</p>
+<h2>7. 上线后让 AI 帮你做检查清单</h2>
+<p>网站能打开，不代表完全没问题。可以让 AI 帮你列一个上线检查表。</p>
+<p>例如：</p>
+<pre><code>我的网站已经上线，请给我一份普通个人网站上线后的检查清单。</code></pre>
+<p>可以检查：</p>
+<ul>
+<li>首页是否能打开</li>
+<li><code>www</code> 和非 <code>www</code> 是否都能访问</li>
+<li>HTTPS 是否正常</li>
+<li>手机端是否排版正常</li>
+<li>图片是否加载</li>
+<li>页面链接是否有 404</li>
+<li>GitHub Pages 最近一次部署是否成功</li>
+<li>Cloudflare DNS 是否生效</li>
+<li>搜索描述是否合理</li>
+</ul>
+<p>如果页面打不开，可以把错误现象告诉 AI：</p>
+<pre><code>我的域名打开后显示 404，但 GitHub Pages 部署成功。
+请帮我分析可能原因，并按优先级给出排查步骤。</code></pre>
+<p>AI 在排查问题时很有用，因为它能把多个系统之间的关系讲清楚。</p>
+<h2>8. 后续维护：把 AI 当编辑和发布助理</h2>
+<p>网站上线之后，维护其实就是不断做小改动：</p>
+<ul>
+<li>改首页文案</li>
+<li>增加新项目</li>
+<li>更新截图</li>
+<li>新增文章</li>
+<li>修正链接</li>
+<li>优化 SEO 描述</li>
+<li>整理 sitemap</li>
+</ul>
+<p>可以这样使用 AI：</p>
+<pre><code>请帮我把这个项目介绍改得更适合普通用户阅读，不要太技术化。</code></pre>
+<pre><code>请帮我检查这段 HTML 里的链接是否有明显问题。</code></pre>
+<pre><code>请帮我为这篇文章写 title、description 和 slug。</code></pre>
+<p>如果你用 Git 管理网站，还可以让 AI 准备发布命令：</p>
+<pre><code>请根据当前改动，帮我准备提交并推送到 GitHub 的命令。</code></pre>
+<p>这样 AI 就不只是写文章，也可以成为发布流程的一部分。</p>
+<h2>9. 常见坑</h2>
+<p>下面这些问题很常见，遇到时可以直接拿去问 AI：</p>
+<ul>
+<li>域名注册后邮箱没有验证，导致域名被暂停</li>
+<li>Cloudflare Nameserver 没有在注册商那里改成功</li>
+<li>DNS 记录写错，把根域名和 <code>www</code> 搞混</li>
+<li>GitHub Pages 里自定义域名填了，但仓库没有正确的 <code>CNAME</code></li>
+<li>HTTPS 证书还没生效，就以为配置失败</li>
+<li>浏览器缓存或 DNS 缓存导致看到旧页面</li>
+<li>首页文件不叫 <code>index.html</code></li>
+<li>图片路径在本地能打开，发布后变成 404</li>
+<li><code>.gitignore</code> 把需要发布的文件忽略了</li>
+</ul>
+<p>遇到这些问题时，不要只问“为什么打不开”。更好的问法是：</p>
+<pre><code>我的网站使用 GitHub Pages + Cloudflare + 自定义域名。
+现在现象是：输入 example.com 显示 404，但 github.io 地址可以打开。
+请按 DNS、GitHub Pages、CNAME、缓存四个方向帮我排查。</code></pre>
+<p>问题描述越具体，AI 给出的排查步骤越有用。</p>
+<h2>10. 隐私和安全提醒</h2>
+<p>使用 AI 协助建站时，有些信息可以发给 AI，有些信息不要发。</p>
+<p>可以发给 AI 的内容包括：</p>
+<ul>
+<li>网站目录结构</li>
+<li>不含隐私的 DNS 记录</li>
+<li>公开页面 HTML</li>
+<li>错误提示</li>
+<li>GitHub Pages 的公开访问地址</li>
+<li>你想实现的页面效果</li>
+</ul>
+<p>不要发给 AI 的内容包括：</p>
+<ul>
+<li>账号密码</li>
+<li>信用卡信息</li>
+<li>邮箱验证码</li>
+<li>域名注册商后台完整截图</li>
+<li>Cloudflare API Token</li>
+<li>GitHub Personal Access Token</li>
+<li>私有仓库里的敏感配置</li>
+</ul>
+<p>如果必须让 AI 帮你看截图，最好先把邮箱、用户名、订单号、Token、付款信息遮住。AI 可以当助理，但不能当保险箱。</p>
+<h2>结语</h2>
+<p>用 AI 注册域名和维护网站，关键不是让 AI 替你做所有决定，而是让它把复杂流程拆开。</p>
+<p>你负责决定：</p>
+<ul>
+<li>网站为什么存在</li>
+<li>域名要不要长期使用</li>
+<li>页面上应该说什么</li>
+<li>哪些内容可以公开</li>
+<li>最终是否发布</li>
+</ul>
+<p>AI 负责协助：</p>
+<ul>
+<li>起名</li>
+<li>写代码</li>
+<li>解释配置</li>
+<li>整理文案</li>
+<li>排查问题</li>
+<li>准备发布步骤</li>
+</ul>
+<p>这样一来，个人网站就不再是一个很重的技术工程，而是一件可以慢慢维护的小作品。</p>
+<p>它可以很简单，也可以很杂。重要的是，它是你自己在互联网上留下的一块地方。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月07日 最終更新 : 2026年06月07日</div>
+	</footer>
+</body>
+</html>

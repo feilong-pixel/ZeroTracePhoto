@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="用 AI 辅助梳理旧网站目录、修复链接、清理镜像残留，并整理成可长期维护的静态网站">
+	<title>如何使用 AI 协助整理和静态化旧网站 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">如何使用 AI 协助整理和静态化旧网站</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>如何使用 AI 协助整理和静态化旧网站</h1>
+		<div class="daily-meta">2026-06-07</div>
+<p>很多旧网站不是没有价值，而是太难维护。</p>
+<p>有些网站是以前用 WordPress、Jimdo 或其他建站工具做的；有些是用 HTTrack 之类工具镜像下来的；还有一些是多年积累出来的 HTML、CSS、图片和脚本混在一起。打开目录时，文件很多，入口不清楚，图片到处放，链接也不知道还通不通。</p>
+<p>这时候，AI 很适合当一个“整理助手”。</p>
+<p>它不能替你判断一个旧页面有没有纪念意义，也不能替你决定哪些内容必须保留。但它可以帮你看目录结构、找入口页面、分析引用关系、整理清理步骤、修复链接、生成发布检查清单。</p>
+<p>这篇文章讲的不是某一种固定工具，而是一套思路：如何让 AI 协助你把一个旧网站整理成能打开、能部署、能长期保存的静态网站。</p>
+<p>整理旧网站的目标，也不是把所有东西都改得很新，而是先得到一个清楚的发布目录：入口明确、资源齐全、链接可用、以后还能继续维护。</p>
+<h2>1. 先确认适不适合静态化</h2>
+<p>不是所有网站都适合静态化。</p>
+<p>适合静态化的网站通常有这些特点：</p>
+<ul>
+<li>主要是展示内容</li>
+<li>页面不需要登录</li>
+<li>不依赖实时数据库</li>
+<li>不需要后台管理</li>
+<li>表单可以改用第三方服务</li>
+<li>主要内容是 HTML、图片、CSS、JavaScript</li>
+</ul>
+<p>比如：</p>
+<ul>
+<li>个人网站</li>
+<li>公司介绍页</li>
+<li>活动页</li>
+<li>产品介绍页</li>
+<li>旧博客归档</li>
+<li>经文、资料、文档类页面</li>
+<li>从旧建站平台导出或镜像下来的网页</li>
+</ul>
+<p>不太适合直接静态化的网站包括：</p>
+<ul>
+<li>需要用户登录的网站</li>
+<li>需要后台提交数据的网站</li>
+<li>实时查询数据库的网站</li>
+<li>订单、支付、会员系统</li>
+<li>强依赖服务器接口的应用</li>
+</ul>
+<p>可以先问 AI：</p>
+<pre><code>我有一个旧网站目录，里面主要是 HTML、CSS、JS 和图片。
+请告诉我它是否适合整理成静态网站，并列出判断标准。</code></pre>
+<p>如果不确定，可以把目录结构发给 AI：</p>
+<pre><code>这是旧网站的目录结构：
+
+index.html
+assets/
+css/
+js/
+images/
+wp-content/
+hts-log.txt
+
+请帮我判断它可能是什么类型的网站，以及静态化时要重点检查什么。</code></pre>
+<h2>2. 不要一开始就删除文件</h2>
+<p>整理旧网站最怕一上来就删。</p>
+<p>因为很多旧站文件名奇怪，目录也乱，看起来像垃圾的文件，可能正好被某个页面引用。尤其是图片、CSS、JavaScript、字体文件和下载附件，不检查引用关系就删除，很容易把页面弄坏。</p>
+<p>比较稳妥的做法是：</p>
+<ol>
+<li>先复制一份旧网站目录</li>
+<li>在副本里整理</li>
+<li>让 AI 帮你盘点目录结构</li>
+<li>先确认入口页面</li>
+<li>再确认哪些文件真的没有被引用</li>
+<li>最后再清理</li>
+</ol>
+<p>如果目录很乱，可以一开始就分成两个区域：</p>
+<pre><code>old-site-raw/     原始备份，不直接修改
+old-site-clean/   整理后的静态网站发布目录</code></pre>
+<p>所有修改都发生在 <code>old-site-clean/</code>，<code>old-site-raw/</code> 只用来对照和恢复。这样就算整理过程中删错或改错，也不会把原始材料弄丢。</p>
+<p>可以这样问 AI：</p>
+<pre><code>我准备整理一个旧网站目录。
+请帮我制定一个安全清理流程，要求先盘点、再确认引用关系，最后才删除无用文件。</code></pre>
+<p>如果你使用 Git 管理，也可以先提交一个原始状态：</p>
+<pre><code>请帮我设计一个旧网站整理前的 Git 备份步骤，确保后续清理错了可以恢复。</code></pre>
+<p>AI 可以帮你写流程，但真正删除文件之前，最好自己再确认一遍。</p>
+<h2>3. 找到真正的首页和内容入口</h2>
+<p>旧网站目录里可能有多个看起来像首页的文件。</p>
+<p>常见情况包括：</p>
+<ul>
+<li><code>index.html</code></li>
+<li><code>index2.html</code></li>
+<li><code>home.html</code></li>
+<li>某个子目录里的 <code>index.html</code></li>
+<li>镜像工具生成的外壳页</li>
+<li>旧 CMS 导出的页面</li>
+</ul>
+<p>有些镜像站还会带着工具生成的文件，例如：</p>
+<ul>
+<li><code>hts-log.txt</code></li>
+<li><code>backblue.gif</code></li>
+<li><code>fade.gif</code></li>
+<li><code>index.html</code> 只是跳转或错误页</li>
+<li>真正内容在更深的目录里</li>
+</ul>
+<p>这一步可以让 AI 帮你分析：</p>
+<pre><code>我有一个旧网站目录，里面有 index.html、index2.html、hts-log.txt 和多个子目录。
+请告诉我如何判断哪个文件才是真正应该发布的首页。</code></pre>
+<p>如果可以读取文件内容，也可以把几个首页文件的开头片段发给 AI：</p>
+<pre><code>下面是 index.html 和 index2.html 的前 80 行。
+请帮我判断哪个更像真实页面，哪个更像镜像工具生成的外壳或错误页。</code></pre>
+<p>找到入口以后，后续整理才有方向。</p>
+<h2>4. 检查本地链接和资源引用</h2>
+<p>静态网站最常见的问题是：页面能打开，但图片丢了，CSS 没加载，链接点过去 404。</p>
+<p>需要重点检查：</p>
+<ul>
+<li><code>&lt;a href=&quot;...&quot;&gt;</code></li>
+<li><code>&lt;img src=&quot;...&quot;&gt;</code></li>
+<li><code>&lt;script src=&quot;...&quot;&gt;</code></li>
+<li><code>&lt;link href=&quot;...&quot;&gt;</code></li>
+<li>CSS 里的 <code>url(...)</code></li>
+<li>表单里的 <code>action</code></li>
+<li>iframe 或地图嵌入</li>
+</ul>
+<p>可以问 AI：</p>
+<pre><code>请告诉我整理静态网站时，需要检查 HTML 和 CSS 中哪些资源引用。
+请按图片、样式、脚本、链接、表单分类列出。</code></pre>
+<p>如果你有一批页面，也可以让 AI 帮你设计检查命令或检查脚本：</p>
+<pre><code>我有一个静态网站目录。
+请帮我写一个检查本地 href、src、link href、script src 和 CSS url(...) 是否存在的思路。</code></pre>
+<p>AI 很适合帮你找“检查点”，但实际检查结果要以本地文件是否存在为准。</p>
+<h2>5. 清理镜像工具残留</h2>
+<p>用 HTTrack 或类似工具保存下来的站点，经常会带一些不需要发布的文件。</p>
+<p>常见残留包括：</p>
+<ul>
+<li>镜像日志</li>
+<li>缓存文件</li>
+<li>临时页面</li>
+<li>远程站点结构外壳</li>
+<li>重复的入口页</li>
+<li>不再使用的图片</li>
+<li>原站统计代码</li>
+<li>旧广告脚本</li>
+<li>外部服务的失败引用</li>
+</ul>
+<p>可以问 AI：</p>
+<pre><code>我这个目录是 HTTrack 镜像出来的静态网站。
+请告诉我哪些文件通常是镜像工具残留，哪些文件不能轻易删除。</code></pre>
+<p>这里要特别小心：AI 可以告诉你“哪些类型可能是残留”，但不要只根据文件名删除。最好配合引用检查：</p>
+<pre><code>请帮我设计一个判断文件是否可以删除的规则：
+1. 是否被 HTML 引用
+2. 是否被 CSS 引用
+3. 是否是入口页面
+4. 是否是图片或下载资源
+5. 是否只是日志或临时文件</code></pre>
+<p>原则很简单：不确定的先保留，确认没用的再删。</p>
+<h2>6. 处理不能静态化的功能</h2>
+<p>旧网站里可能有一些动态功能，静态化以后不能原样使用。</p>
+<p>常见例子：</p>
+<ul>
+<li>联系表单</li>
+<li>评论区</li>
+<li>搜索功能</li>
+<li>登录入口</li>
+<li>地图</li>
+<li>预约系统</li>
+<li>后台管理入口</li>
+<li>PHP、ASP、CGI 等服务器脚本</li>
+</ul>
+<p>这些功能有几种处理方式：</p>
+<ol>
+<li>删除不用的功能</li>
+<li>改成普通联系方式</li>
+<li>换成第三方表单服务</li>
+<li>保留外链</li>
+<li>写清楚“此功能已不再提供”</li>
+</ol>
+<p>可以问 AI：</p>
+<pre><code>我想把旧网站静态化，但里面有联系表单、地图和搜索框。
+请告诉我这些功能在静态网站里分别可以怎么处理。</code></pre>
+<p>对于小网站，联系表单可以考虑 Formspree、Google Forms 或其他托管表单服务。搜索功能也可以先用浏览器搜索、站内目录，或者交给 Google 搜索。</p>
+<p>不要为了一个很少使用的功能，重新做一整套后端。维护成本可能比网站本身还高。</p>
+<h2>7. 统一页面样式</h2>
+<p>旧网站静态化以后，通常还会遇到一个问题：页面能打开，但风格混乱。</p>
+<p>可能有的页面字体太小，有的页面宽度太窄，有的表格撑出屏幕，有的手机上阅读困难。</p>
+<p>AI 可以帮你做这些整理：</p>
+<ul>
+<li>统一字体</li>
+<li>统一页面宽度</li>
+<li>改善移动端阅读</li>
+<li>整理导航</li>
+<li>统一页脚</li>
+<li>简化旧样式</li>
+<li>删除过时的装饰代码</li>
+</ul>
+<p>可以这样问：</p>
+<pre><code>这是一个旧静态页面的 HTML 和 CSS。
+请帮我在尽量不改变内容的前提下，改善排版、字体、页面宽度和手机端阅读体验。</code></pre>
+<p>如果有多篇页面，可以先做一个模板：</p>
+<pre><code>请帮我设计一个简单的静态网站页面模板。
+要求包含统一页头、导航、正文区域、页脚，并适合中文阅读。</code></pre>
+<p>然后再把旧内容慢慢迁进去。</p>
+<h2>8. 本地验证再发布</h2>
+<p>整理完成后，不要马上发布。</p>
+<p>先本地检查：</p>
+<ul>
+<li>首页能不能打开</li>
+<li>图片是否显示</li>
+<li>CSS 是否加载</li>
+<li>菜单链接是否可点</li>
+<li>子页面是否可访问</li>
+<li>手机宽度是否正常</li>
+<li>没有明显乱码</li>
+<li>不需要的动态入口是否已经处理</li>
+</ul>
+<p>可以让 AI 帮你做检查表：</p>
+<pre><code>我已经把旧网站整理成静态目录。
+请给我一份发布前检查清单，重点检查链接、图片、CSS、手机端和无用动态功能。</code></pre>
+<p>如果你有本地检查结果，也可以继续问：</p>
+<pre><code>检查结果如下：
+- 首页正常
+- 两张图片 404
+- contact.html 里表单 action 指向旧 PHP
+- 手机端表格超宽
+
+请帮我按优先级整理修复顺序。</code></pre>
+<p>AI 在这种“把问题排队”的工作上很有用。</p>
+<h2>9. 后续文章如何发布</h2>
+<p>静态网站整理好以后，最好不要每次都手写 HTML。</p>
+<p>更省心的方式是：把文章写成 Markdown，再用脚本自动生成 HTML 页面、文章目录和站点地图。这样以后新增文章时，只要关注内容本身，不用每次重复复制页面模板。</p>
+<p>以一个个人博客为例，可以设计成这样的目录：</p>
+<pre><code>blog/
+  docs/
+    dailys/
+      20260607_005.md
+  dailys/
+    20260607_005.html
+    index.html
+  PowerShell/
+    Publish-Dailys.ps1
+  index.html
+  sitemap.xml</code></pre>
+<p>这里的分工是：</p>
+<ul>
+<li><code>blog/docs/dailys/</code> 保存 Markdown 原稿</li>
+<li><code>blog/dailys/</code> 保存生成后的 HTML</li>
+<li><code>Publish-Dailys.ps1</code> 负责把 Markdown 转成 HTML</li>
+<li><code>blog/index.html</code> 显示文章入口</li>
+<li><code>sitemap.xml</code> 提供给搜索引擎</li>
+</ul>
+<p>新增一篇文章时，可以先创建一个 Markdown 文件，例如：</p>
+<pre><code>blog/docs/dailys/20260607_006.md</code></pre>
+<p>文件开头可以写元信息：</p>
+<pre><code>---
+title: 新文章标题
+date: 2026-06-07
+description: 这篇文章的简短说明
+slug: 20260607_006
+---
+
+这里开始写正文。</code></pre>
+<p>写完以后运行发布脚本：</p>
+<pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File .\blog\PowerShell\Publish-Dailys.ps1</code></pre>
+<p>脚本可以自动完成：</p>
+<ul>
+<li>读取 Markdown</li>
+<li>生成对应 HTML</li>
+<li>更新文章目录页</li>
+<li>更新网站首页入口</li>
+<li>更新 <code>sitemap.xml</code></li>
+<li>清理已经删除 Markdown 的旧 HTML</li>
+</ul>
+<p>发布前再检查一下：</p>
+<pre><code>git status --short</code></pre>
+<p>确认无误后提交并推送：</p>
+<pre><code>git add blog/dailys/20260607_006.html blog/dailys/index.html blog/index.html blog/sitemap.xml
+git add -f blog/docs/dailys/20260607_006.md
+git commit -m &quot;Publish new daily article&quot;
+git push origin main</code></pre>
+<p>如果 <code>blog/docs/</code> 被 <code>.gitignore</code> 忽略，Markdown 原稿需要使用 <code>git add -f</code> 强制加入。这样远程仓库里既保留原稿，也保留生成后的网页。</p>
+<p>这套流程的好处是：静态网站不只是一次性整理完成，而是变成了一个可以继续写、继续发布、继续维护的小系统。</p>
+<p>遇到不确定的地方，也可以直接问 AI：</p>
+<pre><code>我现在有一个 Markdown 自动发布脚本。
+请帮我设计新增文章、生成 HTML、检查 Git 状态、提交并推送 GitHub 的发布流程。</code></pre>
+<h2>10. 发布到静态托管</h2>
+<p>整理好的静态网站可以发布到很多地方：</p>
+<ul>
+<li>GitHub Pages</li>
+<li>Cloudflare Pages</li>
+<li>Netlify</li>
+<li>Vercel</li>
+<li>普通虚拟主机</li>
+<li>对象存储静态网站</li>
+</ul>
+<p>如果网站只是 HTML、CSS、图片和少量 JavaScript，GitHub Pages 就已经够用。</p>
+<p>可以问 AI：</p>
+<pre><code>我已经整理好了一个静态网站目录。
+请告诉我如何发布到 GitHub Pages，并绑定自己的域名。</code></pre>
+<p>如果网站是给客户或朋友维护，也可以让 AI 帮你写交付说明：</p>
+<pre><code>请帮我写一份静态网站交付说明，包含目录结构、如何修改页面、如何替换图片、如何发布。</code></pre>
+<p>一个整理好的静态网站，最重要的是别人以后还能看懂。</p>
+<h2>11. 常见坑</h2>
+<p>整理旧网站时，常见问题包括：</p>
+<ul>
+<li>以为 <code>index.html</code> 是首页，结果真正内容在 <code>index2.html</code></li>
+<li>删除了看似无用的图片，结果某个子页面正在使用</li>
+<li>只检查 HTML，没有检查 CSS 里的 <code>url(...)</code></li>
+<li>表单页面保留下来了，但提交功能已经失效</li>
+<li>外部地图、统计、广告脚本加载失败</li>
+<li>旧页面编码混乱，中文显示乱码</li>
+<li>镜像下来的 HTML 其实是 gzip 或错误页面</li>
+<li>本地路径能打开，发布后大小写不一致导致 404</li>
+<li>文件夹层级太深，部署时入口放错位置</li>
+<li>清理过度，导致历史内容丢失</li>
+</ul>
+<p>遇到这种情况，可以把问题描述给 AI：</p>
+<pre><code>我在整理一个旧静态网站。
+本地打开首页正常，但发布到 GitHub Pages 后图片 404。
+图片路径是 common/images/a.jpg，HTML 在 blog/index.html。
+请帮我判断可能是相对路径问题还是文件没有提交。</code></pre>
+<p>问题越具体，AI 越容易帮你定位。</p>
+<h2>12. 版权和隐私也要检查</h2>
+<p>旧网站能静态化，不代表所有内容都适合重新发布。</p>
+<p>发布前还要确认：</p>
+<ul>
+<li>内容是不是自己拥有或有权使用</li>
+<li>图片、字体、下载文件有没有授权问题</li>
+<li>页面里有没有电话、邮箱、地址等个人信息</li>
+<li>旧表单、旧后台入口是否还暴露在页面上</li>
+<li>客户、公司或他人的资料是否需要脱敏</li>
+<li>原站统计代码、广告代码是否应该删除</li>
+</ul>
+<p>可以问 AI：</p>
+<pre><code>我准备把一个旧网站整理成静态网站重新发布。
+请帮我列一份版权、隐私和敏感信息检查清单。</code></pre>
+<p>AI 可以帮你提醒风险，但最终能不能发布，还是要按内容来源和实际授权来判断。</p>
+<h2>结语</h2>
+<p>AI 很适合协助旧网站静态化，因为这件事本身不是单一技术问题，而是一堆小判断、小检查、小修复。</p>
+<p>它需要有人不断问：</p>
+<ul>
+<li>哪个页面是真正入口？</li>
+<li>哪些内容值得保留？</li>
+<li>哪些文件可以删除？</li>
+<li>哪些链接坏了？</li>
+<li>哪些动态功能要替换？</li>
+<li>最后怎么发布？</li>
+</ul>
+<p>这些问题，一个人慢慢查当然也能做，但会很耗时间。AI 的价值，就是陪你把混乱的目录一点点拆开。</p>
+<p>旧网站整理成静态网站以后，也许不会变得多么华丽。但它会变得清楚、轻量、容易部署，也更适合长期保存。</p>
+<p>这就够了。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月07日 最終更新 : 2026年06月07日</div>
+	</footer>
+</body>
+</html>

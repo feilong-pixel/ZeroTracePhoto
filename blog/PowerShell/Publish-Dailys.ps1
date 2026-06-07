@@ -418,11 +418,10 @@ $currentArticleFiles = @{}
 
 foreach ($article in $articles) {
     $currentArticleFiles[$article.OutputFile] = $true
-    $indentedBody = $article.BodyHtml -replace '(?m)^', "`t`t"
     $content = @"
 		<h1>$(Escape-Html $article.Title)</h1>
 		<div class="daily-meta">$($article.Date)</div>
-$indentedBody
+$($article.BodyHtml)
 "@
     $page = New-PageHtml -Title $article.Title -Description $article.Description -Breadcrumb $article.Title -Content $content -InitialDate $todayText -UpdatedDate $todayText
     Set-Content -LiteralPath (Join-Path $OutputDir $article.OutputFile) -Value $page -Encoding UTF8
