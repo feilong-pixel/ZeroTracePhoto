@@ -384,7 +384,7 @@ function Update-Sitemap {
     $today = (Get-Date).ToString("yyyy-MM-dd")
     $root = (Resolve-Path $RootDir).Path
     $pages = Get-ChildItem -LiteralPath $RootDir -Filter "*.html" -Recurse |
-        Where-Object { $_.FullName -notmatch '\\docs\\' } |
+        Where-Object { $_.FullName -notmatch '\\docs\\' -and $_.FullName -notmatch '\\common\\templates\\' } |
         Sort-Object FullName
 
     $entries = foreach ($page in $pages) {
