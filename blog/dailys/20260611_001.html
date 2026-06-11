@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与AI的杂谈之 从项目事实整理器到本地资料档案馆">
+	<title>从项目事实整理器到本地资料档案馆 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">从项目事实整理器到本地资料档案馆</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>从项目事实整理器到本地资料档案馆</h1>
+		<div class="daily-meta">2026-06-11</div>
+<p>这篇还是一段和 AI 有关的杂谈。原始想法比较散，后来顺着项目方向重新整理了一下。</p>
+<p>最近在想一个小工具。最初的想法其实很简单：</p>
+<blockquote>能不能利用 AI 理解整个项目，然后帮助开发人员调查问题？</blockquote>
+<p>例如：</p>
+<ul>
+<li>为什么当年修改了这个功能？</li>
+<li>这个设计是谁决定的？</li>
+<li>类似的问题以前出现过吗？</li>
+<li>对应的设计书在哪里？</li>
+</ul>
+<p>在很多项目现场，这类问题经常出现。</p>
+<p>回答这些问题的人，往往需要翻阅大量资料：</p>
+<ul>
+<li>设计书</li>
+<li>会议记录</li>
+<li>调查报告</li>
+<li>邮件</li>
+<li>Issue</li>
+<li>代码提交记录</li>
+</ul>
+<p>于是我想到，也许可以利用 AI 来帮助调查。</p>
+<h2>最初的设想</h2>
+<p>最开始，我希望做一个“项目事实整理器”。</p>
+<p>理想状态下，用户提出问题，AI 自动阅读整个项目资料，然后直接给出答案。</p>
+<p>这个设想听起来很美好，但很快就会遇到几个现实问题。</p>
+<h3>第一，本地模型能力有限</h3>
+<p>我目前主要关注本地部署。</p>
+<p>但无论是显存还是计算能力，都很难支撑 AI 在每次查询时重新理解整个项目。项目文档越多，这种方式成本越高。</p>
+<h3>第二，全文理解并不现实</h3>
+<p>即使未来模型能力变强，让 AI 每次查询都重新阅读全部资料，也不一定合理。</p>
+<p>因为绝大部分文档与当前问题无关。真正需要阅读的内容，往往只占很小一部分。</p>
+<h3>第三，缺少真实项目数据</h3>
+<p>没有大量真实设计书、会议记录和历史调查资料。</p>
+<p>很多想法都停留在理论阶段。</p>
+<p>而项目现场的问题，远比演示环境复杂。</p>
+<h2>后来的发现</h2>
+<p>想了一段时间以后，我逐渐意识到一个问题：开发人员调查问题时，真正缺少的往往不是答案，而是资料定位能力。</p>
+<ul>
+<li>很多时候：</li>
+</ul>
+<ul>
+<li>我知道答案一定存在。</li>
+</ul>
+<ul>
+<li>我知道以前有人讨论过。</li>
+</ul>
+<ul>
+<li>我知道设计书里写过。</li>
+</ul>
+<ul>
+<li>但我不知道它在哪里。</li>
+</ul>
+<ul>
+<li>于是调查过程变成：</li>
+</ul>
+<ul>
+<li>搜索 -&gt; 阅读 -&gt; 判断 -&gt; 形成结论</li>
+</ul>
+<ul>
+<li>而不是：</li>
+</ul>
+<ul>
+<li>提问 -&gt; 获得答案</li>
+</ul>
+<p>这时候我突然发现，我需要的也许不是一个 AI 项目专家，而是一个更好的档案馆。</p>
+<h2>档案馆的思路</h2>
+<p>如果把所有项目资料看作档案，那么系统首先应该做的是：</p>
+<ul>
+<li>收集资料</li>
+<li>建立索引</li>
+<li>记录版本</li>
+<li>保存来源</li>
+<li>提供搜索</li>
+</ul>
+<p>AI 的职责则变成：</p>
+<ul>
+<li>阅读资料</li>
+<li>整理资料</li>
+<li>总结资料</li>
+</ul>
+<p>而不是代替档案馆本身。</p>
+<p>这样一来，系统架构就开始发生变化。</p>
+<h3>第一步：文档入库</h3>
+<p>扫描本地资料，建立文档索引，并记录：</p>
+<ul>
+<li>文件路径</li>
+<li>文件版本</li>
+<li>更新时间</li>
+<li>SHA256</li>
+</ul>
+<h3>第二步：文档切片</h3>
+<p>将文档切分成较小的片段，例如：</p>
+<ul>
+<li>按章节</li>
+<li>按标题</li>
+<li>按段落</li>
+</ul>
+<p>这样未来查询时，就不需要重新阅读整份文档。</p>
+<h3>第三步：建立向量索引</h3>
+<p>每个切片生成向量。</p>
+<p>保存到向量数据库。</p>
+<p>未来用户查询时，问题向量与文档向量进行匹配，先找到最相关的资料片段。</p>
+<h3>第四步：AI 生成调查报告</h3>
+<p>找到相关片段后。</p>
+<p>AI 不再阅读整个项目。</p>
+<p>它只阅读这些已经筛选出的内容。</p>
+<p>然后生成调查报告。</p>
+<p>例如：</p>
+<ul>
+<li>修改原因</li>
+<li>影响范围</li>
+<li>历史背景</li>
+<li>相关文档</li>
+</ul>
+<p>这样 AI 的能力可以得到更有效的利用。</p>
+<h2>AI 不是档案馆</h2>
+<p>这次最大的收获是：</p>
+<p>AI 很适合阅读。</p>
+<p>AI 很适合总结。</p>
+<p>AI 很适合发现关联。</p>
+<p>但 AI 不适合替代档案馆。</p>
+<p>资料管理、版本管理、索引维护、切片更新，这些依然是传统系统需要解决的问题。</p>
+<p>AI 只是一个优秀的馆员。</p>
+<p>而不是档案馆本身。</p>
+<p>如果档案馆本身混乱，AI 再会总结，也只能在混乱里找线索。它可以帮忙阅读和整理，但不能凭空保证资料一定完整、版本一定正确、来源一定可信。</p>
+<h2>结语</h2>
+<p>这个项目目前还停留在想法阶段。</p>
+<p>甚至没有真实项目数据进行验证。</p>
+<p>但有一点已经越来越明确：</p>
+<p>未来如果要利用 AI 帮助开发人员调查项目，也许正确的方向不是让 AI 理解整个项目。</p>
+<p>而是先建设一个可靠的本地资料档案馆。</p>
+<p>然后让 AI 在这些资料之上工作。</p>
+<p>毕竟，很多时候，找到资料本身就已经解决了一半问题。</p>
+<p>答案可以慢慢判断，结论也可以由人来下。但如果资料散落在各个角落，连入口都找不到，那调查就会一直卡在原地。</p>
+<p>所以这个工具最后可能不是一个“全知全能的 AI 项目助手”。它更像是一个本地资料档案馆，加上一个会阅读、会归纳、会帮忙写调查报告的馆员。</p>
+<p>这个边界比较朴素，但也更像是真正能落地的方向。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月11日 最終更新 : 2026年06月11日</div>
+	</footer>
+</body>
+</html>

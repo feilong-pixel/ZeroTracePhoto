@@ -22,6 +22,34 @@ function Escape-Html {
     return [System.Net.WebUtility]::HtmlEncode($Value)
 }
 
+function Format-ArticleDateForFooter {
+    param([string]$DateText)
+
+    $parsedDate = [datetime]::MinValue
+    if ([datetime]::TryParse($DateText, [ref]$parsedDate)) {
+        return $parsedDate.ToString("yyyy年MM月dd日")
+    }
+    return $DateText
+}
+
+function Set-ContentIfChanged {
+    param(
+        [string]$Path,
+        [string]$Value
+    )
+
+    if (Test-Path -LiteralPath $Path) {
+        $currentValue = Get-Content -Raw -LiteralPath $Path -Encoding UTF8
+        $currentNormalized = ([regex]::Replace($currentValue, "\r\n?", "`n")).TrimEnd("`r", "`n")
+        $nextNormalized = ([regex]::Replace($Value, "\r\n?", "`n")).TrimEnd("`r", "`n")
+        if ($currentNormalized -eq $nextNormalized) {
+            return
+        }
+    }
+
+    Set-Content -LiteralPath $Path -Value $Value -Encoding UTF8
+}
+
 function Convert-InlineMarkdown {
     param([string]$Text)
 
@@ -377,7 +405,7 @@ $markerEnd
     } else {
         $html = [regex]::Replace($html, '(?s)(\s*</div>\s*<!-- FOOTER -->)', "$section`r`n`$1", 1)
     }
-    Set-Content -LiteralPath $BlogIndexPath -Value $html -Encoding UTF8
+    Set-ContentIfChanged -Path $BlogIndexPath -Value $html
 }
 
 function Update-Sitemap {
@@ -407,7 +435,7 @@ function Update-Sitemap {
     }
 
     $sitemap = "<?xml version=""1.0"" encoding=""UTF-8""?>`n<urlset xmlns=""http://www.sitemaps.org/schemas/sitemap/0.9"">`n$($entries -join "`n")`n</urlset>`n"
-    Set-Content -LiteralPath $SitemapPath -Value $sitemap -Encoding UTF8
+    Set-ContentIfChanged -Path $SitemapPath -Value $sitemap
 }
 
 New-Item -ItemType Directory -Force -Path $SourceDir, $OutputDir | Out-Null
@@ -423,8 +451,9 @@ foreach ($article in $articles) {
 		<div class="daily-meta">$($article.Date)</div>
 $($article.BodyHtml)
 "@
-    $page = New-PageHtml -Title $article.Title -Description $article.Description -Breadcrumb $article.Title -Content $content -InitialDate $todayText -UpdatedDate $todayText
-    Set-Content -LiteralPath (Join-Path $OutputDir $article.OutputFile) -Value $page -Encoding UTF8
+    $articleDateText = Format-ArticleDateForFooter $article.Date
+    $page = New-PageHtml -Title $article.Title -Description $article.Description -Breadcrumb $article.Title -Content $content -InitialDate $articleDateText -UpdatedDate $articleDateText
+    Set-ContentIfChanged -Path (Join-Path $OutputDir $article.OutputFile) -Value $page
 }
 
 Get-ChildItem -LiteralPath $OutputDir -Filter "*.html" -File |
@@ -447,7 +476,7 @@ $listItems
 		</ul>
 "@
 $dailyIndex = New-PageHtml -Title "日常记录" -Description "网途日志日常记录目录" -Breadcrumb "日常记录" -Content $indexContent -InitialDate $todayText -UpdatedDate $todayText
-Set-Content -LiteralPath (Join-Path $OutputDir "index.html") -Value $dailyIndex -Encoding UTF8
+Set-ContentIfChanged -Path (Join-Path $OutputDir "index.html") -Value $dailyIndex
 
 Update-BlogIndex -Articles $articles
 Update-Sitemap
