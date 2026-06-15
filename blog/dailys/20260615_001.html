@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与 AI 的杂谈之 AI 时代的工程师面试">
+	<title>AI 时代的工程师面试，可能要换一种看法 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">AI 时代的工程师面试，可能要换一种看法</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>AI 时代的工程师面试，可能要换一种看法</h1>
+		<div class="daily-meta">2026-06-15</div>
+<p>这篇是和 AI 闲聊后整理出来的一段想法。原始表达比较散，后来请 AI 帮忙顺了一下。</p>
+<p>最近一直在想一个问题：AI 已经能写代码、改代码、补测试、整理文档了，那工程师面试是不是也该换一种问法了？</p>
+<p>过去很多面试，其实是在看一个人会不会写某种代码。</p>
+<ul>
+<li>会不会 Java</li>
+<li>会不会 Python</li>
+<li>会不会 React</li>
+<li>会不会算法题</li>
+<li>会不会背一些框架和八股</li>
+</ul>
+<p>这些当然不是完全没用。一个人如果完全没有基础，很多问题还是走不下去。</p>
+<p>但在 AI 已经参与开发的情况下，只看这些东西，好像越来越不够了。因为很多“写出来”的部分，AI 都可以帮忙完成。真正难判断的，反而变成了另外两件事：</p>
+<ul>
+<li>这个人能不能让 AI 做出一个可控的系统。</li>
+<li>这个人能不能解释这个系统为什么这样做。</li>
+</ul>
+<p>也就是说，未来面试里最重要的可能不是“你能不能现场写出这段代码”，而是：</p>
+<blockquote>你能不能让 AI 写出你自己也能解释、能维护、能负责的系统。</blockquote>
+<h2>传统面试哪里不够了</h2>
+<p>传统面试有一个隐含前提：</p>
+<blockquote>写代码本身，可以代表工程师能力。</blockquote>
+<p>这个前提以前大体成立。因为代码主要靠人写，一个人能不能把需求拆开、把逻辑写顺、把 bug 调出来，基本都能从写代码里看出来。</p>
+<p>但现在有了 AI，这件事变复杂了。</p>
+<p>很多人都可以让 AI 写一个 CRUD 页面，让 AI 生成接口，让 AI 补测试，让 AI 改报错。只看最后的代码，很难知道里面有多少是候选人真正理解的，有多少只是 AI 生成后勉强跑起来的。</p>
+<p>所以面试如果还停留在“会不会某个语法”“能不能现场写一段函数”，就很容易看偏。</p>
+<p>我觉得更应该看的，是候选人和 AI 一起工作时，能不能把事情收住。</p>
+<p>比如：</p>
+<ul>
+<li>需求是怎么拆的。</li>
+<li>模块边界是怎么定的。</li>
+<li>数据从哪里来，到哪里去。</li>
+<li>状态如何流转。</li>
+<li>异常情况怎么处理。</li>
+<li>哪些地方交给 AI，哪些地方必须自己判断。</li>
+<li>AI 生成的代码如何确认没有跑偏。</li>
+</ul>
+<p>这些东西，比单纯问“你会不会写某段代码”更接近真实工作。</p>
+<h2>第一件事：看他怎么和 AI 协作</h2>
+<p>如果以后让我面试工程师，我可能会先问一个很普通的问题：</p>
+<blockquote>你平时怎么让 AI 协助你开发？能不能讲一下流程？</blockquote>
+<p>这个问题听起来很简单，但其实很能看出差别。</p>
+<p>如果回答只是：</p>
+<ul>
+<li>我让 AI 写代码。</li>
+<li>我让 AI 修 bug。</li>
+<li>我让 AI 生成注释。</li>
+<li>我让 AI 写测试。</li>
+</ul>
+<p>那说明他可能只是把 AI 当成一个更快的代码生成器。</p>
+<p>这当然也有价值，但还不够。真正做过一段时间 AI 协作开发的人，通常会讲得更具体：</p>
+<ul>
+<li>先让 AI 帮忙梳理需求，但自己确认边界。</li>
+<li>先定接口和数据结构，再让 AI 补实现。</li>
+<li>对复杂流程先画状态，再生成代码。</li>
+<li>每次只让 AI 改一个范围，不让它顺手改太多。</li>
+<li>让 AI 写测试，但自己确认测试覆盖的是不是关键风险。</li>
+<li>出问题时，不只让 AI 猜 bug，而是让它沿着调用链查。</li>
+<li>代码跑通以后，还要回头整理命名、结构和文档。</li>
+</ul>
+<p>这些细节说明一件事：他不是在“等 AI 变魔法”，而是在把 AI 放进一个工程流程里。</p>
+<p>AI 协作能力，可能会变成未来工程师很重要的一部分。</p>
+<p>不是会不会 prompt，而是能不能把一个模糊需求，逐步变成可验证、可解释、可维护的东西。</p>
+<h2>第二件事：看他能不能解释系统</h2>
+<p>另一个我觉得非常有效的问题是：</p>
+<blockquote>跑一下你做过的系统，然后讲解一下。</blockquote>
+<p>这比单纯看简历、看代码片段、问知识点更直接。</p>
+<p>因为一个人是不是真的理解系统，讲一遍基本就能看出来。</p>
+<p>他应该能说清楚：</p>
+<ul>
+<li>为什么这样拆模块。</li>
+<li>为什么这里要有这个状态。</li>
+<li>数据从哪个入口进来。</li>
+<li>哪些地方会写数据库。</li>
+<li>哪些地方只是读取。</li>
+<li>异常路径怎么走。</li>
+<li>失败以后能不能恢复。</li>
+<li>这个设计当时牺牲了什么。</li>
+</ul>
+<p>这些问题不一定要回答得很漂亮，但应该有因果关系。</p>
+<p>如果一个系统是自己真正做过、真正调过、真正踩过坑的，讲的时候通常会有一种很具体的感觉。哪里绕，哪里脆，哪里以后要重构，自己心里会有数。</p>
+<p>反过来，如果只是让 AI 生成了很多代码，然后自己没有真正吃进去，讲解时就会很容易散。</p>
+<p>不是某个 API 名字忘了的问题，而是整条链路说不清楚。</p>
+<h2>面试可以变成两个动作</h2>
+<p>所以我觉得 AI 时代的工程师面试，至少可以加入两个动作。</p>
+<p>第一个动作，是问 AI 协作流程：</p>
+<blockquote>你怎么把 AI 放进开发流程里？</blockquote>
+<p>这里看的不是他说了多少工具名，而是有没有工程节奏。比如如何拆需求、如何限制范围、如何验证结果、如何处理 AI 跑偏。</p>
+<p>第二个动作，是让他跑系统并讲解：</p>
+<blockquote>打开一个你做过的东西，从入口开始讲到数据落点。</blockquote>
+<p>这里看的不是界面多漂亮，也不是代码量多大，而是他能不能解释系统的结构、边界、状态和风险。</p>
+<p>这两个动作合在一起，大概能看出很多东西：</p>
+<ul>
+<li>他是不是只会让 AI 输出代码。</li>
+<li>他有没有自己的判断。</li>
+<li>他能不能控制复杂度。</li>
+<li>他能不能解释自己交付的东西。</li>
+<li>他知不知道哪些地方不能完全交给 AI。</li>
+</ul>
+<h2>“会写代码”还重要吗</h2>
+<p>我不觉得写代码不重要。</p>
+<p>基础能力还是重要的。完全不懂代码的人，很难判断 AI 写出来的东西有没有问题，也很难在系统变复杂以后守住边界。</p>
+<p>只是“会写代码”可能不再是唯一中心。</p>
+<p>以前工程师的价值，更多体现在亲手把代码写出来。以后可能会更多体现在：</p>
+<ul>
+<li>把需求拆成 AI 能处理的小块。</li>
+<li>把 AI 的输出放回系统里检查。</li>
+<li>发现 AI 没有意识到的边界。</li>
+<li>对最终结果负责。</li>
+<li>在复杂度开始膨胀时及时收住。</li>
+</ul>
+<p>换句话说，工程师还是工程师，只是手里的工具变了。</p>
+<p>AI 可以写很多代码，但它不能替你承担系统后果。系统最后跑不跑得稳，边界清不清楚，出了问题能不能解释，还是人的责任。</p>
+<h2>结语</h2>
+<p>如果只看“写代码”，AI 确实让很多传统面试题变得没那么有区分度。</p>
+<p>但如果看“能不能解释系统”，工程师之间的差别反而会更明显。</p>
+<p>因为 AI 可以帮忙生成实现，却很难替一个人建立真正的系统理解。</p>
+<p>所以未来的工程师面试，可能不应该只问：</p>
+<blockquote>你会不会写这段代码？</blockquote>
+<p>而应该多问：</p>
+<blockquote>你是怎么让 AI 参与进来的？</blockquote>
+<p>以及：</p>
+<blockquote>这个系统为什么是这样？</blockquote>
+<p>这篇文章只是我个人的观察和记录，不是为了给面试定标准。只是觉得 AI 时代来了以后，工程师真正要被看的地方，可能正在慢慢换位置。</p>
+<h2>日本語版</h2>
+<p>この文章は、AI と雑談したあとに考えを整理したものです。もとの表現はかなり散らかっていたので、あとから AI に流れを整えてもらいました。</p>
+<p>最近ずっと考えていることがあります。AI がコードを書き、修正し、テストを補い、ドキュメントまで整理できるようになった今、エンジニアの面接も少し見方を変える必要があるのではないか、ということです。</p>
+<p>これまでの面接では、多くの場合、その人が特定のコードを書けるかどうかを見ていました。</p>
+<ul>
+<li>Java が書けるか。</li>
+<li>Python が書けるか。</li>
+<li>React が使えるか。</li>
+<li>アルゴリズム問題を解けるか。</li>
+<li>フレームワークや定番知識を覚えているか。</li>
+</ul>
+<p>もちろん、これらが不要になったわけではありません。基礎がまったくなければ、進められない問題は今でも多いです。</p>
+<p>ただ、AI が開発に入ってくると、それだけでは判断しにくくなります。なぜなら、コードを書く部分の多くは AI が手伝えるからです。むしろ見えにくくなるのは、別の二つのことです。</p>
+<ul>
+<li>その人は、AI に制御可能なシステムを作らせることができるのか。</li>
+<li>その人は、そのシステムがなぜそうなっているのかを説明できるのか。</li>
+</ul>
+<p>つまり、これからの面接で重要になるのは、「その場でコードを書けるか」だけではなく、次のようなことかもしれません。</p>
+<blockquote>AI に、自分自身が説明でき、保守でき、責任を持てるシステムを書かせることができるか。</blockquote>
+<h3>従来の面接で足りなくなるところ</h3>
+<p>従来の面接には、暗黙の前提がありました。</p>
+<blockquote>コードを書くことは、エンジニアの能力を表している。</blockquote>
+<p>以前は、これはかなり成り立っていました。コードは主に人が書いていたので、要求を分解できるか、ロジックを組めるか、バグを追えるかは、コードを書く過程である程度見えました。</p>
+<p>しかし AI がある今、この前提は少し複雑になっています。</p>
+<p>多くの人が、AI に CRUD 画面を書かせ、API を作らせ、テストを補わせ、エラーを直させることができます。最後に出てきたコードだけを見ても、候補者がどこまで本当に理解しているのか、どこまでが AI に生成させて何とか動かしただけなのかは分かりにくいです。</p>
+<p>だから面接が「この文法を知っていますか」「この関数をその場で書けますか」だけに留まると、見たいものから少しずれてしまう気がします。</p>
+<p>むしろ見たいのは、その人が AI と一緒に作業するとき、物事をきちんと収められるかどうかです。</p>
+<p>たとえば、こういうことです。</p>
+<ul>
+<li>要求をどう分けたのか。</li>
+<li>モジュールの境界をどう決めたのか。</li>
+<li>データはどこから来て、どこへ行くのか。</li>
+<li>状態はどう変化するのか。</li>
+<li>例外や失敗はどう扱うのか。</li>
+<li>どこを AI に任せ、どこを自分で判断するのか。</li>
+<li>AI が生成したコードがずれていないか、どう確認するのか。</li>
+</ul>
+<p>こうした点のほうが、単に「このコードを書けるか」を聞くより、実際の仕事に近いと思います。</p>
+<h3>一つ目は、AI とどう協働しているかを見ること</h3>
+<p>もしこれから自分がエンジニアを面接するなら、まずこう聞くかもしれません。</p>
+<blockquote>普段、AI をどう開発に使っていますか。流れを説明できますか。</blockquote>
+<p>簡単な質問に見えますが、実はかなり差が出ます。</p>
+<p>答えがただ、</p>
+<ul>
+<li>AI にコードを書かせています。</li>
+<li>AI にバグを直させています。</li>
+<li>AI にコメントを書かせています。</li>
+<li>AI にテストを書かせています。</li>
+</ul>
+<p>だけで終わるなら、その人は AI を速いコード生成器として使っているだけかもしれません。</p>
+<p>それにも価値はあります。ただ、それだけでは足りません。実際に AI と開発を続けてきた人は、もう少し具体的に話すことが多いです。</p>
+<ul>
+<li>まず AI に要求を整理させるが、境界は自分で確認する。</li>
+<li>先にインターフェースとデータ構造を決めてから、実装を補わせる。</li>
+<li>複雑な処理は、先に状態の流れを整理してからコードにする。</li>
+<li>一度に AI に触らせる範囲を小さくする。</li>
+<li>AI にテストを書かせるが、重要なリスクを見ているかは自分で確認する。</li>
+<li>問題が起きたとき、AI に推測させるだけでなく、呼び出し経路をたどらせる。</li>
+<li>動いたあとで、命名、構造、ドキュメントを見直す。</li>
+</ul>
+<p>こういう細部があると、その人は AI に魔法を期待しているのではなく、AI を工程の中に置いているのだと分かります。</p>
+<p>AI との協働能力は、これからのエンジニアにとってかなり重要になると思います。</p>
+<p>それは、うまいプロンプトを書けるかどうかではありません。曖昧な要求を、検証でき、説明でき、保守できるものに変えていけるかどうかです。</p>
+<h3>二つ目は、システムを説明できるかを見ること</h3>
+<p>もう一つ、とても有効だと思う質問があります。</p>
+<blockquote>自分が作ったシステムを動かして、説明してもらえますか。</blockquote>
+<p>これは、履歴書やコード片を見るよりも直接的です。</p>
+<p>その人が本当にシステムを理解しているかどうかは、一度説明してもらうとかなり見えてきます。</p>
+<p>説明できるべきなのは、たとえばこういうことです。</p>
+<ul>
+<li>なぜこのようにモジュールを分けたのか。</li>
+<li>なぜここにこの状態があるのか。</li>
+<li>データはどの入口から入るのか。</li>
+<li>どこでデータベースに書き込むのか。</li>
+<li>どこは読み取りだけなのか。</li>
+<li>異常系はどう流れるのか。</li>
+<li>失敗したあとに回復できるのか。</li>
+<li>この設計で何を犠牲にしたのか。</li>
+</ul>
+<p>答えが完璧である必要はありません。ただ、因果関係はあるはずです。</p>
+<p>本当に自分で作り、動かし、問題にぶつかったシステムなら、説明には具体性が出ます。どこが複雑で、どこが弱く、どこをいつか直したいのか、自分なりに分かっているはずです。</p>
+<p>逆に、AI に多くのコードを生成させただけで、自分の中に取り込めていない場合、説明は散らかりやすいです。</p>
+<p>問題は API 名を一つ忘れることではありません。入口から出口までの流れを説明できないことです。</p>
+<h3>面接は二つの動作にできる</h3>
+<p>だから、AI 時代のエンジニア面接には、少なくとも二つの動作を入れてもよいと思います。</p>
+<p>一つ目は、AI との協働プロセスを聞くことです。</p>
+<blockquote>AI をどう開発プロセスに入れていますか。</blockquote>
+<p>ここで見るのは、ツール名をいくつ知っているかではありません。要求をどう分けるか、範囲をどう制限するか、結果をどう検証するか、AI がずれたときにどう戻すかです。</p>
+<p>二つ目は、作ったシステムを動かして説明してもらうことです。</p>
+<blockquote>自分が作ったものを開いて、入口からデータの到達点まで説明してください。</blockquote>
+<p>ここで見るのは、画面がきれいかどうかでも、コード量が多いかどうかでもありません。その人がシステムの構造、境界、状態、リスクを説明できるかどうかです。</p>
+<p>この二つを合わせると、かなり多くのことが見えてきます。</p>
+<ul>
+<li>ただ AI にコードを出させているだけなのか。</li>
+<li>自分の判断があるのか。</li>
+<li>複雑さを制御できるのか。</li>
+<li>自分が納品したものを説明できるのか。</li>
+<li>どこを AI に完全には任せられないか分かっているのか。</li>
+</ul>
+<h3>「コードを書けること」はまだ重要か</h3>
+<p>私は、コードを書く力が不要になるとは思っていません。</p>
+<p>基礎能力は今でも重要です。コードがまったく分からなければ、AI が出したものに問題があるかどうか判断できませんし、システムが複雑になったときに境界を守ることも難しいです。</p>
+<p>ただ、「コードを書けること」だけが中心ではなくなるかもしれません。</p>
+<p>以前のエンジニアの価値は、自分の手でコードを書くところにより強く表れていました。これからは、次のようなところにより表れるのかもしれません。</p>
+<ul>
+<li>要求を AI が扱える小さな単位に分ける。</li>
+<li>AI の出力をシステムの中に戻して確認する。</li>
+<li>AI が気づいていない境界を見つける。</li>
+<li>最終的な結果に責任を持つ。</li>
+<li>複雑さが膨らみ始めたときに止める。</li>
+</ul>
+<p>言い換えると、エンジニアはこれからもエンジニアです。ただ、手に持つ道具が変わっただけです。</p>
+<p>AI は多くのコードを書けますが、システムの結果に責任を持つことはできません。最後に安定して動くのか、境界が明確なのか、問題が起きたときに説明できるのか。それはやはり人の責任です。</p>
+<h3>終わりに</h3>
+<p>「コードを書くこと」だけを見るなら、AI によって従来の面接問題の区別力は少し下がっていると思います。</p>
+<p>でも「システムを説明できるか」を見るなら、エンジニアの差はむしろ見えやすくなるかもしれません。</p>
+<p>AI は実装を助けることはできます。しかし、その人自身のシステム理解を代わりに作ることは難しいです。</p>
+<p>だからこれからのエンジニア面接では、</p>
+<blockquote>このコードを書けますか。</blockquote>
+<p>だけではなく、</p>
+<blockquote>AI をどう参加させましたか。</blockquote>
+<p>そして、</p>
+<blockquote>このシステムはなぜこうなっていますか。</blockquote>
+<p>も聞いたほうがよいのかもしれません。</p>
+<p>これはあくまで個人的な観察と記録です。面接の基準を決めたいわけではありません。ただ、AI の時代になって、エンジニアを見る場所が少しずつ変わってきている気がしています。</p>
+<h2>English Version</h2>
+<p>This article came from a casual conversation with AI. My original thoughts were scattered, so I later asked AI to help organize the flow.</p>
+<p>Lately I have been thinking about one question: now that AI can write code, edit code, add tests, and organize documentation, should engineering interviews also change a little?</p>
+<p>Many traditional interviews are really trying to see whether someone can write a certain kind of code.</p>
+<ul>
+<li>Can they write Java?</li>
+<li>Can they write Python?</li>
+<li>Can they use React?</li>
+<li>Can they solve algorithm problems?</li>
+<li>Can they recite framework knowledge and common interview answers?</li>
+</ul>
+<p>These things are not useless. If someone has no foundation at all, many problems still cannot move forward.</p>
+<p>But once AI becomes part of development, these questions are no longer enough. Many of the parts that used to mean &quot;writing code&quot; can now be helped by AI. What becomes harder to judge are two other things:</p>
+<ul>
+<li>Can this person make AI produce a controllable system?</li>
+<li>Can this person explain why the system is built this way?</li>
+</ul>
+<p>In other words, the important question in future interviews may not be only &quot;Can you write this code on the spot?&quot; It may be:</p>
+<blockquote>Can you make AI write a system that you can explain, maintain, and take responsibility for?</blockquote>
+<h3>Where traditional interviews start to fall short</h3>
+<p>Traditional interviews have an implied assumption:</p>
+<blockquote>Writing code represents engineering ability.</blockquote>
+<p>In the past, this was mostly true. Since humans wrote most of the code, you could often see whether someone could break down requirements, organize logic, and debug problems through the act of writing code.</p>
+<p>But with AI, this becomes more complicated.</p>
+<p>Many people can ask AI to write a CRUD page, generate an API, add tests, or fix an error. If we only look at the final code, it is hard to know how much the candidate truly understands and how much was simply generated by AI and made to run somehow.</p>
+<p>So if an interview still stays at &quot;Do you know this syntax?&quot; or &quot;Can you write this function right now?&quot;, it may miss the more important part.</p>
+<p>What I would rather look at is whether the candidate can keep things under control while working with AI.</p>
+<p>For example:</p>
+<ul>
+<li>How were the requirements broken down?</li>
+<li>How were the module boundaries decided?</li>
+<li>Where does the data come from, and where does it go?</li>
+<li>How does state change?</li>
+<li>How are errors handled?</li>
+<li>Which parts are given to AI, and which parts must be judged by the person?</li>
+<li>How do they check whether AI-generated code has gone off track?</li>
+</ul>
+<p>These questions are closer to real work than simply asking whether someone can write a piece of code.</p>
+<h3>First, look at how they collaborate with AI</h3>
+<p>If I were interviewing engineers in the future, I might begin with a very ordinary question:</p>
+<blockquote>How do you usually use AI in development? Can you explain your process?</blockquote>
+<p>It sounds simple, but it can reveal a lot.</p>
+<p>If the answer is only:</p>
+<ul>
+<li>I ask AI to write code.</li>
+<li>I ask AI to fix bugs.</li>
+<li>I ask AI to generate comments.</li>
+<li>I ask AI to write tests.</li>
+</ul>
+<p>then the person may be using AI mainly as a faster code generator.</p>
+<p>That has value, but it is not enough. People who have really worked with AI for a while usually speak more concretely:</p>
+<ul>
+<li>They ask AI to help clarify requirements, but they confirm the boundaries themselves.</li>
+<li>They define interfaces and data structures first, then ask AI to fill in the implementation.</li>
+<li>For complex flows, they organize the state transitions before generating code.</li>
+<li>They limit the scope of each AI change.</li>
+<li>They ask AI to write tests, but they check whether the tests cover the important risks.</li>
+<li>When something breaks, they do not only ask AI to guess the bug; they make it trace the call path.</li>
+<li>After the code runs, they review naming, structure, and documentation.</li>
+</ul>
+<p>These details show that the person is not waiting for AI to perform magic. They are putting AI inside an engineering process.</p>
+<p>AI collaboration may become an important engineering ability.</p>
+<p>It is not about writing clever prompts. It is about turning a vague requirement into something verifiable, explainable, and maintainable.</p>
+<h3>Second, see whether they can explain the system</h3>
+<p>Another question I think is very effective is:</p>
+<blockquote>Please run a system you built and explain it.</blockquote>
+<p>This is more direct than reading a resume, looking at a small code sample, or asking isolated knowledge questions.</p>
+<p>Whether someone truly understands a system becomes much clearer once they explain it.</p>
+<p>They should be able to explain things like:</p>
+<ul>
+<li>Why the modules are split this way.</li>
+<li>Why this state exists here.</li>
+<li>Which entry point the data comes from.</li>
+<li>Where the database is written.</li>
+<li>Which parts are read-only.</li>
+<li>How error paths flow.</li>
+<li>Whether the system can recover after failure.</li>
+<li>What tradeoffs this design made.</li>
+</ul>
+<p>The answers do not need to be beautiful, but they should have cause and effect.</p>
+<p>If someone really built, ran, debugged, and struggled with a system, their explanation usually becomes concrete. They know which parts are awkward, which parts are fragile, and which parts they may want to refactor later.</p>
+<p>On the other hand, if they only let AI generate a lot of code without really absorbing it, the explanation tends to scatter.</p>
+<p>The issue is not forgetting the name of an API. The issue is being unable to explain the chain from entry point to outcome.</p>
+<h3>Interviews can become two actions</h3>
+<p>So I think engineering interviews in the AI era can include at least two actions.</p>
+<p>The first is to ask about the AI collaboration process:</p>
+<blockquote>How do you place AI inside your development process?</blockquote>
+<p>What matters here is not how many tool names they can mention. It is how they break down requirements, limit scope, verify results, and recover when AI goes off track.</p>
+<p>The second is to ask them to run and explain a system:</p>
+<blockquote>Open something you built, and explain it from the entry point to where the data lands.</blockquote>
+<p>What matters here is not how polished the interface looks or how much code exists. It is whether the person can explain the structure, boundaries, state, and risks of the system.</p>
+<p>Together, these two actions can reveal a lot:</p>
+<ul>
+<li>Are they only asking AI to output code?</li>
+<li>Do they have their own judgment?</li>
+<li>Can they control complexity?</li>
+<li>Can they explain what they delivered?</li>
+<li>Do they know which parts cannot be fully delegated to AI?</li>
+</ul>
+<h3>Is writing code still important?</h3>
+<p>I do not think writing code becomes unimportant.</p>
+<p>Foundation still matters. If someone does not understand code at all, it is hard for them to judge whether AI output has problems. It is also hard to protect boundaries once the system becomes complicated.</p>
+<p>But &quot;being able to write code&quot; may no longer be the only center.</p>
+<p>In the past, an engineer&#39;s value was more strongly expressed by writing code with their own hands. In the future, it may be expressed more in things like:</p>
+<ul>
+<li>Breaking requirements into small pieces that AI can handle.</li>
+<li>Bringing AI output back into the system and checking it.</li>
+<li>Finding boundaries AI did not notice.</li>
+<li>Taking responsibility for the final result.</li>
+<li>Stopping complexity before it grows too far.</li>
+</ul>
+<p>In other words, engineers are still engineers. The tool in their hands has changed.</p>
+<p>AI can write a lot of code, but it cannot take responsibility for the consequences of a system. Whether the system runs steadily, whether the boundaries are clear, and whether problems can be explained are still human responsibilities.</p>
+<h3>Closing</h3>
+<p>If we only look at &quot;writing code,&quot; AI does make many traditional interview questions less distinctive.</p>
+<p>But if we look at &quot;being able to explain a system,&quot; the differences between engineers may become even clearer.</p>
+<p>AI can help generate implementation, but it is difficult for AI to replace a person&#39;s real system understanding.</p>
+<p>So future engineering interviews may not only ask:</p>
+<blockquote>Can you write this code?</blockquote>
+<p>They may also need to ask:</p>
+<blockquote>How did you involve AI?</blockquote>
+<p>And:</p>
+<blockquote>Why is this system built this way?</blockquote>
+<p>This is only a personal observation and record. I am not trying to define a new interview standard. I just feel that, as the AI era arrives, the place where we should look at engineers may be slowly moving.</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月15日 最終更新 : 2026年06月15日</div>
+	</footer>
+</body>
+</html>
