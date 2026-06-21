@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与 AI 的杂谈之 程序员编程之再见编程">
+	<title>程序员编程之再见编程 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">程序员编程之再见编程</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>程序员编程之再见编程</h1>
+		<div class="daily-meta">2026-06-22</div>
+<p>这篇是和 AI 闲聊后整理出来的关于“再见编程”的思考。我们正在目睹人手编写每一行代码的时代逐渐谢幕，但如何在这种背景下培养合格的、能主导系统的工程师，依然是未来极其漫长而艰巨的课题。</p>
+<p>---</p>
+<h1>AI 对软件行业的四波冲击</h1>
+<p>我觉得很多“程序员明年消失”的说法过于科幻，而真正的行业变革，是在维护项目、移植项目、外包开发这些真实场景中逐步演进的。AI 对软件行业的重构，大致可以划分为以下四个阶段。它们并非严格前后相继，而是在不同领域中同时发生、交错演进的：</p>
+<h3>第一阶段：新规开发和移行项目</h3>
+<p>这是 AI 优势最明显的领域。这类项目往往目标明确、输入输出清晰、有旧系统可供参考，且能够进行快速的闭环验证。</p>
+<pre><code>旧系统A ──&gt; 迁移到 Java ──&gt; 迁移到 Spring ──&gt; 部署到云环境
+                 ▲                 ▲                 ▲
+                 └───────── AI 自动化重构与转换 ────────┘</code></pre>
+<p>对于已知规则向代码实现的转换，AI 的效率极高。在这一阶段，水平参差不齐的初级开发人员会首先受到冲击，团队的规模开始收缩，开发模式由“10人手写”转变为“3人 + AI 辅助”。</p>
+<h3>第二阶段：旧系统知识被 AI 逐渐吸收</h3>
+<p>过去，企业的核心资产往往零散地存在于关键员工的脑海中——“老王知道这个旧系统”、“老李懂得那个复杂的批处理”、“小张清楚那个奇怪的接口”。</p>
+<p>当 AI 开始持续读取代码库、设计书、QA 记录、故障日志以及邮件沟通记录时，这些知识便开始向 AI 知识库转移：</p>
+<pre><code>老员工脑中的隐性知识 (老王、老李、小张)
+               │
+               ▼ (持续喂给)
+[ 代码 / 设计文档 / QA记录 / 故障日志 ] ──&gt; [ AI 知识库 ]
+                                                │
+                                                ▼
+                                        全体成员通过 AI 查询</code></pre>
+<p>这一阶段对行业的影响甚至比代码生成更大，因为它直接冲击了软件行业最大的隐性成本：<strong>知识的传承与沉淀</strong>。</p>
+<h3>第三阶段：维护与运维自动化</h3>
+<p>企业在软件生命周期中，真正的大头往往是“维护10年，开发1年”。未来的系统维护正快速朝着自动化方向演进：</p>
+<pre><code>监控系统发现异常
+      │
+      ▼
+AI 分析根本原因 (RCA)
+      │
+      ▼
+AI 自动生成修复方案
+      │
+      ▼
+AI 在沙箱中执行测试
+      │
+      ▼
+提交变更申请 ──&gt; 人工最终确认 ──&gt; 自动化部署上线</code></pre>
+<p>这种闭环让日常运维的响应速度大幅提升，同时也压缩了基础运维岗位的空间。</p>
+<h3>第四阶段：责任体系的重构</h3>
+<p>当技术实现彻底交给 AI 后，软件开发中的决策和逻辑责任会开始向上转移：</p>
+<pre><code>【传统模式】
+ 客户 ──&gt; 业务负责人 ──&gt; 程序员 (程序员用技术经验消化模糊需求，承担技术决策)
+
+【AI 模式】
+ 客户 ──&gt; 业务负责人 ──&gt; AI (决策真空直接暴露，逻辑责任反弹回业务层)</code></pre>
+<p>以前业务负责人写一句“适当处理”，程序员会追着刨根问底。而在未来，AI 会原封不动地把这句“适当处理”变成一个妥协的代码并直接上线。一旦出事，AI 的回答将是：“我已严格按照您的描述实现，请提供‘适当’的定义。”</p>
+<p>责任的重新分配，迫使组织去面对那些过去被程序员默默消化掉的管理和决策混乱。</p>
+<p>---</p>
+<h1>企业视角的效率瓶颈</h1>
+<p>在讨论 AI 的影响时，大家习惯把聚光灯打在程序员身上。但站在企业经营者的角度看，代码生成速度的成倍提升，往往无法直接等同于项目交付周期的同比例缩短。</p>
+<h3>1. 需求损耗的无形消耗</h3>
+<p>在一个典型的项目中，时间的分布往往是这样的：</p>
+<pre><code>传统项目耗时分布:
+[   需求讨论 (3个月)   ][ 设计修改 (2个月) ][ 沟通协调 (1月) ][ 开发实现 (1月) ][ 测试修正 (1月) ]
+
+AI 效率提升10倍后的分布:
+[   需求讨论 (3个月)   ][ 设计修改 (2个月) ][ 沟通协调 (1月) ][开发(3天)][ 测试修正 (1月) ]</code></pre>
+<p>即使开发实现时间从 1 个月缩短到 3 天，项目总工期依然长达 7 个月。企业老板会赫然发现，<strong>编码根本不是瓶颈，真正的瓶颈在于沟通与决策</strong>。</p>
+<h3>2. 企业引入 AI 的两条路线</h3>
+<p>面对这一瓶颈，企业在引入 AI 时往往会面临两条路线的选择：</p>
+<ul>
+<li><strong>路线 A (治标)</strong>：只关注程序员人数的减少。虽然短时间内报表上的研发成本降低了，但由于前端的需求依然是混乱的，AI 只是在用 10 倍的速度更快地产生混乱的代码与设计。</li>
+<li><strong>路线 B (治本)</strong>：先优化流程，清晰地定义需求、设计、责任与边界，然后再引入 AI。</li>
+</ul>
+<blockquote>[!WARNING]</blockquote>
+<blockquote>如果业务流程本身是混乱的，AI 不会成为救世主。它更像是一个把问题放大十倍的加速器。</blockquote>
+<p>---</p>
+<h1>培养程序员：未来的任重道远</h1>
+<p>当我们意识到 AI 正在接管所有的基础编码和自动化运维时，整个行业迎来了一个前所未有的悖论：<strong>如果未来不再需要初级程序员写 CRUD，那我们要如何培养出能够把控系统、验证 AI 的资深工程师？</strong></p>
+<h3>1. 消失的“新手沙箱”</h3>
+<p>在手工编程时代，程序员的成长是有梯度的：</p>
+<pre><code>初级阶段 (手写 CRUD、修简单 Bug、写单元测试)
+      │
+      ▼ (在试错中建立系统直觉)
+中级阶段 (设计小型模块、优化接口性能、处理异常)
+      │
+      ▼ (在复杂场景中锻炼架构眼界)
+资深阶段 (划定系统边界、做关键技术决策、发现隐性风险)</code></pre>
+<p>然而，AI 时代正在把底部的“初级阶段”连根拔起。当新人一入行就直接使用 AI 生成大量代码时，他们跳过了痛苦的调试、排错和语法磨炼。由于缺乏在底层细节中打磨的经历，他们很难建立起对并发、内存、事务隔离等隐性风险的直觉。</p>
+<h3>2. 培养模式的断层</h3>
+<p>这就导致了人才市场的尴尬局面：企业极度缺乏能够发现 AI 逻辑漏洞、制定系统边界的“资深验证者”；但市场上却充斥着大量缺乏底层基础、只会发送 Prompt 的“代码拼装工”。</p>
+<p>未来的程序员培养，任重而道远。我们不能再用“背诵语法八股”、“手写简单算法”的旧方法来训练他们。</p>
+<blockquote>[!TIP]</blockquote>
+<blockquote>未来的工程教育，必须将重心转向<strong>系统理解能力</strong>、<strong>架构边界意识</strong>以及<strong>逆向调试与审计能力</strong>。新一代工程师需要学习如何站在“裁判员”而非“运动员”的角度去审视系统。</blockquote>
+<p>---</p>
+<h1>结语：再见，手工作坊时代</h1>
+<p>人手一行行编织代码的“手工作坊”时代，正在不可逆转地走向终结。</p>
+<p>这不仅是程序员岗位的变迁，更是整个软件工程范式的跃迁。我们不再需要把宝贵的时间消耗在记忆繁杂的 API 参数和重复的模板代码上。</p>
+<p>但这绝不意味着工程师精神的消亡。当编程的门槛变得无比低廉时，<strong>构建正确逻辑和守住复杂系统边界的价值，反而被推到了前所未有的高度</strong>。</p>
+<p>再见，手写代码的时代。 你好，人机协同的全新工程纪元。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月22日 最終更新 : 2026年06月22日</div>
+	</footer>
+</body>
+</html>
