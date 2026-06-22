@@ -86,45 +86,138 @@ function Convert-MarkdownToHtml {
     $Lines = [regex]::Split($MarkdownText, "\r?\n")
     $html = New-Object System.Collections.Generic.List[string]
     $paragraph = New-Object System.Collections.Generic.List[string]
-    $inCode = $false
     $code = New-Object System.Collections.Generic.List[string]
-    $inUl = $false
-    $inOl = $false
+    $blockquoteLines = New-Object System.Collections.Generic.List[string]
+
+    $state = @{
+        inCode = $false
+        inUl = $false
+        inOl = $false
+        inBlockquote = $false
+        hasPendingCharacter = $false
+        pendingCharacter = ""
+        pendingParenthetical = ""
+    }
 
     function Flush-Paragraph {
         if ($paragraph.Count -gt 0) {
             $joined = ($paragraph -join " ")
-            $html.Add("<p>$(Convert-InlineMarkdown $joined)</p>")
+            if ($joined -match '^\s*(?:\*+)?(注[：:])\s*(.+)$') {
+                $label = $Matches[1]
+                $content = $Matches[2]
+                $html.Add("<p class=`"footnote`"><strong>$label</strong>$(Convert-InlineMarkdown $content)</p>")
+            } else {
+                $html.Add("<p>$(Convert-InlineMarkdown $joined)</p>")
+            }
             $paragraph.Clear()
         }
     }
 
     function Close-Lists {
-        if ($inUl) {
+        if ($state.inUl) {
             $html.Add("</ul>")
-            Set-Variable -Name inUl -Value $false -Scope 1
+            $state.inUl = $false
         }
-        if ($inOl) {
+        if ($state.inOl) {
             $html.Add("</ol>")
-            Set-Variable -Name inOl -Value $false -Scope 1
+            $state.inOl = $false
+        }
+    }
+
+    function Flush-PendingCharacter {
+        if ($state.hasPendingCharacter) {
+            $text = "<strong>$($state.pendingCharacter)</strong>"
+            if ($state.pendingParenthetical) {
+                $text += " $(Convert-InlineMarkdown $state.pendingParenthetical)"
+            }
+            $text += "："
+            $html.Add("<p>$text</p>")
+            $state.hasPendingCharacter = $false
+        }
+    }
+
+    function Flush-Blockquote {
+        if ($state.inBlockquote) {
+            if ($blockquoteLines.Count -gt 0) {
+                # Check if first line is a callout identifier
+                $firstLine = $blockquoteLines[0].Trim()
+                if ($firstLine -match '^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]$') {
+                    $type = $Matches[1].ToUpper()
+                    $blockquoteLines.RemoveAt(0)
+                    $innerMarkdown = $blockquoteLines -join "`n"
+                    # Render inner markdown recursively
+                    $innerHtml = Convert-MarkdownToHtml -MarkdownText $innerMarkdown
+                    
+                    # Icons and Titles mapping
+                    $titleMap = @{
+                        "NOTE" = "提示"
+                        "TIP" = "建议"
+                        "IMPORTANT" = "重要"
+                        "WARNING" = "警告"
+                        "CAUTION" = "注意"
+                    }
+                    $svgMap = @{
+                        "NOTE" = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1.5 7a.5.5 0 0 0 0-1H9V7a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 0 0 1h1V11H7a.5.5 0 0 0 0 1h2.5Z"></path></svg>'
+                        "TIP" = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.426 1.913 1.12 2.518.502.438.88 1.054.88 1.732v.25a.75.75 0 0 0 .75.75h2.5a.75.75 0 0 0 .75-.75v-.25c0-.678.378-1.294.88-1.732.694-.605 1.12-1.534 1.12-2.518 0-2.06-1.637-3.75-4-3.75ZM5.97 7.03A3.75 3.75 0 0 1 5.5 5.25c0-1.27 1.01-2.25 2.5-2.25s2.5.98 2.5 2.25c0 .628-.19 1.218-.47 1.78a2.25 2.25 0 0 0-.51.72H6.98a2.25 2.25 0 0 0-.51-.72ZM6.25 12h3.5a.75.75 0 0 1 0 1.5h-3.5a.75.75 0 0 1 0-1.5Zm1 2.5h1.5a.25.25 0 0 1 0 .5h-1.5a.25.25 0 0 1 0-.5Z"></path></svg>'
+                        "IMPORTANT" = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 5Zm0 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path></svg>'
+                        "WARNING" = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M6.457 1.047c.659-1.203 2.427-1.203 3.086 0l6.03 11c.629 1.147-.202 2.533-1.543 2.533H1.97C.628 14.58-.203 13.194.426 12.047l6.03-11ZM8 4.75a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 4.75Zm0 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path></svg>'
+                        "CAUTION" = '<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M4.47.22A.75.75 0 0 1 5 0h6a.75.75 0 0 1 .53.22l4.25 4.25c.141.14.22.33.22.53v6a.75.75 0 0 1-.22.53l-4.25 4.25A.75.75 0 0 1 11 16H5a.75.75 0 0 1-.53-.22L.22 11.53A.75.75 0 0 1 0 11V5c0-.2.079-.39.22-.53L4.47.22Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5H5.31ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 6a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 10Z"></path></svg>'
+                    }
+                    $titleText = $titleMap[$type]
+                    $svgIcon = $svgMap[$type]
+                    
+                    $html.Add("<div class=`"callout callout-$($type.ToLower())`">")
+                    $html.Add("    <div class=`"callout-title`">$svgIcon$titleText</div>")
+                    $html.Add("    $innerHtml")
+                    $html.Add("</div>")
+                } elseif ($state.hasPendingCharacter) {
+                    $innerMarkdown = $blockquoteLines -join "`n"
+                    $innerHtml = Convert-MarkdownToHtml -MarkdownText $innerMarkdown
+                    
+                    $parentheticalHtml = ""
+                    if ($state.pendingParenthetical) {
+                        $parentheticalHtml = "<span class=`"script-parenthetical`">$(Convert-InlineMarkdown $state.pendingParenthetical)</span>"
+                    }
+                    
+                    $html.Add("<div class=`"script-dialogue`">")
+                    $html.Add("    <div class=`"script-character`">")
+                    $html.Add("        <span class=`"name`">$($state.pendingCharacter)</span>")
+                    $html.Add("        $parentheticalHtml")
+                    $html.Add("    </div>")
+                    $html.Add("    <div class=`"script-text`">")
+                    $html.Add("        $innerHtml")
+                    $html.Add("    </div>")
+                    $html.Add("</div>")
+                    
+                    $state.hasPendingCharacter = $false
+                } else {
+                    $innerMarkdown = $blockquoteLines -join "`n"
+                    $innerHtml = Convert-MarkdownToHtml -MarkdownText $innerMarkdown
+                    $html.Add("<blockquote>`n$innerHtml`n</blockquote>")
+                }
+                $blockquoteLines.Clear()
+            }
+            $state.inBlockquote = $false
         }
     }
 
     foreach ($line in $Lines) {
         if ($line -match '^\s*```') {
+            Flush-Blockquote
+            Flush-PendingCharacter
             Flush-Paragraph
             Close-Lists
-            if ($inCode) {
+            if ($state.inCode) {
                 $html.Add("<pre><code>$(Escape-Html ($code -join "`n"))</code></pre>")
                 $code.Clear()
-                $inCode = $false
+                $state.inCode = $false
             } else {
-                $inCode = $true
+                $state.inCode = $true
             }
             continue
         }
 
-        if ($inCode) {
+        if ($state.inCode) {
             $code.Add($line)
             continue
         }
@@ -132,8 +225,43 @@ function Convert-MarkdownToHtml {
         if ([string]::IsNullOrWhiteSpace($line)) {
             Flush-Paragraph
             Close-Lists
+            Flush-Blockquote
             continue
         }
+
+        if ($line -match '^\s*\*\*【(.+)】\*\*\s*$') {
+            Flush-Blockquote
+            Flush-PendingCharacter
+            Flush-Paragraph
+            Close-Lists
+            $html.Add("<p class=`"stage-direction`">【$($Matches[1])】</p>")
+            continue
+        }
+
+        if ($line -match '^\s*\*\*([^*]+)\*\*\s*([（(].+?[）)])?\s*[：:]\s*$') {
+            Flush-Blockquote
+            Flush-PendingCharacter
+            Flush-Paragraph
+            Close-Lists
+            $state.hasPendingCharacter = $true
+            $state.pendingCharacter = $Matches[1].Trim()
+            $state.pendingParenthetical = if ($Matches[2]) { $Matches[2].Trim() } else { "" }
+            continue
+        }
+
+        if ($line -match '^\s*>\s?(.*)$') {
+            Flush-Paragraph
+            Close-Lists
+            if (-not $state.inBlockquote) {
+                $state.inBlockquote = $true
+                $blockquoteLines.Clear()
+            }
+            $blockquoteLines.Add($Matches[1])
+            continue
+        }
+
+        Flush-Blockquote
+        Flush-PendingCharacter
 
         if ($line -match '^(#{1,6})\s+(.+)$') {
             Flush-Paragraph
@@ -146,13 +274,13 @@ function Convert-MarkdownToHtml {
 
         if ($line -match '^\s*[-*+]\s+(.+)$') {
             Flush-Paragraph
-            if ($inOl) {
+            if ($state.inOl) {
                 $html.Add("</ol>")
-                $inOl = $false
+                $state.inOl = $false
             }
-            if (-not $inUl) {
+            if (-not $state.inUl) {
                 $html.Add("<ul>")
-                $inUl = $true
+                $state.inUl = $true
             }
             $html.Add("<li>$(Convert-InlineMarkdown $Matches[1].Trim())</li>")
             continue
@@ -160,22 +288,15 @@ function Convert-MarkdownToHtml {
 
         if ($line -match '^\s*\d+\.\s+(.+)$') {
             Flush-Paragraph
-            if ($inUl) {
+            if ($state.inUl) {
                 $html.Add("</ul>")
-                $inUl = $false
+                $state.inUl = $false
             }
-            if (-not $inOl) {
+            if (-not $state.inOl) {
                 $html.Add("<ol>")
-                $inOl = $true
+                $state.inOl = $true
             }
             $html.Add("<li>$(Convert-InlineMarkdown $Matches[1].Trim())</li>")
-            continue
-        }
-
-        if ($line -match '^\s*>\s?(.+)$') {
-            Flush-Paragraph
-            Close-Lists
-            $html.Add("<blockquote>$(Convert-InlineMarkdown $Matches[1].Trim())</blockquote>")
             continue
         }
 
@@ -184,7 +305,10 @@ function Convert-MarkdownToHtml {
 
     Flush-Paragraph
     Close-Lists
-    if ($inCode) {
+    Flush-Blockquote
+    Flush-PendingCharacter
+
+    if ($state.inCode) {
         $html.Add("<pre><code>$(Escape-Html ($code -join "`n"))</code></pre>")
     }
 
@@ -326,6 +450,149 @@ function New-PageHtml {
 		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
 		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
 		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
 	</style>
 </head>
 <body>

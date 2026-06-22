@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
@@ -20,6 +20,149 @@
 		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
 		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
 		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
 	</style>
 </head>
 <body>
@@ -62,12 +205,18 @@
 <p>它不是一个单纯的全文搜索工具，也不是一个只会聊天的 AI。它更像是一个围绕本地资料库工作的 AI 阅读、检索和调查工具。</p>
 <p>用户可以把本地文档、项目代码、笔记、PDF、Word、Markdown 等资料加入一个资料库，然后用自然语言提问。区别是：资料不上传云端，索引和 AI 推理都尽量在本地完成。</p>
 <p>所以，这个项目的第一目标可以很明确：</p>
-<blockquote>做一个本地资料库搜索支援系统。</blockquote>
+<blockquote>
+<p>做一个本地资料库搜索支援系统。</p>
+</blockquote>
 <p>在这个基础上，再逐步加入更适合个人工程和本地项目管理的能力。比如根据用户输入的问题，在现有工程里的文档、代码、SQL、配置和接口说明中搜索相关内容，最后输出命中的文件、位置和相关上下文。</p>
 <p>简单说，它要解决的是这个问题：</p>
-<blockquote>用户用自然语言提问，系统能在本地资料库里找到真实依据。</blockquote>
+<blockquote>
+<p>用户用自然语言提问，系统能在本地资料库里找到真实依据。</p>
+</blockquote>
 <p>例如用户问：</p>
-<blockquote>归档状态影响哪里？</blockquote>
+<blockquote>
+<p>归档状态影响哪里？</p>
+</blockquote>
 <p>普通全文搜索只能搜索“归档”两个字。如果代码里实际叫 <code>archive_flag</code>、<code>storage_status</code> 或 <code>ArchiveService</code>，就很容易漏掉。</p>
 <p>本地 AI 的价值就在这里：它负责把人的模糊问题，翻译成资料库和项目里真实存在的关键词。</p>
 <h2>核心目标</h2>
@@ -92,7 +241,9 @@ AI 负责整理出处</code></pre>
 <h2>明确不做的范围</h2>
 <p>这个项目不是 AI 智能分析系统。</p>
 <p>它的定位应该是：</p>
-<blockquote>本地搜索支援系统。</blockquote>
+<blockquote>
+<p>本地搜索支援系统。</p>
+</blockquote>
 <p>它负责帮助用户从本地资料库中找到出处、内容和上下文，但不替用户做判断。</p>
 <p>明确不做：</p>
 <ul>
@@ -165,7 +316,9 @@ AI 负责整理出处</code></pre>
 数据库词：photo_status, archived_at, storage_status</code></pre>
 <p>有了这层词典以后，用户再问文档问题或者工程问题，AI 都能把自然语言转换成更贴近资料库的关键词。</p>
 <p>例如在工程资料库里，用户问：</p>
-<blockquote>归档状态影响哪里？</blockquote>
+<blockquote>
+<p>归档状态影响哪里？</p>
+</blockquote>
 <p>AI 就不是凭空猜关键词，而是结合资料词典和项目词典扩展搜索计划：</p>
 <pre><code>archive
 archive_flag
@@ -224,7 +377,9 @@ AI 整理出处和片段</code></pre>
 <h2>第二层：AI 意图转换</h2>
 <p>AI 主要负责把用户问题转换成搜索计划。普通文档问题可以转换成语义检索计划，工程问题可以进一步转换成关键词和符号检索计划。</p>
 <p>例如用户问：</p>
-<blockquote>增加归档状态会影响哪里？</blockquote>
+<blockquote>
+<p>增加归档状态会影响哪里？</p>
+</blockquote>
 <p>AI 输出的不是最终答案，而是一份搜索计划：</p>
 <pre><code>核心关键词：
 archive
@@ -394,7 +549,9 @@ storage_status</code></pre>
 <h2>结论</h2>
 <p>这个系统的核心价值不是“AI 替我凭空总结一切”。</p>
 <p>更准确地说，是：</p>
-<blockquote>AI 把人的模糊问题翻译成资料库里的真实检索计划，索引系统找到真实证据，AI 再把证据整理成带引用的回答。</blockquote>
+<blockquote>
+<p>AI 把人的模糊问题翻译成资料库里的真实检索计划，索引系统找到真实证据，AI 再把证据整理成带引用的回答。</p>
+</blockquote>
 <p>这个边界很重要。</p>
 <p>AI 不负责凭空判断事实，事实必须来自本地索引。AI 负责的是理解用户问题、扩展检索关键词、整理命中片段和表达出处关系。</p>
 <p>所以，产品主线应该先定成：做一个本地资料库搜索支援系统。</p>

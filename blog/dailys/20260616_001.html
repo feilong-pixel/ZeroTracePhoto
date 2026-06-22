@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
@@ -20,6 +20,149 @@
 		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
 		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
 		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
 	</style>
 </head>
 <body>
@@ -61,14 +204,18 @@
 <p>这篇还是和 AI 闲聊后整理出来的一段想法。原始表达比较散，后来请 AI 帮忙顺了一下。</p>
 <p>前一段时间，我一直在想 AI 编程、AI 协作、AI 对工程师的影响。想得多了以后，反而觉得可以先收一收。</p>
 <p>宏观上的事情，可能会进入一段很长的社会拉锯战。这个不是我一个人能想清楚的，也不是我现在真正能处理的。对我来说，更现实的问题是：</p>
-<blockquote>如果以后 AI 会长期参与开发，那一个工程师应该怎样训练自己？</blockquote>
+<blockquote>
+<p>如果以后 AI 会长期参与开发，那一个工程师应该怎样训练自己？</p>
+</blockquote>
 <p>我把这段时间做 ZeroTraceBrowser 和 ZeroTraceMobile 的经历回头看了一遍，发现里面其实有一条很清楚的路线。</p>
 <p>一开始，我只是让 AI 帮我写代码。后来，我开始让 AI 帮我整理设计。再后来，我发现自己做的不是一个个孤立工具，而是一套逐渐成形的个人工具链。</p>
 <p>这篇文章不是教程，也不是给别人定标准。只是把我自己的体验写下来，算是给这段时间的 AI 研究画一个阶段性的句号。</p>
 <h2>第一阶段：AI 写代码，我跟着救火</h2>
 <p>最开始做 ZeroTraceBrowser 的时候，我对“图片浏览器”其实没有什么概念。</p>
 <p>当时的想法很简单：</p>
-<blockquote>不就是一个图片浏览器吗？</blockquote>
+<blockquote>
+<p>不就是一个图片浏览器吗？</p>
+</blockquote>
 <p>所以我直接让 Codex 帮我实现浏览界面。然后把上一个 AI 项目里做过的导入工具接进来，做成图片导入和去重的入口。数据先用 JSON 保存。</p>
 <p>一切看起来都挺好。</p>
 <p>有导入界面，有重复查看界面，有删除恢复界面，图片也能浏览，数据也能保存。照这个感觉，好像两三天就能结束。</p>
@@ -85,7 +232,9 @@
 <li>每个地方都像是在给另一个地方打补丁。</li>
 </ul>
 <p>这是我在 AI 编程里踩到的第一个大坑：</p>
-<blockquote>AI 可以很快帮你写出功能，也可以很快帮你写出混乱。</blockquote>
+<blockquote>
+<p>AI 可以很快帮你写出功能，也可以很快帮你写出混乱。</p>
+</blockquote>
 <p>如果人没有先定义结构，AI 并不会自动替你把系统收住。它会顺着当前代码继续写，而当前代码如果已经开始歪了，后面的代码只会更歪。</p>
 <h2>第二阶段：我开始意识到，结构比功能更重要</h2>
 <p>ZeroTraceBrowser 第一版能跑以后，我反而开始不安心。</p>
@@ -107,7 +256,9 @@
 <p>尤其是时间线更新。一开始程序不断更新时间线，像是自己停不下来。后来重新定义了时间线的更新原则，哪些时候需要更新，哪些时候不应该动。这个原则确定以后，系统才终于平静下来。</p>
 <p>再后来，我又发现各个页面还在互相打补丁。于是又重新规划每个页面的职责和边界，让每个页面各安其位。</p>
 <p>到这里，我才真正明白一件事：</p>
-<blockquote>AI 编程里，最重要的不是让 AI 多写代码，而是让系统有边界。</blockquote>
+<blockquote>
+<p>AI 编程里，最重要的不是让 AI 多写代码，而是让系统有边界。</p>
+</blockquote>
 <p>没有边界，AI 越能写，系统越容易膨胀。</p>
 <p>有了边界，AI 才能变成真正的助手。</p>
 <h2>第三阶段：先和 AI 聊设计，再让 AI 写代码</h2>
@@ -125,7 +276,9 @@
 <p>我先把前一个项目里留下来的经验带过来：开发前先和 AI 聊设计。</p>
 <p>我让 AI 帮我整理需求，拆分模块，设计接口，最后形成设计文档和接口文档。等我看完以后，觉得方向没有问题，再让 AI 开始实现。</p>
 <p>ZeroTraceBrowser 侧的开发几乎就是一句话：</p>
-<blockquote>按照设计文档，把接口实现出来。</blockquote>
+<blockquote>
+<p>按照设计文档，把接口实现出来。</p>
+</blockquote>
 <p>然后它就结束了。</p>
 <p>这件事给我的冲击很大。</p>
 <p>因为同样是 AI 写代码，前后的体验完全不同。</p>
@@ -139,7 +292,9 @@
 <h2>第四阶段：AI 写得快，不代表人可以不懂</h2>
 <p>不过，这里也不能得出一个太轻松的结论。</p>
 <p>ZeroTraceMobile 很快跑起来，不代表我就真的掌握了 Android 开发。相反，它让我更清楚地看到一个问题：</p>
-<blockquote>AI 可以帮我跨过很多实现细节，但不能替我承担理解不足带来的风险。</blockquote>
+<blockquote>
+<p>AI 可以帮我跨过很多实现细节，但不能替我承担理解不足带来的风险。</p>
+</blockquote>
 <p>如果只是做一个能跑的版本，AI 很强。</p>
 <p>但如果我要长期维护它，还是得知道：</p>
 <ul>
@@ -178,12 +333,16 @@
 <li>出错以后应该在哪里恢复。</li>
 </ul>
 <p>这可能才是我现在最想留下来的经验：</p>
-<blockquote>AI 时代真正值得训练的，不是单点功能开发能力，而是工具链构建能力。</blockquote>
+<blockquote>
+<p>AI 时代真正值得训练的，不是单点功能开发能力，而是工具链构建能力。</p>
+</blockquote>
 <p>一个工具可以很快写出来。</p>
 <p>但一套工具链要长期可用，就必须有边界、流程、文档和维护方式。</p>
 <h2>我理解的 AI 行人才</h2>
 <p>如果要给“AI 行人才”下一个很朴素的定义，我现在会这样说：</p>
-<blockquote>AI 行人才不是最会让 AI 写代码的人，而是能让 AI 在自己的结构里工作的人。</blockquote>
+<blockquote>
+<p>AI 行人才不是最会让 AI 写代码的人，而是能让 AI 在自己的结构里工作的人。</p>
+</blockquote>
 <p>这里面至少有几种能力。</p>
 <p>第一，是拆问题的能力。</p>
 <p>不能把一个模糊的大问题直接丢给 AI，然后期待它自动变成可靠系统。人要先把问题拆成模块、接口、数据流和可验证的步骤。</p>
@@ -206,8 +365,9 @@
 <p>第六步，保留文档。因为文档不仅是给人看的，也是以后让 AI 重新理解系统的入口。</p>
 <p>这条路线并不高大上，也没有什么神秘感。</p>
 <p>它更像是一个很普通的工程习惯：</p>
-<blockquote>先想清楚，再让 AI 做。</blockquote>
-<blockquote>做完以后，再确认自己真的能解释。</blockquote>
+<blockquote>
+<p>先想清楚，再让 AI 做。 做完以后，再确认自己真的能解释。</p>
+</blockquote>
 <h2>结语</h2>
 <p>回头看 ZeroTraceBrowser 和 ZeroTraceMobile，我觉得自己不是突然掌握了什么 AI 秘技。</p>
 <p>更像是慢慢明白了一件普通的事：</p>
