@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与 AI 的杂谈之 AI时代的软件开发：从代码生产线到系统演化工程">
+	<title>AI时代的软件开发：从“代码生产线”到“系统演化工程” - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">AI时代的软件开发：从“代码生产线”到“系统演化工程”</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>AI时代的软件开发：从“代码生产线”到“系统演化工程”</h1>
+		<div class="daily-meta">2026-06-22 12:49:07</div>
+<p>过去的软件开发，很多时候被理解为一条线性的“代码生产线”：需求进入、设计输出、程序员编码、测试验证，最终系统上线。</p>
+<p>在这种流水线模式下，程序员更接近于生产线上的“技术工人”，核心任务是负责把自然语言描述的设计方案转换成可运行的代码指令。因此，随着生成式 AI 的爆发，各种讨论自然集中在一个悬而未决的问题：</p>
+<p>“AI 会不会替代程序员？”</p>
+<p>然而，这道命题可能从一开始就看错了方向。因为在真实的商业世界里，软件开发真正的成本和困难，从来都不只是代码本身。</p>
+<p>---</p>
+<h2>第一幕：代码生产线时代的“信息漏斗”</h2>
+<p>在传统的线性开发模式中，每个角色各司其职，守着自己的环节。这种隔离式的分工，在项目推进过程中制造了一个无法回避的“信息漏斗”：</p>
+<pre><code>[ 客户原始需求 (业务语言) ]
+           │
+           ▼ (沟通偏差：损失 30% 业务边界)
+[ 系统功能设计 (技术设计书) ]
+           │
+           ▼ (理解偏差：损失 20% 极端边界场景)
+[ 最终实现代码 (编程指令语言) ]</code></pre>
+<p>客户用业务语言描述设想，设计人员将其整理为系统设计书，程序员再将其翻译为代码。在这个传递链条中，关于“为什么这样设计”、“这个规则背后的商业背景是什么”等关键隐性知识在不断损耗。</p>
+<p>最终，代码虽然上线运行了，但系统很快就陷入了“为什么这样设计？”、“这个规则是谁决定的？”、“这个逻辑为什么不能改？”的疑问中。许多答案被永久地埋藏在历史的尘埃里。</p>
+<p>---</p>
+<h2>第二幕：AI 进场，击碎“编写”的瓶颈</h2>
+<p>生成式 AI 出现后，最先受到颠覆的是纯粹的代码编写环节。因为代码是一种规则明确、结构化和严谨性极高的表达符号，这恰恰是大语言模型最擅长解决的领域。</p>
+<p>如今，AI 可以快速执行以下任务：</p>
+<ul>
+<li>瞬间生成功能代码模板；</li>
+<li>自动补全测试用例；</li>
+<li>精准分析错误日志并提出修复方案。</li>
+</ul>
+<p>这就好比在组装流水线上引入了高精度的自动化组装臂，过去需要耗费大量人工的“手写实现工作”开始被极度压缩。</p>
+<div class="callout callout-note">
+    <div class="callout-title"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1.5 7a.5.5 0 0 0 0-1H9V7a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 0 0 1h1V11H7a.5.5 0 0 0 0 1h2.5Z"></path></svg>提示</div>
+    <p>组装臂的引入提升了生产速度，但不等于项目交付周期会同比例缩短。如果设计蓝图本身是错的，机械臂只会以 10 倍的速度生产出废品。当编码不再是瓶颈，软件工程真正的软肋开始暴露。</p>
+</div>
+<p>---</p>
+<h2>第三幕：城市扩建悖论 —— 遗留系统的真实挑战</h2>
+<p>企业软件开发，从来都不是在一块空旷的平地上建造一座完美的崭新建筑，而更像是在一座历史悠久、不断扩建的城市中进行市政基建。</p>
+<p>在这座“系统城市”中：</p>
+<ul>
+<li>地下埋着十几年前老前辈布下的陈旧管网；</li>
+<li>地表纠缠着历任开发团队为了应付紧急上线追加的临时线路；</li>
+<li>许多核心服务贴着“能跑就行，没人敢碰”的标签；</li>
+<li>甚至某些关键业务的豁免规则，只存在于已退休架构师的记忆或某封过往的邮件里。</li>
+</ul>
+<div class="callout callout-important">
+    <div class="callout-title"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 5Zm0 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path></svg>重要</div>
+    <p>系统中最宝贵的，往往不是已经写好的代码行，而是<strong>系统拓扑结构与规则背后的隐性知识（Why）</strong>。AI 可以秒级生成一根新管子，但它无法直接感知这根管子在错综复杂的地下网网中应该接在哪个节点，更不知道触碰哪根看似多余的旧线会导致全城停电。</p>
+</div>
+<p>---</p>
+<h2>第四幕：系统演化工程的兴起</h2>
+<p>因此，未来的软件开发必将从“代码生产线”范式，跃迁为“系统演化工程”范式。</p>
+<p>开发的核心任务不再只是“写出新功能”，而是“让已有的复杂系统安全、持续地演化”：</p>
+<pre><code>【传统写代码】: ──[ 新增管线 ]──&gt; 完工 (忽略对老系统拓扑的连带影响)
+
+【系统演化工程】:
+[已有老管网] ◄─── (影响范围分析) ───► [新管线连接点]
+                        │
+                        ▼ (安全与合规审计)
+                  [ 自动化回归验证 ] ──&gt; [系统持续演化]</code></pre>
+<p>在这套范式中，AI 负责高速“造管子”，而程序员的核心价值则向更高维度的架构决策转移：</p>
+<ol>
+<li><strong>分析影响范围</strong>：研判新增逻辑对现有业务拓扑的影响；</li>
+<li><strong>选择重构还是追加</strong>：在技术债与交付速度之间寻找平衡点；</li>
+<li><strong>保护老旧业务逻辑</strong>：建立坚实的自动化安全网，确保系统在进化过程中不发生退化。</li>
+</ol>
+<p>---</p>
+<h2>第五幕：人机协同时代的岗位重组</h2>
+<p>在人机协同的新工程纪元中，研发链条上的各角色职能都将迎来深刻重组：</p>
+<ul>
+<li><strong>程序员 ──► 系统验证者与审计员</strong>：从编写代码的“运动员”变成审阅 AI 代码、把控并发与内存风险、调试极端场景的“裁判员”。</li>
+<li><strong>架构师 ──► 系统演化方向的航海士</strong>：重心从绘制静态设计图转向系统重构、链路理顺与技术债管控，避免架构在 AI 的高频修改中坍塌。</li>
+<li><strong>业务人员 ──► 业务规则的精准定义者</strong>：不能再依靠“适当处理”、“高端大气”等模糊词汇糊弄过去，必须清晰定义业务的判定逻辑和边界。</li>
+</ul>
+<p>负责人也需要更深地参与决策：这次修改的商业动机是什么？依据是什么？风险在哪里？谁来为此承担最终责任？</p>
+<p>---</p>
+<h2>结语：以知识驱动系统持续进化</h2>
+<p>AI 时代真正改变的，可能不是谁会写代码。</p>
+<p>而是谁必须解释：<strong>为什么</strong>。</p>
+<p>过去许多软件系统依靠经验和侥幸“凑合跑”；未来，系统必须依靠结构化的知识与严密的规则才能稳健前行。代码编写可以交由 AI 自动生成，但系统存在的商业逻辑与演化路径，需要被人类真正理解和掌控。</p>
+<p>从代码生产线，到系统演化工程 —— 这才是 AI 给软件开发带来的深层变革。</p>
+<p class="footnote"><strong>注：</strong>本文灵感来源于与 AI 围绕“系统架构可持续演化”的深度交流。代码是工具，理解与构建高健壮性系统才是软件工程师的立身之本。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月22日 最終更新 : 2026年06月22日</div>
+	</footer>
+</body>
+</html>
