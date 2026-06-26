@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与 AI 的杂谈之 AI时代的软件工程治理">
+	<title>AI时代的软件工程治理 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">AI时代的软件工程治理</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>AI时代的软件工程治理</h1>
+		<div class="daily-meta">2026-06-26 20:23:08</div>
+<h2><strong>一、引言：从“如何编程”到“如何治理”</strong></h2>
+<p>在探讨 AI 如何改变软件开发时，很多人的关注点还停留在“Prompt 怎么写”或者“代码生成速度”上。然而，随着 AI 模型的快速演进，我们已经开始触及一个更深层次、更根本的问题：<strong>AI 时代的软件工程治理 (Software Engineering Governance)</strong>。</p>
+<p>这个演进过程，可以被划分为三个逐渐深入的层次：</p>
+<pre><code>graph TD
+    A[第一层: AI 负责实现] --&gt;|解决&#39;怎么写代码&#39;| B[第二层: AI 负责制定规范]
+    B --&gt;|解决&#39;如何规范工程&#39;| C[第三层: AI 负责判断业务]
+    C --&gt;|解决&#39;谁来决策和负责&#39;| D[终极命题: 业务决策与工程治理]</code></pre>
+<ul>
+<li><strong>第一层：AI 负责实现（现已基本实现）</strong></li>
+<li>程序员提出需求（如“实现一个订单管理模块”），AI 负责编写并生成代码。在 Cursor、Claude Code 等工具的加持下，这一步已经非常成熟。</li>
+<li><strong>第二层：AI 负责制定规范（未来几年即将普及）</strong></li>
+<li>AI 通过分析整个代码库，自动建议适合项目的架构和规范。例如：“本项目建议使用 DDD 架构，采用事件驱动模式，统一日志格式，且单元测试覆盖率需达到 80%。”程序员只需点击批准，后续整个项目便在 AI 自动维护的规范下演进。</li>
+<li><strong>第三层：AI 负责判断业务（这才是真正的难题）</strong></li>
+<li>客户提出模糊需求：“我需要一个审批流程。” AI 凭借通用经验建议：“建议使用三级审批流程。”</li>
+<li>但事实上，不同企业的业务场景差异巨大。三级审批是否符合公司的权责规定？审批顺序是否需要反向？AI 无法得知，甚至连程序员自己可能也需要与业务方进行多轮博弈才能明确。这已经脱离了技术实现，进入了<strong>业务决策</strong>的深水区。</li>
+</ul>
+<h2><strong>二、核心命题：谁拥有最终的业务决策权？</strong></h2>
+<p>在业务决策的语境下，并不存在绝对的技术对错。</p>
+<blockquote>
+<p>AI 说：“按照库存管理最佳实践，应当采用先进先出（FIFO）原则。” 但企业因为特殊的财务或税务考量，硬性规定必须采用后进先出（LIFO）原则。</p>
+</blockquote>
+<p>AI 无法通过“逻辑推理”得出这一结论，因为<strong>这是企业自身的业务决策和主观选择</strong>。</p>
+<p>这也就推导出了“个人项目”与“企业软件”在 AI 时代完全不同的开发范式：</p>
+<ul>
+<li><strong>个人/低风险开发模式</strong>：开发者只想快速上线一个记账 App，他们不在乎日志格式、系统架构或测试覆盖率，只要功能跑通即可。此时可以让 AI 代理全部工作并直接发布，因为<strong>开发者自己承担全部风险</strong>。</li>
+<li><strong>企业级软件开发模式</strong>：企业系统牵涉资金、合同、法律、审计与安全。AI 可以协助定义规范、编写代码、运行测试，但 <strong>AI 绝对无法承担任何法律或商业后果</strong>。</li>
+</ul>
+<h2><strong>三、风险驱动：我们到底要不要自己做测试？</strong></h2>
+<p>经常有开发者问：“既然 AI 能写测试，我们还要不要自己测？” 这个问题的底层逻辑，其实取决于：<strong>你愿意并能够承担多大的风险？</strong></p>
+<ul>
+<li><strong>场景一（低风险）</strong>：开发一个计算 BMI 的小工具。AI 负责编写、AI 负责测试，开发者直接一键发布。即使出现计算 Bug，影响微乎其微，这种“全权托管”是合理的。</li>
+<li><strong>场景二（高风险）</strong>：开发银行转账系统。AI 同样负责了开发与全部测试，作为程序员或项目负责人，你敢不看一眼就直接上线吗？</li>
+</ul>
+<p>现在几乎没有企业敢这么做。这并非因为 AI 的技术能力不够，而是<strong>因为没有人敢在责任真空中运行核心系统</strong>。</p>
+<h2><strong>四、AI 自治等级 (AI Autonomy Levels)</strong></h2>
+<p>为了更好地评估 AI 在软件工程中的参与度与治理边界，我们可以将 AI 的自治能力划分为以下四个等级：</p>
+<p>| 自治等级 | 角色定位 | AI 职责 | 人类职责 | 适用场景 | | :--- | :--- | :--- | :--- | :--- | | <strong>L0</strong> | <strong>AI 辅助工具</strong> | 仅负责代码片段生成、函数补全。 | 负责架构设计、业务定义、代码实现与测试。 | 传统编码、复杂重构。 | | <strong>L1</strong> | <strong>AI 协作者</strong> | 负责完整功能的代码实现。 | 负责核心架构、代码审查 (Code Review) 与测试。 | 常规业务功能开发。 | | <strong>L2</strong> | <strong>AI 高级工程师</strong> | 负责架构建议、规范制定、代码编写及自动化测试。 | 负责业务决策、最终质量确认与价值把关。 | 大部分企业级业务模块开发。 | | <strong>L3</strong> | <strong>自主 AI 代理</strong> | 全权负责需求分析、架构设计、代码实现、测试与自动上线。 | 仅进行极高层面的宏观目标设定，完全不参与细节。 | 低风险工具、标准化SaaS、个人验证项目。 |</p>
+<p>从技术演进来看，<strong>L3 自治在未来并非不可逾越</strong>。在低风险、标准化程度极高的领域，AI 完全自主开发与部署会成为常态。</p>
+<p>然而，在企业核心业务系统中，天花板并不是 AI 的技术极限，而是<strong>责任的归属 (Accountability)</strong>。</p>
+<h2><strong>五、总结：治理的核心是责任归属</strong></h2>
+<p>如果一个系统上线后造成了数千万甚至上亿元的经济损失：</p>
+<ul>
+<li>AI 无法去法庭当被告；</li>
+<li>企业不能把“这是 AI 做的决定”作为免责条款；</li>
+<li>最终的法律责任与经济损失，依然必须由有法人资格的企业和人来承担。</li>
+</ul>
+<p>因此，即使未来的 AI 将测试覆盖率做到 100%、代码零 Bug，企业在软件工程治理上仍将坚守一条底线：</p>
+<blockquote>
+<p><strong>AI 可以执行 99% 的工程落地，但涉及业务目标的定义、风险的接受度以及最终的上线决策，话语权必须牢牢掌握在具有责任主体的人类手中。</strong></p>
+</blockquote>
+<p>AI 时代，我们讨论的终极问题已经不再是“AI 能不能写好代码”，而是<strong>当 AI 几乎无所不能时，人类应当保留哪些核心决策权，以及如何建立人机协同的责任边界</strong>。这才是软件工程治理的真正价值所在。</p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月26日 最終更新 : 2026年06月26日</div>
+	</footer>
+</body>
+</html>
