@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="与 AI 的杂谈之 阿福（Alpha-F）&#183; 守护者">
+	<title>阿福（Alpha-F）&#183; 守护者 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">阿福（Alpha-F）&#183; 守护者</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>阿福（Alpha-F）&#183; 守护者</h1>
+		<div class="daily-meta">2026-06-26 09:56:03</div>
+<p><img src="../common/images/20260626/Gemini_Generated_Image_p9ibeap9ibeap9ib.png" alt="阿福（Alpha-F）"></p>
+<h2>&#128736;️ 一、 核心定位与设计哲学</h2>
+<p>A01 型“守护者”智能犬绝非传统的“冷冰冰的惩戒机器”，亦非单纯的“移动监控摄像头”。它的核心设计哲学是<strong>“将日常柔性交互与高烈度机动防护完美融合的警察 AI 战友”</strong>。</p>
+<blockquote>
+<p><strong>核心哲学：</strong> 最强大的力量不需要通过咆哮来证明，最坚固的防线能以温和友善的形态呈现。</p>
+</blockquote>
+<ul>
+<li><strong>双重减压：</strong> 承担高风险的试探性工作，以强大的物理存在感分担警员的现场防范压力；心理上为警员提供如传统警犬般的“战友陪伴感”，同时以温和的形态向普通市民传递安全与亲和感。</li>
+<li><strong>信息压制：</strong> 改变传统执法中“人脑记忆有限”的痛点，通过强大的现场多模态感知与生物特征建模，压缩现场的不确定性。</li>
+<li><strong>规则防线：</strong> 不具备直接性主动攻击武器。作为“移动防护屏障”，在紧急状态下利用高机动性与自重拉开危险距离、阻止逃逸，实现极致无害化的被动防御。</li>
+</ul>
+<h2>&#128208; 二、 物理规格参数</h2>
+<ul>
+<li><strong>型号编码：</strong> A01 型 “守护者” (Guardian)</li>
+<li><strong>肩高：</strong> 约 90 厘米（威慑但不恐怖，视觉威慑感强且兼顾低重心稳定性，适配地铁闸机高度）</li>
+<li><strong>全长：</strong> 约 140 - 160 厘米（匹配警用 SUV 后备箱/后座部署空间）</li>
+<li><strong>整机自重：</strong> 约 125 公斤（高密度复合装甲与大扭矩动力系统带来的自重，确保物理冲撞与阻挡时的绝对压制力）</li>
+<li><strong>外壳材质：</strong> 碳纤维装甲骨架外包覆亲肤温控防撞硅胶防护层。既具备防弹、耐磨、IP67 级防尘防泼溅的警用机能，又提供温暖、防滑的触觉体验，消除金属冷酷感。</li>
+<li><strong>驱动与动力：</strong> 采用高扭矩密度力控电机与<strong>轮足自适应复合动力系统</strong>。平地可切换为低能耗、超静音（运行噪声 &lt; 15 dB）的轮式滑行；复杂地形或台阶无缝转换为柔性四足步态。</li>
+</ul>
+<h2>&#129504; 三、 核心功能模块解析</h2>
+<h3>1. 头部：多模态复合感知与交互系统</h3>
+<ul>
+<li><strong>全息情感仿生眼：</strong> 面部集成全息仿生显示眼，平时显示温和可亲的“豆豆眼”及淡蓝/暖粉色呼吸指示灯，大幅度降低市民对抗与戒备心理；切入警备状态时，可联动额头与面侧的红蓝交替警用提示灯。</li>
+<li><strong>视觉与热成像：</strong> 集成高分辨率多目融合视觉系统，外加红外/热成像仪。在夜间、浓烟、混乱环境中可瞬间捕捉异常热源与人员活动。</li>
+<li><strong>3D 场景建模：</strong> 顶部配备高精度激光雷达 (LiDAR)，实时对复杂地形、狭窄巷道、建筑内部进行三维建模，并为警员提示最佳路线与潜在风险。</li>
+</ul>
+<h3>2. 胸部：生物认证与现场证据采集单元</h3>
+<ul>
+<li><strong>全特征记录：</strong> 改变以往“逃离现场即消失”的犯罪预期。AI 犬能够主动移动选择最佳角度，在靠近目标的数秒内，瞬间提取并记录在场人员的<strong>身高、体型比例、衣着特征、步态轨迹及面部/生物特征点</strong>，生成结构化现场档案。</li>
+<li><strong>隐私伦理模糊：</strong> 在社区及日常陪伴模式下，系统自动对无关人员、儿童等隐私信息进行高动态模糊化处理。</li>
+</ul>
+<h3>3. 四肢：柔性力控与轮足复合系统</h3>
+<ul>
+<li><strong>轮足复合双模切换：</strong> 足端轮足一体，在平滑路面以轮式滑行，在沙石、台阶等地形切换为仿生四足漫步，具备优秀的越障能力。</li>
+<li><strong>零力矩防夹关节：</strong> 四肢搭载主动阻抗力控算法与高精度扭矩传感器。在日常巡护交互中，当系统探测到外力拉扯时瞬间进入“零力矩自由状态”，防止因机械刚性对市民或儿童造成夹伤。</li>
+</ul>
+<h3>4. 身体与尾板：模块化任务挂载平台</h3>
+<ul>
+<li><strong>主电源与核心：</strong> 躯干内部为高效能电池管理系统（支持热插拔）与高算力 AI 边缘计算核心。</li>
+<li><strong>背部收纳机械臂（标配）：</strong> 滑轨式高柔顺性特制机械臂。平时收纳于背部，辅助模式下可展开，为路人、老人提供平稳的倚靠与搀扶支撑（采用力-位混合控制）。</li>
+<li><strong>选配拓展接口：</strong> 可根据任务挂载<strong>搜索救援模块</strong>（生命探测仪/小型设备舱）、<strong>破拆辅助</strong>、或<strong>战术防护盾</strong>。</li>
+</ul>
+<h2>&#129309; 四、 工作模式与现场响应逻辑</h2>
+<p>AI 执勤犬不进行复杂的法律裁判，其行动严格遵循<strong>分层规则限制</strong>与<strong>人类确认机制</strong>。系统内置四大工作模式，且在战术警备状态下与警员的现场协同响应逻辑相契合：</p>
+<h3>1. 警备状态下的三级响应逻辑 (Tactical Response)</h3>
+<pre><code>[一级：观察提醒] ──&gt; 环境扫描、多目标追踪 ──&gt; 语音/战术平板提醒警员：“目标快速接近，侧后方有异常”
+      │
+[二级：物理阻隔] ──&gt; 异常动作/危险迫近 ──&gt; 主动切入站位 ──&gt; 利用 125 kg 机身与背部防护盾形成物理屏障，拉开安全距离
+      │
+[三级：极端防护] ──&gt; 执勤人员遭受明确攻击 ──&gt; 触发紧急规则 ──&gt; 高速冲撞 (非致伤)、压制、限制逃离，等待警员决策</code></pre>
+<ul>
+<li><strong>指挥控制方式：</strong> 支持警员<strong>语音直接唤醒</strong>、<strong>战术手势识别</strong>，以及通过<strong>手腕/平板终端</strong>进行权限分级授权。</li>
+</ul>
+<blockquote>
+<p>&#128161; <strong>设计团队备忘：</strong> 本版外形成功在“威慑装备”与“可靠伙伴”之间找到了心理平衡点。轮足双模及温和友善的交互设计，能有效规避人形机器人带来的强烈社会对抗心理。</p>
+</blockquote>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月26日 最終更新 : 2026年06月26日</div>
+	</footer>
+</body>
+</html>
