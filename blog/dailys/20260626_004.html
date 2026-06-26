@@ -155,6 +155,25 @@
 			color: #cf222e;
 		}
 
+		/* Table styling */
+		.daily-article table {
+			width: 100%;
+			margin: 1.5rem 0;
+			border-collapse: collapse;
+			font-size: 0.95rem;
+		}
+		.daily-article th, .daily-article td {
+			padding: 0.6rem 0.8rem;
+			border: 1px solid #dee2e6;
+		}
+		.daily-article th {
+			background-color: #f8f9fa;
+			font-weight: 600;
+		}
+		.daily-article tbody tr:nth-of-type(even) {
+			background-color: rgba(0, 0, 0, 0.02);
+		}
+
 		/* Footnote styling */
 		.daily-article .footnote {
 			font-size: 0.9rem;
@@ -237,7 +256,47 @@
 <p>现在几乎没有企业敢这么做。这并非因为 AI 的技术能力不够，而是<strong>因为没有人敢在责任真空中运行核心系统</strong>。</p>
 <h2><strong>四、AI 自治等级 (AI Autonomy Levels)</strong></h2>
 <p>为了更好地评估 AI 在软件工程中的参与度与治理边界，我们可以将 AI 的自治能力划分为以下四个等级：</p>
-<p>| 自治等级 | 角色定位 | AI 职责 | 人类职责 | 适用场景 | | :--- | :--- | :--- | :--- | :--- | | <strong>L0</strong> | <strong>AI 辅助工具</strong> | 仅负责代码片段生成、函数补全。 | 负责架构设计、业务定义、代码实现与测试。 | 传统编码、复杂重构。 | | <strong>L1</strong> | <strong>AI 协作者</strong> | 负责完整功能的代码实现。 | 负责核心架构、代码审查 (Code Review) 与测试。 | 常规业务功能开发。 | | <strong>L2</strong> | <strong>AI 高级工程师</strong> | 负责架构建议、规范制定、代码编写及自动化测试。 | 负责业务决策、最终质量确认与价值把关。 | 大部分企业级业务模块开发。 | | <strong>L3</strong> | <strong>自主 AI 代理</strong> | 全权负责需求分析、架构设计、代码实现、测试与自动上线。 | 仅进行极高层面的宏观目标设定，完全不参与细节。 | 低风险工具、标准化SaaS、个人验证项目。 |</p>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+  <th style="text-align: left;">自治等级</th>
+  <th style="text-align: left;">角色定位</th>
+  <th style="text-align: left;">AI 职责</th>
+  <th style="text-align: left;">人类职责</th>
+  <th style="text-align: left;">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align: left;"><strong>L0</strong></td>
+  <td style="text-align: left;"><strong>AI 辅助工具</strong></td>
+  <td style="text-align: left;">仅负责代码片段生成、函数补全。</td>
+  <td style="text-align: left;">负责架构设计、业务定义、代码实现与测试。</td>
+  <td style="text-align: left;">传统编码、复杂重构。</td>
+</tr>
+<tr>
+  <td style="text-align: left;"><strong>L1</strong></td>
+  <td style="text-align: left;"><strong>AI 协作者</strong></td>
+  <td style="text-align: left;">负责完整功能的代码实现。</td>
+  <td style="text-align: left;">负责核心架构、代码审查 (Code Review) 与测试。</td>
+  <td style="text-align: left;">常规业务功能开发。</td>
+</tr>
+<tr>
+  <td style="text-align: left;"><strong>L2</strong></td>
+  <td style="text-align: left;"><strong>AI 高级工程师</strong></td>
+  <td style="text-align: left;">负责架构建议、规范制定、代码编写及自动化测试。</td>
+  <td style="text-align: left;">负责业务决策、最终质量确认与价值把关。</td>
+  <td style="text-align: left;">大部分企业级业务模块开发。</td>
+</tr>
+<tr>
+  <td style="text-align: left;"><strong>L3</strong></td>
+  <td style="text-align: left;"><strong>自主 AI 代理</strong></td>
+  <td style="text-align: left;">全权负责需求分析、架构设计、代码实现、测试与自动上线。</td>
+  <td style="text-align: left;">仅进行极高层面的宏观目标设定，完全不参与细节。</td>
+  <td style="text-align: left;">低风险工具、标准化SaaS、个人验证项目。</td>
+</tr>
+</tbody>
+</table>
 <p>从技术演进来看，<strong>L3 自治在未来并非不可逾越</strong>。在低风险、标准化程度极高的领域，AI 完全自主开发与部署会成为常态。</p>
 <p>然而，在企业核心业务系统中，天花板并不是 AI 的技术极限，而是<strong>责任的归属 (Accountability)</strong>。</p>
 <h2><strong>五、总结：治理的核心是责任归属</strong></h2>

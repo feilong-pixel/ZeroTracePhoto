@@ -94,10 +94,12 @@ function Convert-MarkdownToHtml {
         inUl = $false
         inOl = $false
         inBlockquote = $false
+        inTable = $false
         hasPendingCharacter = $false
         pendingCharacter = ""
         pendingParenthetical = ""
     }
+    $tableAlignments = New-Object System.Collections.Generic.List[string]
 
     function Flush-Paragraph {
         if ($paragraph.Count -gt 0) {
@@ -121,6 +123,14 @@ function Convert-MarkdownToHtml {
         if ($state.inOl) {
             $html.Add("</ol>")
             $state.inOl = $false
+        }
+    }
+
+    function Close-Table {
+        if ($state.inTable) {
+            $html.Add("</tbody>")
+            $html.Add("</table>")
+            $state.inTable = $false
         }
     }
 
@@ -201,8 +211,11 @@ function Convert-MarkdownToHtml {
         }
     }
 
-    foreach ($line in $Lines) {
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        $line = $Lines[$i]
+
         if ($line -match '^\s*```') {
+            Close-Table
             Flush-Blockquote
             Flush-PendingCharacter
             Flush-Paragraph
@@ -223,6 +236,7 @@ function Convert-MarkdownToHtml {
         }
 
         if ([string]::IsNullOrWhiteSpace($line)) {
+            Close-Table
             Flush-Paragraph
             Close-Lists
             Flush-Blockquote
@@ -230,6 +244,7 @@ function Convert-MarkdownToHtml {
         }
 
         if ($line -match '^\s*\*\*【(.+)】\*\*\s*$') {
+            Close-Table
             Flush-Blockquote
             Flush-PendingCharacter
             Flush-Paragraph
@@ -239,6 +254,7 @@ function Convert-MarkdownToHtml {
         }
 
         if ($line -match '^\s*\*\*([^*]+)\*\*\s*([（(].+?[）)])?\s*[：:]\s*$') {
+            Close-Table
             Flush-Blockquote
             Flush-PendingCharacter
             Flush-Paragraph
@@ -250,6 +266,7 @@ function Convert-MarkdownToHtml {
         }
 
         if ($line -match '^\s*>\s?(.*)$') {
+            Close-Table
             Flush-Paragraph
             Close-Lists
             if (-not $state.inBlockquote) {
@@ -258,6 +275,102 @@ function Convert-MarkdownToHtml {
             }
             $blockquoteLines.Add($Matches[1])
             continue
+        }
+
+        # Check if table starts
+        if (-not $state.inTable -and $line -match '\|' -and ($i + 1 -lt $Lines.Count) -and $Lines[$i + 1] -match '^\s*\|?(\s*[:-]+\s*\|)+\s*$') {
+            Close-Lists
+            Flush-Paragraph
+            Flush-Blockquote
+            Flush-PendingCharacter
+            
+            $state.inTable = $true
+            
+            # Parse header row
+            $rawHeaderCells = $line.Split('|')
+            $headerCells = New-Object System.Collections.Generic.List[string]
+            for ($idx = 0; $idx -lt $rawHeaderCells.Length; $idx++) {
+                if (($idx -eq 0 -or $idx -eq ($rawHeaderCells.Length - 1)) -and [string]::IsNullOrWhiteSpace($rawHeaderCells[$idx])) {
+                    continue
+                }
+                $headerCells.Add($rawHeaderCells[$idx].Trim())
+            }
+            
+            # Parse separator row (which is at index $i + 1)
+            $i++
+            $separatorLine = $Lines[$i]
+            $rawSepCells = $separatorLine.Split('|')
+            $sepCells = New-Object System.Collections.Generic.List[string]
+            for ($idx = 0; $idx -lt $rawSepCells.Length; $idx++) {
+                if (($idx -eq 0 -or $idx -eq ($rawSepCells.Length - 1)) -and [string]::IsNullOrWhiteSpace($rawSepCells[$idx])) {
+                    continue
+                }
+                $sepCells.Add($rawSepCells[$idx].Trim())
+            }
+            
+            # Determine alignments
+            $tableAlignments.Clear()
+            foreach ($cell in $sepCells) {
+                $left = $cell.StartsWith(":")
+                $right = $cell.EndsWith(":")
+                if ($left -and $right) {
+                    $tableAlignments.Add("center")
+                } elseif ($right) {
+                    $tableAlignments.Add("right")
+                } elseif ($left) {
+                    $tableAlignments.Add("left")
+                } else {
+                    $tableAlignments.Add("")
+                }
+            }
+            
+            # Output table header
+            $headerHtml = New-Object System.Collections.Generic.List[string]
+            for ($c = 0; $c -lt $headerCells.Count; $c++) {
+                $align = if ($c -lt $tableAlignments.Count) { $tableAlignments[$c] } else { "" }
+                $styleAttr = if ($align) { " style=`"text-align: $align;`"" } else { "" }
+                $headerHtml.Add("<th$styleAttr>$(Convert-InlineMarkdown $headerCells[$c])</th>")
+            }
+            
+            $html.Add("<table class=`"table table-striped table-bordered`">")
+            $html.Add("<thead>")
+            $html.Add("<tr>")
+            foreach ($th in $headerHtml) {
+                $html.Add("  $th")
+            }
+            $html.Add("</tr>")
+            $html.Add("</thead>")
+            $html.Add("<tbody>")
+            continue
+        }
+
+        if ($state.inTable) {
+            if ($line -match '\|') {
+                # Parse body row
+                $rawCells = $line.Split('|')
+                $bodyCells = New-Object System.Collections.Generic.List[string]
+                for ($idx = 0; $idx -lt $rawCells.Length; $idx++) {
+                    if (($idx -eq 0 -or $idx -eq ($rawCells.Length - 1)) -and [string]::IsNullOrWhiteSpace($rawCells[$idx])) {
+                        continue
+                    }
+                    $bodyCells.Add($rawCells[$idx].Trim())
+                }
+                
+                $rowHtml = New-Object System.Collections.Generic.List[string]
+                for ($c = 0; $c -lt $bodyCells.Count; $c++) {
+                    $align = if ($c -lt $tableAlignments.Count) { $tableAlignments[$c] } else { "" }
+                    $styleAttr = if ($align) { " style=`"text-align: $align;`"" } else { "" }
+                    $rowHtml.Add("<td$styleAttr>$(Convert-InlineMarkdown $bodyCells[$c])</td>")
+                }
+                $html.Add("<tr>")
+                foreach ($td in $rowHtml) {
+                    $html.Add("  $td")
+                }
+                $html.Add("</tr>")
+                continue
+            } else {
+                Close-Table
+            }
         }
 
         Flush-Blockquote
@@ -305,6 +418,7 @@ function Convert-MarkdownToHtml {
 
     Flush-Paragraph
     Close-Lists
+    Close-Table
     Flush-Blockquote
     Flush-PendingCharacter
 
@@ -583,6 +697,25 @@ function New-PageHtml {
 		}
 		.daily-article .callout-caution .callout-title {
 			color: #cf222e;
+		}
+
+		/* Table styling */
+		.daily-article table {
+			width: 100%;
+			margin: 1.5rem 0;
+			border-collapse: collapse;
+			font-size: 0.95rem;
+		}
+		.daily-article th, .daily-article td {
+			padding: 0.6rem 0.8rem;
+			border: 1px solid #dee2e6;
+		}
+		.daily-article th {
+			background-color: #f8f9fa;
+			font-weight: 600;
+		}
+		.daily-article tbody tr:nth-of-type(even) {
+			background-color: rgba(0, 0, 0, 0.02);
 		}
 
 		/* Footnote styling */
