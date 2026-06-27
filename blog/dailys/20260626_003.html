@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
@@ -220,7 +220,7 @@
 	<main class="container daily-article">
 		<h1>AI时代的软件开发，应当先工程化，再智能化</h1>
 		<div class="daily-meta">2026-06-26 19:41:39</div>
-<h2><strong>一、核心论点：先工程化，再智能化</strong></h2>
+<h2 id="一核心论点先工程化再智能化"><strong>一、核心论点：先工程化，再智能化</strong></h2>
 <p>在 AI 辅助开发的时代，很多人一上来就会陷入对以下问题的思考：</p>
 <blockquote>
 <p><strong>“AI 应该怎么帮我做开发？”</strong></p>
@@ -239,12 +239,12 @@
     F --&gt; G[CI/CD 自动化流水线]
     G --&gt; H[AI 介入自主开发]</code></pre>
 <p>当这一整套软件工程规范建立并明确之后，AI 实际上就已经具备了<strong>“怎么开发”</strong>的前提条件。接下来，我们只需要引导它去解决具体的业务逻辑。</p>
-<h2><strong>二、AI 时代的软件开发三阶段模型</strong></h2>
+<h2 id="二ai-时代的软件开发三阶段模型"><strong>二、AI 时代的软件开发三阶段模型</strong></h2>
 <p>基于“先工程化，再智能化”的理念，我们可以将 AI 时代的软件开发提炼为一个结构清晰的<strong>三阶段模型</strong>：</p>
 <pre><code>graph LR
     A[1. 建立工程约束] --&gt; B[2. 业务实现]
     B --&gt; C[3. 业务验证]</code></pre>
-<h3><strong>1. 第一阶段：建立工程约束 (Engineering Constraints)</strong></h3>
+<h3 id="1-第一阶段建立工程约束-engineering-constraints"><strong>1. 第一阶段：建立工程约束 (Engineering Constraints)</strong></h3>
 <ul>
 <li><strong>核心目的</strong>：规定 AI <strong>“怎么开发”</strong>。</li>
 <li><strong>主要内容</strong>：由人类架构师或高级开发人员主导，为项目沉淀出一套可执行、清晰的规范体系。这包括：</li>
@@ -254,7 +254,7 @@
 <li><strong>日志与异常处理</strong>：规定在何处打印日志，以及异常如何统一捕获与抛出。</li>
 <li><strong>测试与部署规范</strong>：规定单元测试的写法和 CI/CD 自动化流水线的触发机制。</li>
 </ul>
-<h3><strong>2. 第二阶段：业务实现 (Business Implementation)</strong></h3>
+<h3 id="2-第二阶段业务实现-business-implementation"><strong>2. 第二阶段：业务实现 (Business Implementation)</strong></h3>
 <ul>
 <li><strong>核心目的</strong>：告诉 AI <strong>“做什么”</strong>，而不是“怎么做”。</li>
 <li><strong>主要内容</strong>：在这一阶段，开发人员不再需要向 AI 细致描述每一个技术细节，而只需抛出具体的业务目标。</li>
@@ -266,7 +266,7 @@
 <li>应当如何生成配套的单元测试和接口文档。</li>
 <li><strong>角色转变</strong>：AI 在此并非天马行空的“发明家”，而是成为团队中<strong>遵守规范、高效执行的高级开发人员</strong>。</li>
 </ul>
-<h3><strong>3. 第三阶段：业务验证 (Business Validation)</strong></h3>
+<h3 id="3-第三阶段业务验证-business-validation"><strong>3. 第三阶段：业务验证 (Business Validation)</strong></h3>
 <ul>
 <li><strong>核心目的</strong>：确认产出的代码<strong>“是不是客户真正需要的”</strong>。</li>
 <li><strong>主要内容</strong>：当编码工作基本结束后，开发流程的闭环并未完成，人与 AI 需要分工合作完成最后的质量与价值确认：</li>
@@ -276,14 +276,14 @@
 <li><strong>长期的运维与指标监控</strong>；</li>
 <li><strong>价值所在</strong>：尤其是<strong>“业务确认”</strong>环节，这涉及真实商业场景的博弈与人机交互，是目前 AI 无法替代的价值核心。</li>
 </ul>
-<h2><strong>三、该模型的深层价值与行业启示</strong></h2>
-<h3><strong>1. 符合经典的软件工程思想，重新定义高级开发者的价值</strong></h3>
+<h2 id="三该模型的深层价值与行业启示"><strong>三、该模型的深层价值与行业启示</strong></h2>
+<h3 id="1-符合经典的软件工程思想重新定义高级开发者的价值"><strong>1. 符合经典的软件工程思想，重新定义高级开发者的价值</strong></h3>
 <p>在传统的软件开发团队中，高级程序员（架构师）的价值往往不在于他写代码的速度有多快，而在于他能够制定出合理且易于维护的<strong>开发框架 (Framework)</strong>、<strong>规范 (Standard)</strong> 和<strong>架构 (Architecture)</strong>，从而让团队中的新人（初级开发）只负责聚焦于具体的业务实现。</p>
 <p>在 AI 时代，这一分工模式依然奏效，只是具体的“业务实现者”从初级程序员变为 AI。人类高级开发人员的工作非但没有贬值，反而更加聚焦于“制定工程约束”和“把关业务验证”两端。</p>
-<h3><strong>2. 解释了现代 AI 编程工具易用性飞跃的本质</strong></h3>
+<h3 id="2-解释了现代-ai-编程工具易用性飞跃的本质"><strong>2. 解释了现代 AI 编程工具易用性飞跃的本质</strong></h3>
 <p>为什么像 Cursor、Claude Code 等工具在近年来的体验有了质的提升？这并非仅仅因为 Prompt 工程越来越精妙，而是因为 <strong>AI 拥有了更强的“工程级上下文理解能力”</strong>。</p>
 <p>当 AI 能够瞬间理解一个大型工程从 <code>Controller</code> 到 <code>Service</code> 再到 <code>Repository</code> 的完整链路时，它就能瞬间适应公司的开发规范。你只需告诉它“增加订单取消功能”，它就能自动契合已有的编码风格、日志格式和测试规范，生成出近乎完美的业务代码。</p>
-<h3><strong>3. 纠正“神化 AI”的认知误区：规范不是 AI 的负担，而是其发挥的前提</strong></h3>
+<h3 id="3-纠正神化-ai的认知误区规范不是-ai-的负担而是其发挥的前提"><strong>3. 纠正“神化 AI”的认知误区：规范不是 AI 的负担，而是其发挥的前提</strong></h3>
 <p>很多关于 AI 开发的文章都隐含着一种逻辑：</p>
 <blockquote>
 <p><em>“AI 越来越聪明了，所以软件工程可以被简化甚至抛弃。”</em></p>
@@ -293,7 +293,7 @@
 <p><strong>“AI 越来越聪明了，所以软件工程应该变得越来越规范。”</strong></p>
 </blockquote>
 <p>规范与约束不是限制 AI 发挥的绊脚石，相反，它们是 AI 能力发挥的温床。<strong>工程规则越明确、上下文越完整，AI 的产出就越稳定、越一致、越安全，也越容易被维护。</strong></p>
-<h2><strong>四、总结</strong></h2>
+<h2 id="四总结"><strong>四、总结</strong></h2>
 <p>“先工程化，再智能化”的本质，是<strong>将 AI 看作一个高度自律且高效的执行者，而将人放在“工程规则定义者”与“业务价值确认者”的位置上</strong>。</p>
 <p>通过建立“工程约束 -&gt; 业务实现 -&gt; 业务验证”的完整闭环，我们既能最大限度榨取 AI 的代码生成效率，又能牢牢把控软件系统的工程质量与商业价值。这才是 AI 时代真正可持续的软件工程治理实践。</p>
 	</main>

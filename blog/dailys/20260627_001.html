@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="本文档是一份结合本项目源码的 Java SMTP 邮件发送说明指南">
+	<title>Java SMTP 邮件发送集成与开发指南 - 网途日志</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="../common/css/site.css" rel="stylesheet">
+	<style>
+		.daily-article { max-width: 820px; margin: 0 auto; line-height: 1.85; }
+		.daily-article h1 { margin-bottom: .4rem; text-align: center; }
+		.daily-meta { margin-bottom: 1.5rem; text-align: center; color: #6c757d; }
+		.daily-article h2, .daily-article h3 { margin-top: 1.8rem; }
+		.daily-article img { max-width: 100%; height: auto; }
+		.daily-article pre { padding: 1rem; overflow: auto; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: .25rem; }
+		.daily-article blockquote { margin: 1rem 0; padding-left: 1rem; color: #495057; border-left: 4px solid #dee2e6; }
+		.daily-list { display: grid; gap: .75rem; padding-left: 0; list-style: none; }
+		.daily-list a { font-weight: 700; }
+
+		/* Code and text diagrams styling */
+		.daily-article pre code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			font-size: 0.95em;
+		}
+		.daily-article code {
+			font-family: var(--bs-font-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+			background-color: rgba(175, 184, 193, 0.2);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-size: 85%;
+		}
+		.daily-article pre code {
+			background-color: transparent;
+			padding: 0;
+			border-radius: 0;
+			font-size: inherit;
+		}
+
+		/* Stage directions in theatrical play script */
+		.daily-article .stage-direction {
+			font-style: italic;
+			color: #55595c;
+			background-color: #f1f3f5;
+			border-left: 4px solid #adb5bd;
+			padding: 0.5rem 1rem;
+			margin: 1.25rem 0;
+			border-radius: 0 0.375rem 0.375rem 0;
+			font-size: 0.95rem;
+		}
+
+		/* Theatrical script dialogue formatting */
+		.daily-article .script-dialogue {
+			margin: 1.25rem 0;
+			padding: 1rem 1.25rem;
+			border: 1px solid #e9ecef;
+			border-radius: 0.5rem;
+			background-color: #fafbfc;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+		}
+		.daily-article .script-character {
+			font-weight: 700;
+			color: #333333;
+			margin-bottom: 0.5rem;
+			font-size: 1rem;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.35rem;
+		}
+		.daily-article .script-character .name {
+			background-color: #212529;
+			color: #ffffff;
+			padding: 0.15rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.05em;
+		}
+		.daily-article .script-character .parenthetical {
+			font-weight: 400;
+			font-style: italic;
+			color: #6c757d;
+			font-size: 0.9rem;
+		}
+		.daily-article .script-text {
+			font-size: 1.05rem;
+			line-height: 1.7;
+			color: #212529;
+			padding-left: 0.5rem;
+		}
+		.daily-article .script-text p:last-child {
+			margin-bottom: 0;
+		}
+
+		/* GitHub-style Markdown callout alerts */
+		.daily-article .callout {
+			margin: 1.5rem 0;
+			padding: 1rem 1.25rem;
+			border-left: 4px solid;
+			border-radius: 0 0.375rem 0.375rem 0;
+		}
+		.daily-article .callout-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+			font-size: 0.95rem;
+			text-transform: uppercase;
+		}
+		.daily-article .callout p:last-child {
+			margin-bottom: 0;
+		}
+		.daily-article .callout-note {
+			background-color: #f0f7ff;
+			border-color: #0969da;
+			color: #1f2328;
+		}
+		.daily-article .callout-note .callout-title {
+			color: #0969da;
+		}
+		.daily-article .callout-tip {
+			background-color: #f2fcf5;
+			border-color: #1a7f37;
+			color: #1f2328;
+		}
+		.daily-article .callout-tip .callout-title {
+			color: #1a7f37;
+		}
+		.daily-article .callout-important {
+			background-color: #fbf5ff;
+			border-color: #8250df;
+			color: #1f2328;
+		}
+		.daily-article .callout-important .callout-title {
+			color: #8250df;
+		}
+		.daily-article .callout-warning {
+			background-color: #fffdf5;
+			border-color: #9a6700;
+			color: #1f2328;
+		}
+		.daily-article .callout-warning .callout-title {
+			color: #9a6700;
+		}
+		.daily-article .callout-caution {
+			background-color: #ffebe9;
+			border-color: #cf222e;
+			color: #1f2328;
+		}
+		.daily-article .callout-caution .callout-title {
+			color: #cf222e;
+		}
+
+		/* Table styling */
+		.daily-article table {
+			width: 100%;
+			margin: 1.5rem 0;
+			border-collapse: collapse;
+			font-size: 0.95rem;
+		}
+		.daily-article th, .daily-article td {
+			padding: 0.6rem 0.8rem;
+			border: 1px solid #dee2e6;
+		}
+		.daily-article th {
+			background-color: #f8f9fa;
+			font-weight: 600;
+		}
+		.daily-article tbody tr:nth-of-type(even) {
+			background-color: rgba(0, 0, 0, 0.02);
+		}
+
+		/* Footnote styling */
+		.daily-article .footnote {
+			font-size: 0.9rem;
+			color: #6c757d;
+			margin-top: 2rem;
+			padding-top: 0.75rem;
+			border-top: 1px dashed #dee2e6;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header class="site-header noto-sans-sc-400">
+			<div class="site-header-inner">
+				<a href="../" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
+					<span class="fs-4">网途日志</span>
+				</a>
+				<form id="search" method="GET" action="https://www.google.com/search">
+					<input type="hidden" name="ie" value="utf-8">
+					<input type="hidden" name="oe" value="utf-8">
+					<input type="hidden" name="hl" value="zh-CN">
+					<input type="hidden" name="lr" value="zh-CN">
+					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+					<label for="google-search">Search:</label>
+					<input id="google-search" type="text" name="q" maxlength="255" value="">
+					<input type="submit" name="btnG" value="検索">
+					(By <a href="http://www.google.com/">Google</a>)
+				</form>
+			</div>
+		</header>
+	</div>
+
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb breadcrumb-chevron">
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="../">主页</a></li>
+				<li class="breadcrumb-item"><a class="link-body-emphasis" href="./">日常记录</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Java SMTP 邮件发送集成与开发指南</li>
+			</ol>
+		</nav>
+	</div>
+
+	<main class="container daily-article">
+		<h1>Java SMTP 邮件发送集成与开发指南</h1>
+		<div class="daily-meta">2026-06-27 22:58:42</div>
+<p>本文档是一份结合本项目源码的 Java SMTP 邮件发送说明指南。文档共分为十个核心部分，从底层的 SMTP 协议基础开始，逐步介绍项目中各个组件的设计与实现，以便于您在生产环境中集成与应用。</p>
+<h2 id="️-文档目录">&#128450;️ 文档目录</h2>
+<ul>
+<li><strong><a href="#1-smtp-协议与连接基础-smtp-fundamentals">1. SMTP 协议与连接基础 (SMTP Fundamentals)</a></strong> —— 协议命令、端口及 <code>mail.properties</code></li>
+<li><strong><a href="#2-基础邮件单发实现-single-mail-sending">2. 基础邮件单发实现 (Single Mail Sending)</a></strong> —— 资源管理与 <code>SendMialBySmtpDemo</code> 单发</li>
+<li><strong><a href="#3-富文本-html-邮件支持-html-mail">3. 富文本 HTML 邮件支持 (HTML Mail)</a></strong> —— MIME 支持与 <code>SendMialBySmtpDemo</code> 的 HTML 渲染</li>
+<li><strong><a href="#4-多收件人与抄送密送处理-multiple-recipients">4. 多收件人与抄送/密送处理 (Multiple Recipients)</a></strong> —— <code>MultipleRecipientsDemo</code> 与严格格式校验</li>
+<li><strong><a href="#5-附件拼接与中文名编码保护-attachments">5. 附件拼接与中文名编码保护 (Attachments)</a></strong> —— <code>AttachmentSmtpDemo</code> 与 <code>AttachmentMailHelper</code></li>
+<li><strong><a href="#6-轻量级-html-模板渲染-template-engine">6. 轻量级 HTML 模板渲染 (Template Engine)</a></strong> —— <code>TemplateSmtpDemo</code> 与 <code>TemplateEngine</code> 解析</li>
+<li><strong><a href="#7-统一-api-与嵌套-mime-复合模型-unified-mailrequest">7. 统一 API 与嵌套 MIME 复合模型 (Unified MailRequest)</a></strong> —— <code>UnifiedSmtpDemo</code> 与 <code>MailRequest</code></li>
+<li><strong><a href="#8-适配-amazon-ses-投递-amazon-ses">8. 适配 Amazon SES 投递 (Amazon SES)</a></strong> —— <code>AmazonSesDemo</code> 与云端 SMTP 密码认证防范</li>
+<li><strong><a href="#9-本地开发模拟与拦截模式-debug--intercept-mode">9. 本地开发模拟与拦截模式 (Debug / Intercept Mode)</a></strong> —— <code>debugFlag</code> 离线双模调试</li>
+<li><strong><a href="#10-生产级高可用工程实践-best-practices">10. 生产级高可用工程实践 (Best Practices)</a></strong> —— 属性超时、SLF4J 统一日志及可见性隔离</li>
+</ul>
+<h2 id="1-smtp-协议与连接基础-smtp-fundamentals">1. SMTP 协议与连接基础 (SMTP Fundamentals)</h2>
+<h3 id="11-smtp-协议核心命令">1.1 SMTP 协议核心命令</h3>
+<p>SMTP (Simple Mail Transfer Protocol) 协议由客户端与服务器通过纯文本 Socket 指令进行会话交互。核心的协议交互命令如下：</p>
+<ul>
+<li><code>EHLO</code>：客户端握手及能力协商。</li>
+<li><code>AUTH LOGIN</code>：身份验证开始。</li>
+<li><code>MAIL FROM</code>：声明发信人地址。</li>
+<li><code>RCPT TO</code>：声明收信人地址。</li>
+<li><code>DATA</code>：传输信件实体内容。</li>
+<li><code>.</code>：单行单点表示数据包传输结束。</li>
+<li><code>QUIT</code>：结束连接。</li>
+</ul>
+<h3 id="12-端口与加密套件">1.2 端口与加密套件</h3>
+<p>本项目中的 <code>SmtpClient</code> 支持主流的加密手段，可以通过端口和协议开关切换：</p>
+<ul>
+<li><strong>端口 25</strong>：明文端口（云服务器商通常封禁）。</li>
+<li><strong>端口 465</strong>：SSL 加密套件端口（对应 <code>mail.smtp.ssl.enable=true</code>）。</li>
+<li><strong>端口 587</strong>：STARTTLS 升级连接端口（对应 <code>mail.smtp.starttls.enable=true</code>）。</li>
+</ul>
+<h3 id="13-属性配置加载">1.3 属性配置加载</h3>
+<p>项目推荐使用统一的配置文件进行参数管理。以下是常用属性映射表（可参阅类路径下的 <code>mail.properties</code>）：</p>
+<pre><code>mail.smtp.host=smtp.example.com
+mail.smtp.port=587
+mail.smtp.username=your-username
+mail.smtp.password=your-password
+mail.smtp.starttls.enable=true
+mail.smtp.ssl.enable=false</code></pre>
+<h2 id="2-基础邮件单发实现-single-mail-sending">2. 基础邮件单发实现 (Single Mail Sending)</h2>
+<p>本部分介绍如何使用项目中的 <code>SmtpClient</code> 及 <code>SendMialBySmtpDemo</code> 类进行基础的单发邮件。</p>
+<h3 id="21-资源安全释放-autocloseable">2.1 资源安全释放 (AutoCloseable)</h3>
+<p>邮件网络连接是非常宝贵的网络套接字资源。本项目中的 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/basic/SmtpClient.java">SmtpClient.java</a> 实现了 <code>AutoCloseable</code> 接口，确保在使用完毕后，通过 <code>try-with-resources</code> 自动触发 <code>close()</code> 释放网络套接字句柄。</p>
+<h3 id="22-基础发送示例-sendmialbysmtpdemo">2.2 基础发送示例 (SendMialBySmtpDemo)</h3>
+<p>项目中基础发送功能集成在 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/basic/SendMialBySmtpDemo.java">SendMialBySmtpDemo.java</a> 的 <code>sendSingleMail()</code> 方法中。 它采用了嵌套 <code>try-catch</code> 结构，精细地区分了连接阶段异常和邮件发送阶段的异常：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+
+// 本示例提取自 SendMialBySmtpDemo.java
+public class SendSingleMailExample {
+    public static void main(String[] args) {
+        // 利用 try-with-resources 保证退出时自动触发 client.close() 释放资源
+        try (SmtpClient client = new SmtpClient()) {
+
+            // 步骤一：连接服务器（捕获连接错误）
+            try {
+                client.open();
+            } catch (Exception e) {
+                // 使用项目统一的 slf4j/log4j 框架输出，不混杂 System.out 打印
+                System.err.println(&quot;【连接错误】无法建立与 SMTP 服务器的连接：&quot; + e.getMessage());
+                return;
+            }
+
+            // 准备单收件人基本信件内容
+            String recipientName = &quot;测试收件人&quot;;
+            String recipientEmail = &quot;recipient@example.com&quot;;
+            String subject = &quot;测试单个邮件主题&quot;;
+            String content = &quot;&lt;h1&gt;这是一封测试邮件&lt;/h1&gt;&lt;p&gt;通过 SmtpClient 成功发送！&lt;/p&gt;&quot;;
+
+            // 步骤二：发送邮件（捕获发送错误）
+            try {
+                client.sendMail(recipientName, recipientEmail, subject, content);
+            } catch (Exception e) {
+                System.err.println(&quot;【发送错误】单个邮件发送失败：&quot; + e.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.err.println(&quot;【资源关闭错误】释放资源时发生异常：&quot; + e.getMessage());
+        }
+    }
+}</code></pre>
+<h2 id="3-富文本-html-邮件支持-html-mail">3. 富文本 HTML 邮件支持 (HTML Mail)</h2>
+<p>现代应用极少发送纯文本邮件，多以富文本（HTML）表格、图片为主。</p>
+<h3 id="31-mime-类型与字符集">3.1 MIME 类型与字符集</h3>
+<p>为了支持富文本，本项目 <code>SmtpClient</code> 底层采用 MIME 格式封包。在 <code>sendMail</code> 方法拼装正文时，显式设定了媒体类型为 <code>text/html</code>，并强制采用 <code>UTF-8</code> 字符编码：</p>
+<pre><code>message.setContent(content, &quot;text/html;charset=UTF-8&quot;);</code></pre>
+<h3 id="32-html-发送实践">3.2 HTML 发送实践</h3>
+<p>在 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/basic/SendMialBySmtpDemo.java">SendMialBySmtpDemo.java</a> 中，发送的 <code>content</code> 即为一段完整的 HTML 段落：</p>
+<pre><code>String content = &quot;&lt;h1&gt;这是一封测试邮件&lt;/h1&gt;&lt;p&gt;通过 SmtpClient 成功发送！&lt;/p&gt;&quot;;
+client.sendMail(recipientName, recipientEmail, subject, content);</code></pre>
+<p>这保证了客户端在接收到邮件时，会根据 HTML 标记进行富文本排版渲染。</p>
+<h2 id="4-多收件人与抄送密送处理-multiple-recipients">4. 多收件人与抄送/密送处理 (Multiple Recipients)</h2>
+<p>在实际业务中，常需要将一封邮件发送给多个接收者。本部分说明 TO (收件人)、CC (抄送)、BCC (密送) 的多收件人配置。</p>
+<h3 id="41-本项目核心实现">4.1 本项目核心实现</h3>
+<p>在 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/basic/SmtpClient.java">SmtpClient.java</a> 中，通过 <code>setRecipients</code> 方法为 <code>MimeMessage</code> 分级设置多地址：</p>
+<pre><code>// 设置主收件人、抄送人和密送人
+setRecipients(message, Message.RecipientType.TO, toList);
+setRecipients(message, Message.RecipientType.CC, ccList);
+setRecipients(message, Message.RecipientType.BCC, bccList);</code></pre>
+<p>为了防止因为某一个邮箱格式拼写错误（如 <code>invalid.email@</code>）而导致整个发送指令被拒，程序内使用了 <code>InternetAddress.parse(email, true)</code> 的严格检测模式进行逐个解析和格式校验。</p>
+<h3 id="42-多群发使用示例-multiplerecipientsdemo">4.2 多群发使用示例 (MultipleRecipientsDemo)</h3>
+<p>在项目中，多收件人群发演示类为 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/multiple/MultipleRecipientsDemo.java">MultipleRecipientsDemo.java</a>。示例如下：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+import java.util.List;
+
+public class MultipleRecipientsApp {
+    public static void main(String[] args) {
+        try (SmtpClient client = new SmtpClient()) {
+            client.open();
+
+            // 准备群发收件人、抄送人、密送人列表
+            List&lt;String&gt; toList = List.of(&quot;to1@example.com&quot;, &quot;to2@example.com&quot;);
+            List&lt;String&gt; ccList = List.of(&quot;cc1@example.com&quot;);
+            List&lt;String&gt; bccList = List.of(&quot;bcc1@example.com&quot;);
+
+            client.sendMail(toList, ccList, bccList, 
+                    &quot;【群发测试】多收件人邮件&quot;, 
+                    &quot;&lt;h1&gt;多收件人测试&lt;/h1&gt;&lt;p&gt;同时发送至 TO/CC/BCC 列表成功。&lt;/p&gt;&quot;);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<h2 id="5-附件拼接与中文名编码保护-attachments">5. 附件拼接与中文名编码保护 (Attachments)</h2>
+<p>发送报表、对账单等文件需要用到邮件附件功能。</p>
+<h3 id="51-mixed-混合容器复合模型">5.1 mixed 混合容器复合模型</h3>
+<p>在底层封装中，带有附件的邮件，其内容媒体类型必须指定为 <code>multipart/mixed</code>。外层混合容器中包含邮件正文 <code>BodyPart</code> 以及各个附件的 <code>BodyPart</code>。</p>
+<h3 id="52-解决中文文件名乱码">5.2 解决中文文件名乱码</h3>
+<p>为了防止中文字符集在不同客户端下（如 Mac 邮箱、Outlook、Gmail）显示为 <code>???</code> 乱码，项目在 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/attachments/AttachmentMailHelper.java">AttachmentMailHelper.java</a> 中通过 <code>MimeUtility.encodeText</code> 进行保护转义：</p>
+<pre><code>attachmentPart.attachFile(file);
+attachmentPart.setFileName(javax.mail.internet.MimeUtility.encodeText(file.getName(), &quot;UTF-8&quot;, null));</code></pre>
+<h3 id="53-附件邮件发送示例-attachmentsmtpdemo">5.3 附件邮件发送示例 (AttachmentSmtpDemo)</h3>
+<p>在项目中，演示带附件邮件发送的类为 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/attachments/AttachmentSmtpDemo.java">AttachmentSmtpDemo.java</a>。示例使用根路径下的真实文件作为测试附件载入：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+import com.feilonglab.smtp.attachments.AttachmentMailHelper;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.util.List;
+
+public class AttachmentApp {
+    public static void main(String[] args) {
+        try (SmtpClient client = new SmtpClient()) {
+            client.open();
+
+            // 载入真实存在的测试 PDF 文件附件
+            List&lt;File&gt; attachments = List.of(new File(&quot;src/main/resources/attachments/ShuXinJiaohuo.pdf&quot;));
+
+            // 1. 利用 helper 构建带附件的封装邮件
+            MimeMessage message = AttachmentMailHelper.buildMessageWithAttachments(
+                    client.getSession(),
+                    &quot;发件别名&quot;, &quot;sender@example.com&quot;,
+                    &quot;收件客户&quot;, &quot;recipient@example.com&quot;,
+                    &quot;月度对账清单&quot;,
+                    &quot;&lt;h1&gt;正文&lt;/h1&gt;&lt;p&gt;请查收下方附件。&lt;/p&gt;&quot;,
+                    attachments
+            );
+
+            // 2. 发送已构建的 MimeMessage
+            client.sendMimeMessage(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<h2 id="6-轻量级-html-模板渲染-template-engine">6. 轻量级 HTML 模板渲染 (Template Engine)</h2>
+<p>企业级邮件通知通常需要将订单数据动态渲染到 HTML 模板中。</p>
+<h3 id="61-高性能正则匹配器-regex-matcher">6.1 高性能正则匹配器 (Regex Matcher)</h3>
+<p>为了保持 SDK 轻量，<a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/Template/TemplateEngine.java">TemplateEngine.java</a> 没有引入 Velocity 或 Freemarker，而是基于 Java 正则表达式构建了一个单遍扫描 (Single-pass) 的高效替换引擎。 它使用编译后的 <code>Pattern</code> 对文件进行流式匹配：</p>
+<pre><code>Pattern pattern = Pattern.compile(&quot;\\$\\{([a-zA-Z0-9_]+)\\}&quot;);</code></pre>
+<p>能够自动匹配模板中的 <code>${variable}</code> 并填充对应的值，解析出错时抛出清晰的中文 FileNotFoundException 异常。</p>
+<h3 id="62-模板发送示例-templatesmtpdemo">6.2 模板发送示例 (TemplateSmtpDemo)</h3>
+<p>在项目中，演示模板发信的类为 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/Template/TemplateSmtpDemo.java">TemplateSmtpDemo.java</a>。它渲染 <code>/templates/welcome.template</code> 模板文件并发送：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+import com.feilonglab.smtp.Template.TemplateEngine;
+import java.util.Map;
+
+public class TemplateApp {
+    public static void main(String[] args) {
+        try (SmtpClient client = new SmtpClient()) {
+            client.open();
+
+            // 准备动态参数
+            Map&lt;String, String&gt; variables = Map.of(
+                &quot;username&quot;, &quot;阿观&quot;,
+                &quot;email&quot;, &quot;user@example.com&quot;
+            );
+
+            // 渲染动态 HTML
+            String content = TemplateEngine.render(&quot;/templates/welcome.template&quot;, variables);
+
+            client.sendMail(&quot;阿观&quot;, &quot;recipient@example.com&quot;, &quot;欢迎加入平台！&quot;, content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<h2 id="7-统一-api-与嵌套-mime-复合模型-unified-mailrequest">7. 统一 API 与嵌套 MIME 复合模型 (Unified MailRequest)</h2>
+<p>对于同时需要处理多收件人、纯文本备用描述、模板和多附件的复杂发送请求，直接通过方法参数传递较为繁琐。本部分介绍项目提供的统一发送架构。</p>
+<h3 id="71-mailrequest-链式-dto">7.1 MailRequest 链式 DTO</h3>
+<p><a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/unified/MailRequest.java">MailRequest.java</a> 封装了所有的信件属性，且内置了链式 Setter (Builder-like Pattern) 供开发者优雅地组装属性：</p>
+<pre><code>MailRequest request = new MailRequest()
+    .to(&quot;user1@example.com&quot;, &quot;user2@example.com&quot;)
+    .subject(&quot;月度总账&quot;)
+    .template(&quot;/templates/welcome.template&quot;, params)
+    .addAttachment(&quot;report.pdf&quot;);</code></pre>
+<h3 id="72-rfc-黄金嵌套模型">7.2 RFC 黄金嵌套模型</h3>
+<p>当 HTML 与纯文本同时出现在正文中时，<code>SmtpClient.send(MailRequest)</code> 实现了严苛的 RFC 标准嵌套设计。 它会将纯文本正文 <code>text/plain</code> 和 HTML 正文 <code>text/html</code> 包裹在互斥的 <code>multipart/alternative</code> 内层容器中（HTML排在后方优先渲染，不支持HTML的古老客户端则自动降级展示纯文本），然后再与外层附件 <code>multipart/mixed</code> 融为一体。树形复合嵌套模型如下：</p>
+<pre><code>graph TD
+  mixed[&quot;multipart/mixed (外层混合容器)&quot;] --&gt; alternative[&quot;multipart/alternative (内层备用互斥容器)&quot;]
+  mixed --&gt; attachment1[&quot;MimeBodyPart (附件 1)&quot;]
+  mixed --&gt; attachment2[&quot;MimeBodyPart (附件 2)&quot;]
+  alternative --&gt; textPart[&quot;text/plain (降级备用纯文本)&quot;]
+  alternative --&gt; htmlPart[&quot;text/html (优先 HTML 渲染正文)&quot;]</code></pre>
+<h3 id="73-一键式统一发送示例-unifiedsmtpdemo">7.3 一键式统一发送示例 (UnifiedSmtpDemo)</h3>
+<p>在项目中对应的演示类为 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/unified/UnifiedSmtpDemo.java">UnifiedSmtpDemo.java</a>。示例使用 DTO 一键式发送组合邮件：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+import com.feilonglab.smtp.unified.MailRequest;
+import java.util.Map;
+
+public class UnifiedApp {
+    public static void main(String[] args) {
+        try (SmtpClient client = new SmtpClient()) {
+            client.open();
+
+            // 使用链式 Setter 构建组合邮件请求
+            MailRequest request = new MailRequest()
+                    .to(&quot;to-user1@example.com&quot;, &quot;to-user2@example.com&quot;)
+                    .cc(&quot;cc-user@example.com&quot;)
+                    .subject(&quot;【统一API】通知与报表交付&quot;)
+                    .template(&quot;/templates/welcome.template&quot;, Map.of(&quot;username&quot;, &quot;阿观&quot;))
+                    .textContent(&quot;降级备用信息：您的账号已激活，请及时登录。&quot;)
+                    .addAttachment(&quot;src/main/resources/attachments/attachment_test.txt&quot;);
+
+            // 一键发送，底层自动按嵌套模型装配投递
+            client.send(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<h2 id="8-适配-amazon-ses-投递-amazon-ses">8. 适配 Amazon SES 投递 (Amazon SES)</h2>
+<p>Amazon Simple Email Service (SES) 是业界主流的云端邮件平台。</p>
+<h3 id="81-切换-ses-专用配置-mail-sesproperties">8.1 切换 SES 专用配置 (mail-ses.properties)</h3>
+<p>AWS SES 在不同的地域有不同的主机 Host 域名。项目提供了 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/resources/mail-ses.properties">mail-ses.properties</a> 模板。 要使用 AWS 邮箱，只需在构造 <code>SmtpClient</code> 时传入指定的 SES 配置文件路径即可，无需改动任何一行发送代码，实现了完美的动态切换能力：</p>
+<pre><code>SmtpClient client = new SmtpClient(&quot;/mail-ses.properties&quot;);</code></pre>
+<h3 id="82-iam-秘钥与-smtp-证书的区别避坑重点">8.2 IAM 秘钥与 SMTP 证书的区别（避坑重点）</h3>
+<div class="callout callout-important">
+    <div class="callout-title"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 5Zm0 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path></svg>重要</div>
+    <p><strong>AWS 的 IAM Access Key ID / Secret Access Key 绝不能直接作为用户名和密码填入 mail.properties！</strong> 因为安全协议不同，您必须登录 AWS 控制台的 SES 页面，在 &quot;SMTP Settings&quot; 菜单中点击 &quot;Create SMTP Credentials&quot;，生成专用于邮件代理发送的特殊用户名和密码，将其填入 properties 配置文件中，否则连接将直接抛出 <code>535 Authentication Credentials Invalid</code> 认证失效异常。</p>
+</div>
+<h3 id="83-amazon-ses-发送示例-amazonsesdemo">8.3 Amazon SES 发送示例 (AmazonSesDemo)</h3>
+<p>项目中对应的演示类为 <a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/amazon/ses/AmazonSesDemo.java">AmazonSesDemo.java</a>：</p>
+<pre><code>import com.feilonglab.smtp.basic.SmtpClient;
+
+public class AmazonSesApp {
+    public static void main(String[] args) {
+        // 直接载入 /mail-ses.properties 执行 AWS SES 专用通道构建
+        try (SmtpClient client = new SmtpClient(&quot;/mail-ses.properties&quot;)) {
+            client.open();
+
+            client.sendMail(&quot;收件客户&quot;, &quot;recipient@example.com&quot;, 
+                    &quot;SES测试邮件&quot;, 
+                    &quot;&lt;h1&gt;来自 Amazon SES 的测试&lt;/h1&gt;&quot;);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<h2 id="9-本地开发模拟与拦截模式-debug-intercept-mode">9. 本地开发模拟与拦截模式 (Debug / Intercept Mode)</h2>
+<p>在本地测试或持续集成 CI/CD 环境下，如果每次测试都向外网真实投递邮件，容易触发服务商风控判定为垃圾邮件而封号。</p>
+<h3 id="91-开启本地拦截配置">9.1 开启本地拦截配置</h3>
+<p>只要在 <code>mail.properties</code>（或任何指定的 properties 配置文件）中将拦截配置修改为：</p>
+<pre><code>mail.smtp.debug.flag=0</code></pre>
+<p><code>SmtpClient</code> 将启动<strong>调试拦截模式</strong>：</p>
+<ul>
+<li>客户端底层不与真实 SMTP 服务器建立任何 TCP 套接字握手连接。</li>
+<li>执行 <code>sendMail</code> 或 <code>send(MailRequest)</code> 时，会正常解析渲染占位符模板，校验本地附件文件是否存在。</li>
+<li>解析后的邮件完整细节（发件、收件人列表、主题、HTML内容、附件路径与状态）会直接打印在 SLF4J 格式化日志中，提供本地极速沙箱模拟。</li>
+</ul>
+<h3 id="92-本地拦截控制台日志效果展示">9.2 本地拦截控制台日志效果展示</h3>
+<pre><code>【拦截模式】开启。模拟连接至 SMTP 服务器 smtp.gmail.com:465
+【拦截模式】模拟发送统一 API 邮件详情：
+  - 发件人: Fei Long Lab &lt;testuser@example.com&gt;
+  - 收件人 (TO): [to-user1@example.com, to-user2@example.com]
+  - 抄送 (CC): [cc-user@example.com]
+  - 主题: 【统一API测试】包含模板与附件的邮件
+  - HTML内容: &lt;h1&gt;欢迎你，阿观！&lt;/h1&gt;
+  - 附件列表: [attachment_test.txt (存在)]
+【拦截模式】统一 API 邮件模拟发送成功。【TO: [to-user1@example.com, to-user2@example.com]】
+【拦截模式】关闭模拟连接</code></pre>
+<h2 id="10-生产级高可用工程实践-best-practices">10. 生产级高可用工程实践 (Best Practices)</h2>
+<p>在将 Java 邮件投递功能推向线上生产环境时，必须遵循以下高可用准则。</p>
+<h3 id="101-显式设定三大超时时间">10.1 显式设定三大超时时间</h3>
+<p>千万不要使用 properties 配置的默认空值！如果网络闪断或中转服务器假死挂起，默认连接将无限阻塞调用线程，导致高并发下的业务系统因线程池枯竭直接卡死崩溃。项目在加载属性配置时提供了强制的三大毫秒级超时兜底设置：</p>
+<pre><code>mail.smtp.connectiontimeout=5000  # 套接字 TCP 连接建立超时
+mail.smtp.timeout=5000            # 数据流读取超时
+mail.smtp.writetimeout=5000       # 数据包网络写入超时</code></pre>
+<h3 id="102-统一日志输出规范">10.2 统一日志输出规范</h3>
+<div class="callout callout-warning">
+    <div class="callout-title"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" class="me-2"><path d="M6.457 1.047c.659-1.203 2.427-1.203 3.086 0l6.03 11c.629 1.147-.202 2.533-1.543 2.533H1.97C.628 14.58-.203 13.194.426 12.047l6.03-11ZM8 4.75a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 4.75Zm0 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path></svg>警告</div>
+    <p>绝不要在业务代码或异常捕获中使用 <code>System.out.println</code>、<code>System.err.println</code> 甚至 <code>e.printStackTrace()</code>。 这种原生输出由于缺失线程标识和时间格式，无法被集中式日志平台（如 ELK 等）收集。请务必使用 <code>org.slf4j.Logger</code> 方法进行信息记录：</p>
+</div>
+<pre><code>// 错误示范：会导致日志索引平台无法采集
+e.printStackTrace();
+
+// 正确示范：带有堆栈信息的 slf4j 错误归档方法
+logger.error(&quot;【发信故障】SMTP 投递失败。原因：{}&quot;, e.getMessage(), e);</code></pre>
+<h3 id="103-控制-smtpclient-线程生命周期与可见性">10.3 控制 SmtpClient 线程生命周期与可见性</h3>
+<p>因为 <code>SmtpClient</code> 持有了底层的有状态连接对象 <code>Transport</code>，它<strong>不是线程安全的</strong>！</p>
+<ul>
+<li>绝对不要在 Spring 框架中将 <code>SmtpClient</code> 设置为默认的单例单热点 Bean 供全局业务线程共享，这会导致多线程通道抢占，出现 <code>Transport</code> 冲突或状态脏读。</li>
+<li><strong>推荐做法</strong>：使用 Prototype 原型多例作用域，或者像本项目中的 Demo 一样，在需要发送邮件的方法内部直接使用 <code>try-with-resources</code> 临时实例化客户端，用完即弃，从而在物理隔离上规避线程安全风险。</li>
+</ul>
+<h2 id="相关项目与链接">&#128279; 相关项目与链接</h2>
+<ul>
+<li><strong>GitHub 仓库</strong>：<a href="https://github.com/feilong-pixel/ZeroTraceSmtp">feilong-pixel/ZeroTraceSmtp</a></li>
+<li><strong>核心模块源码直达</strong>：</li>
+<li><a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/basic/SmtpClient.java">SmtpClient.java</a> —— 核心连接与发送封装</li>
+<li><a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/attachments/AttachmentMailHelper.java">AttachmentMailHelper.java</a> —— 附件处理与中文编码防乱码</li>
+<li><a href="https://github.com/feilong-pixel/ZeroTraceSmtp/blob/main/src/main/java/com/feilonglab/smtp/Template/TemplateEngine.java">TemplateEngine.java</a> —— 轻量级正则模板渲染器</li>
+</ul>
+<p><em>(注：本文介绍的所有演示类 Demo 以及 properties 配置模板均已在上述 GitHub 仓库中开源。)</em></p>
+	</main>
+
+	<footer class="container site-footer noto-sans-sc-400">
+		<div class="float-end mb-1"><a href="#">返回页首</a></div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br>初版 : 2026年06月27日 最終更新 : 2026年06月27日</div>
+	</footer>
+</body>
+</html>

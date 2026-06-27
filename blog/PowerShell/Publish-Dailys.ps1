@@ -380,8 +380,16 @@ function Convert-MarkdownToHtml {
             Flush-Paragraph
             Close-Lists
             $level = $Matches[1].Length
-            $text = Convert-InlineMarkdown $Matches[2].Trim()
-            $html.Add("<h$level>$text</h$level>")
+            $rawText = $Matches[2].Trim()
+            $text = Convert-InlineMarkdown $rawText
+            
+            # Generate id for headers to support anchor links
+            $id = $rawText.ToLowerInvariant()
+            $id = $id -replace '[^\w\s\-\p{IsCJKUnifiedIdeographs}]', ''
+            $id = $id -replace '[\s_]+', '-'
+            $id = $id.Trim('-')
+            
+            $html.Add("<h$level id=`"$id`">$text</h$level>")
             continue
         }
 
@@ -882,3 +890,5 @@ Update-BlogIndex -Articles $articles
 Update-Sitemap
 
 Write-Host "已发布 $($articles.Count) 篇文章到 $OutputDir"
+
+
