@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -9,26 +10,31 @@
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&family=Sofia&display=swap"
+		rel="stylesheet">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 	<link href="./common/css/site.css" rel="stylesheet">
-<style>
+	<style>
 		.site-section {
 			margin-bottom: 1rem;
 		}
 
 		.site-section-title {
 			margin: 0 0 .75rem 0;
-			padding: .35rem .6rem;
-			background-color: #e2dfdf;
-			color: #284918;
+			padding: .35rem .6rem .35rem .75rem;
+			background-color: #f1f5f9;
+			color: #334155;
 			font-size: 1.1rem;
 			font-weight: 700;
+			border-left: 4px solid #74C0FC;
+			border-radius: 4px;
 		}
 
 		.site-section-title::before {
-			content: "■ ";
+			content: "";
 		}
 
 		.site-link-list {
@@ -49,9 +55,9 @@
 				grid-template-columns: 1fr;
 			}
 		}
-	
 	</style>
 </head>
+
 <body>
 	<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
 		<symbol id="home" viewBox="0 0 16 16">
@@ -61,14 +67,16 @@
 
 		<symbol id="alphabet-W" viewBox="0 0 384 512">
 			<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-			<path d="M20.8 34c16.5-6.2 35 2.2 41.2 18.7l110.2 294L257.3 55c4-13.7 16.5-23 30.7-23s26.7 9.4 30.7 23l85.1 291.7L514 52.8c6.2-16.5 24.6-24.9 41.2-18.7s24.9 24.7 18.7 41.2l-144 384c-4.8 12.9-17.4 21.3-31.2 20.7s-25.7-9.8-29.5-23L288 178.3 206.7 457c-3.9 13.2-15.8 22.5-29.5 23s-26.3-7.8-31.2-20.7L2 75.2C-4.2 58.7 4.2 40.2 20.8 34z"/>
+			<path
+				d="M20.8 34c16.5-6.2 35 2.2 41.2 18.7l110.2 294L257.3 55c4-13.7 16.5-23 30.7-23s26.7 9.4 30.7 23l85.1 291.7L514 52.8c6.2-16.5 24.6-24.9 41.2-18.7s24.9 24.7 18.7 41.2l-144 384c-4.8 12.9-17.4 21.3-31.2 20.7s-25.7-9.8-29.5-23L288 178.3 206.7 457c-3.9 13.2-15.8 22.5-29.5 23s-26.3-7.8-31.2-20.7L2 75.2C-4.2 58.7 4.2 40.2 20.8 34z" />
 		</symbol>
 	</svg>
 
 	<div class="container">
 		<header class="site-header noto-sans-sc-400">
 			<div class="site-header-inner">
-				<a href="./"  class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+				<a href="./"
+					class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
 					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
 					<span class="fs-4">网途日志</span>
 				</a>
@@ -89,35 +97,12 @@
 
 	<div class="container noto-sans-sc-400">
 		<section class="site-section">
-			<h2 class="site-section-title">早期作品</h2>
-			<ul class="site-link-list">
-				<li><a href="./woniu/helloWoniu.html">早期AI作品：Hello, 蜗牛！</a></li>
-			</ul>
-		</section>
-
-		<section class="site-section">
-			<h2 class="site-section-title">汉字注音与经文</h2>
-			<ul class="site-link-list">
-				<li><a href="./jingwen/jingangjing.html">金刚经原文和译文</a></li>
-				<li><a href="./jingwen/xinjing.html">般若波罗蜜多心经 - 注音版</a></li>
-				<li><a href="./jingwen/xinjing_wzy.html">般若波罗蜜多心经 - 无注音版</a></li>
-				<li><a href="./jingwen/wuliangshoujing.html">无量寿经（夏莲居会集本） - 注音版</a></li>
-				<li><a href="./jingwen/wuliangshoujing_wzy.html">无量寿经（夏莲居会集本） - 无注音版</a></li>
-			</ul>
-		</section>
-
-		<section class="site-section">
-			<h2 class="site-section-title">古诗文</h2>
-			<ul class="site-link-list">
-				<li><a href="./jingwen/tangshi.html">唐诗选读</a></li>
-			</ul>
-		</section>
-
-		<section class="site-section">
 			<h2 class="site-section-title">网页与字体实验</h2>
 			<ul class="site-link-list">
 				<li><a href="./pinyinPro/pinyinPro.html">在 HTML 网页中使用 pinyin-pro 标注拼音</a></li>
 				<li><a href="./fonts/fontsList.html">Google Fonts 中文字体示例</a></li>
+				<li><a href="./jingwen/xinjing.html">般若波罗蜜多心经 - 注音版</a></li>
+				<li><a href="./jingwen/wuliangshoujing.html">无量寿经（夏莲居会集本） - 注音版</a></li>
 			</ul>
 		</section>
 
@@ -129,35 +114,34 @@
 			</ul>
 		</section>
 
-		<section class="site-section">
-			<h2 class="site-section-title">生活记录</h2>
-			<ul class="site-link-list">
-				<li><a href="./riji/riji_20240831.html">在日本出生的小孩办理中国户口登记</a></li>
-			</ul>
-		</section>
-
-		<section class="site-section">
-			<h2 class="site-section-title">工具备忘</h2>
-			<ul class="site-link-list">
-				<li><a href="./notepad/notepad_shotcut.html">Notepad++ 快捷键备忘录</a></li>
-			</ul>
-		</section>
 		<!-- DAILY-AUTO-START -->
 		<section class="site-section">
 			<h2 class="site-section-title">日常记录</h2>
 			<ul class="site-link-list">
-				<li><a href="./dailys/20260627_001.html">Java SMTP 邮件发送集成与开发指南</a> <span class="text-body-secondary">2026-06-27 22:58:42</span></li>
-				<li><a href="./dailys/20260626_004.html">AI时代的软件工程治理</a> <span class="text-body-secondary">2026-06-26 20:23:08</span></li>
-				<li><a href="./dailys/20260626_003.html">AI时代的软件开发，应当先工程化，再智能化</a> <span class="text-body-secondary">2026-06-26 19:41:39</span></li>
-				<li><a href="./dailys/20260626_002.html">机器人行业的商业化困境与新路径：从硬件销售到智能体服务</a> <span class="text-body-secondary">2026-06-26 10:35:42</span></li>
-				<li><a href="./dailys/20260626_001.html">阿福（Alpha-F）&#183; 守护者</a> <span class="text-body-secondary">2026-06-26 09:56:03</span></li>
-				<li><a href="./dailys/20260625_002.html">从“企业大脑”到“高级秘书”：我为什么对Copilot有点失望</a> <span class="text-body-secondary">2026-06-25 18:55:40</span></li>
-				<li><a href="./dailys/20260625_001.html">阿福（Alpha-F）未来社区警务 AI巡戒犬</a> <span class="text-body-secondary">2026-06-25 12:42:03</span></li>
-				<li><a href="./dailys/20260622_004.html">AI时代的软件开发：从“代码生产线”到“系统演化工程”</a> <span class="text-body-secondary">2026-06-22 12:49:07</span></li>
-				<li><a href="./dailys/20260622_001.html">程序员寓言故事</a> <span class="text-body-secondary">2026-06-22</span></li>
-				<li><a href="./dailys/20260622_002.html">程序员编程之再见编程</a> <span class="text-body-secondary">2026-06-22</span></li>
-				<li><a href="./dailys/20260622_003.html">AI之编程：时代现场剧</a> <span class="text-body-secondary">2026-06-22</span></li>
-				<li><a href="./dailys/20260616_001.html">AI 行人才培养路线图：我从面试思考和两个工具开发中学到的事</a> <span class="text-body-secondary">2026-06-16</span></li>
+				<li><a href="./dailys/20260627_001.html">Java SMTP 邮件发送集成与开发指南</a> <span
+						class="text-body-secondary">2026-06-27 22:58:42</span></li>
+				<li><a href="./dailys/20260626_004.html">AI时代的软件工程治理</a> <span class="text-body-secondary">2026-06-26
+						20:23:08</span></li>
+				<li><a href="./dailys/20260626_003.html">AI时代的软件开发，应当先工程化，再智能化</a> <span
+						class="text-body-secondary">2026-06-26 19:41:39</span></li>
+				<li><a href="./dailys/20260626_002.html">机器人行业的商业化困境与新路径：从硬件销售到智能体服务</a> <span
+						class="text-body-secondary">2026-06-26 10:35:42</span></li>
+				<li><a href="./dailys/20260626_001.html">阿福（Alpha-F）&#183; 守护者</a> <span
+						class="text-body-secondary">2026-06-26 09:56:03</span></li>
+				<li><a href="./dailys/20260625_002.html">从“企业大脑”到“高级秘书”：我为什么对Copilot有点失望</a> <span
+						class="text-body-secondary">2026-06-25 18:55:40</span></li>
+				<li><a href="./dailys/20260625_001.html">阿福（Alpha-F）未来社区警务 AI巡戒犬</a> <span
+						class="text-body-secondary">2026-06-25 12:42:03</span></li>
+				<li><a href="./dailys/20260622_004.html">AI时代的软件开发：从“代码生产线”到“系统演化工程”</a> <span
+						class="text-body-secondary">2026-06-22 12:49:07</span></li>
+				<li><a href="./dailys/20260622_001.html">程序员寓言故事</a> <span class="text-body-secondary">2026-06-22</span>
+				</li>
+				<li><a href="./dailys/20260622_002.html">程序员编程之再见编程</a> <span
+						class="text-body-secondary">2026-06-22</span></li>
+				<li><a href="./dailys/20260622_003.html">AI之编程：时代现场剧</a> <span
+						class="text-body-secondary">2026-06-22</span></li>
+				<li><a href="./dailys/20260616_001.html">AI 行人才培养路线图：我从面试思考和两个工具开发中学到的事</a> <span
+						class="text-body-secondary">2026-06-16</span></li>
 			</ul>
 		</section>
 		<!-- DAILY-AUTO-END -->
@@ -167,62 +151,9 @@
 	<!-- FOOTER -->
 	<footer class="container site-footer noto-sans-sc-400">
 		<div class="float-end mb-1"><a href="#">返回页首</a></div>
-		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日</div>
+		<div class="mb-0 text-body-secondary">&copy; Copyright (C) 2024 by 网途 <br />初版 : 2024年08月27日 最終更新 : 2024年08月27日
+		</div>
 	</footer>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
