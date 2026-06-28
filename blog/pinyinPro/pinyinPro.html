@@ -50,16 +50,12 @@
 					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
 					<span class="fs-4">网途日志</span>
 				</a>
-				<form id="search" method="GET" action="https://www.google.com/search">
-					<input type="hidden" name="ie" value="utf-8">
-					<input type="hidden" name="oe" value="utf-8">
-					<input type="hidden" name="hl" value="zh-CN">
-					<input type="hidden" name="lr" value="zh-CN">
-					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+				<form id="search" method="GET" action="https://www.bing.com/search" onsubmit="this.q.value = this.querySelector('#google-search').value + ' site:zerotracephoto.com/blog';">
 					<label for="google-search">Search:</label>
-					<input id="google-search" type="text" name="q" maxlength="255" value="">
-					<input type="submit" name="btnG" value="検索">
-					(By <a href="http://www.google.com/">Google</a>)
+					<input id="google-search" type="text" maxlength="255" value="" placeholder="搜索本站内容" required>
+					<input type="hidden" name="q">
+					<input type="submit" value="Bing">
+					(By <a href="https://www.bing.com/">Bing</a>)
 				</form>
 			</div>
 		</header>

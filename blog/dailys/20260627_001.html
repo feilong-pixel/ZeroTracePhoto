@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
@@ -192,16 +192,12 @@
 					<span class="bi me-2 sofia-regular site-brand-mark">W</span>
 					<span class="fs-4">网途日志</span>
 				</a>
-				<form id="search" method="GET" action="https://www.google.com/search">
-					<input type="hidden" name="ie" value="utf-8">
-					<input type="hidden" name="oe" value="utf-8">
-					<input type="hidden" name="hl" value="zh-CN">
-					<input type="hidden" name="lr" value="zh-CN">
-					<input type="hidden" name="as_sitesearch" value="zerotracephoto.com/blog">
+				<form id="search" method="GET" action="https://www.bing.com/search" onsubmit="this.q.value = this.querySelector('#google-search').value + ' site:zerotracephoto.com/blog';">
 					<label for="google-search">Search:</label>
-					<input id="google-search" type="text" name="q" maxlength="255" value="">
-					<input type="submit" name="btnG" value="検索">
-					(By <a href="http://www.google.com/">Google</a>)
+					<input id="google-search" type="text" maxlength="255" value="" placeholder="搜索本站内容" required>
+					<input type="hidden" name="q">
+					<input type="submit" value="Bing">
+					(By <a href="https://www.bing.com/">Bing</a>)
 				</form>
 			</div>
 		</header>
@@ -221,7 +217,7 @@
 		<h1>Java SMTP 邮件发送集成与开发指南</h1>
 		<div class="daily-meta">2026-06-27 22:58:42</div>
 <p>本文档是一份结合本项目源码的 Java SMTP 邮件发送说明指南。文档共分为十个核心部分，从底层的 SMTP 协议基础开始，逐步介绍项目中各个组件的设计与实现，以便于您在生产环境中集成与应用。</p>
-<h2 id="️-文档目录">&#128450;️ 文档目录</h2>
+<h2 id="️-文档目录">🗂️ 文档目录</h2>
 <ul>
 <li><strong><a href="#1-smtp-协议与连接基础-smtp-fundamentals">1. SMTP 协议与连接基础 (SMTP Fundamentals)</a></strong> —— 协议命令、端口及 <code>mail.properties</code></li>
 <li><strong><a href="#2-基础邮件单发实现-single-mail-sending">2. 基础邮件单发实现 (Single Mail Sending)</a></strong> —— 资源管理与 <code>SendMialBySmtpDemo</code> 单发</li>
@@ -534,7 +530,7 @@ logger.error(&quot;【发信故障】SMTP 投递失败。原因：{}&quot;, e.ge
 <li>绝对不要在 Spring 框架中将 <code>SmtpClient</code> 设置为默认的单例单热点 Bean 供全局业务线程共享，这会导致多线程通道抢占，出现 <code>Transport</code> 冲突或状态脏读。</li>
 <li><strong>推荐做法</strong>：使用 Prototype 原型多例作用域，或者像本项目中的 Demo 一样，在需要发送邮件的方法内部直接使用 <code>try-with-resources</code> 临时实例化客户端，用完即弃，从而在物理隔离上规避线程安全风险。</li>
 </ul>
-<h2 id="相关项目与链接">&#128279; 相关项目与链接</h2>
+<h2 id="相关项目与链接">🔗 相关项目与链接</h2>
 <ul>
 <li><strong>GitHub 仓库</strong>：<a href="https://github.com/feilong-pixel/ZeroTraceSmtp">feilong-pixel/ZeroTraceSmtp</a></li>
 <li><strong>核心模块源码直达</strong>：</li>
